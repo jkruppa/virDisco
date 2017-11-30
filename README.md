@@ -1,7 +1,7 @@
 # viralDetectTools
 Modules for a viral detection pipeline. Uses external tools and software. No standalone.
 
-
+```R
 # A tibble: 1,254 x 5
        prot_id genebank_id pos_start pos_end   ind
          <chr>       <chr>     <dbl>   <dbl> <int>
@@ -16,8 +16,9 @@ Modules for a viral detection pipeline. Uses external tools and software. No sta
   9 ACV90776.1    GQ923367         8    1417 21573
  10 ADN65884.1    GU001061         1     187 23908
  # ... with 1,244 more rows
+```
 
-
+```R
  # A tibble: 1,000 x 8
     genebank_id   mol_type                              strain  tax_id Accession
           <chr>      <chr>                               <chr>   <chr>     <chr>
@@ -33,3 +34,4 @@ Modules for a viral detection pipeline. Uses external tools and software. No sta
  10    CY164853 viral cRNA         A/mallard/Sweden/52116/2006 1455438  CY164853
  # ... with 990 more rows, and 3 more variables: Length <int>, Organism <chr>,
  #   Description <chr>
+ ```
