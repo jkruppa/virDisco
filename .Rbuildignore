@@ -1,2 +1,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+data\aa_info_db.RDS
+data\strain_info_db.RDS
+data\aa_1000_R_example.fa
+data\dna_1000_R_example.fa
