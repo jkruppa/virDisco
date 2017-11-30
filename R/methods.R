@@ -1,5 +1,41 @@
 setMethod(
   f = "[",
+  signature = "program_list",
+  definition = function(x, i, j, drop) {
+    if(i == "bowtie") {return(x@bowtie)} else {}
+    if(i == "pauda") {return(x@pauda)} else {}
+    if(i == "samtools") {return(x@samtools)} else {}
+    if(i == "trimmomatic") {return(x@trimmomatic)} else {}
+  }
+)
+
+
+setReplaceMethod(
+  f = "[",
+  signature = "program_list",
+  definition = function(x, i, j , value) {
+    if(i == "bowtie") {x@bowtie <- value} else {}
+    if(i == "pauda") {x@pauda <- value} else {}
+    if(i == "samtools") {x@samtools <- value} else {}
+    if(i == "trimmomatic") {x@trimmomatic <- value} else {}
+  }
+)
+
+
+setMethod(
+  f = "show",
+  signature = "program_list",
+  definition = function(object) {
+    cat(str_c("Bowtie path set to ", object@bowtie, "\n"))   
+    cat(str_c("Pauda path set to ", object@pauda, "\n"))
+    cat(str_c("Samtools path set to ", object@samtools, "\n"))    
+    cat(str_c("Trimmomatic path set to ", object@trimmomatic, "\n"))
+  }
+)
+
+
+setMethod(
+  f = "[",
   signature = "par_list",
   definition = function(x, i, j, drop) {
     if(i == "genome_index") {return(x@index_genome_dir)} else {}

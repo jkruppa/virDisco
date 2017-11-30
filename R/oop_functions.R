@@ -38,3 +38,26 @@ set_par_list <- function(index_genome_dir,
         species_info = species_info_df)
   }
 }
+
+##' Test
+##'
+##' Test
+##' @title Test 
+##' @param bowtie_dir 
+##' @param pauda_dir 
+##' @param samtools_dir 
+##' @param trimmomatic_dir 
+##' @return program_list
+##' @author Jochen Kruppa
+##' @export
+set_program_list <- function(bowtie_dir,
+                             pauda_dir,
+                             samtools_dir,
+                             trimmomatic_dir)
+{
+  new(Class = "program_list",
+      bowtie = bowtie_dir,
+      pauda = pauda_dir,
+      samtools = samtools_dir,
+      trimmomatic = trimmomatic_dir)
+}

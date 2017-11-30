@@ -1,3 +1,30 @@
+## define class par_list
+setClass(
+  Class = "program_list",
+  representation = representation(
+    bowtie = "character",
+    pauda = "character",
+    samtools = "character",
+    trimmomatic = "character"
+  ),
+  validity = function(object){
+    if(!file.exists(object@bowtie)) {
+      stop("Cannot find dir 'bowtie': No such file or directory")
+    }
+    if(!file.exists(object@pauda)) {
+      stop("Cannot find dir 'pauda': No such file or directory")
+    }
+    if(!file.exists(object@samtools)) {
+      stop("Cannot find dir 'samtools': No such file or directory")
+    }
+    if(!file.exists(object@trimmomatic)) {
+      stop("Cannot find dir 'trimmomatic': No such file or directory")
+    }
+    return(TRUE)
+  }
+)
+
+
 ## we need to define the class tbl_sqlite
 setOldClass("tbl_dbi")
 
