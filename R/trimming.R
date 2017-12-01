@@ -18,7 +18,7 @@ fastq_trimmer <- function (inFile, outFile, leading = 10, trailing = 10, minleng
       if(length(inFile) == 2) {
         paired_outFile <- gsub("trimmed", "trimmed.paired", outFile)
         unpaired_outFile <- gsub("trimmed", "trimmed.unpaired", outFile)
-        fastq_trimmer_CMD <- paste("java -jar", trimmomatic, 
+        fastq_trimmer_CMD <- paste("java -jar", program_list["trimmomatic"], 
                                    "PE",
                                    "-threads", par$nCores,
                                    "-phred33",
@@ -36,7 +36,7 @@ fastq_trimmer <- function (inFile, outFile, leading = 10, trailing = 10, minleng
                                    "2>", log_file)
     }
     else {
-      fastq_trimmer_CMD <- paste("java -jar", trimmomatic, 
+      fastq_trimmer_CMD <- paste("java -jar", program_list["trimmomatic"], 
                                  "SE",
                                  "-threads", par$nCores,
                                  "-phred33",
