@@ -66,7 +66,7 @@ artificial_genome_mapping <- function(in_file,
   ## fastq quality control and trimming
   in_file <- fastq_quality_control(inFile = in_file,
                                    tmpDir = par_list["tmp_dir"],
-                                   illumninaclip = file.path(dirname(trimmomatic),
+                                   illumninaclip = file.path(dirname(program_list["trimmomatic"]),
                                                              "adapters", "TruSeq3-PE.fa"),
                                    log_file = file.path(par_list["tmp_dir"],
                                                         str_c(basename(out_file), "_trim.log")))
