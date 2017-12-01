@@ -61,7 +61,7 @@ set_program_list <- function(bowtie_dir,
                              ete3_dir)
 {
   new(Class = "program_list",
-      bowtie = bowtie_dir,
+      bowtie2 = bowtie_dir,
       pauda = pauda_dir,
       samtools = samtools_dir,
       trimmomatic = trimmomatic_dir,
