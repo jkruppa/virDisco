@@ -1,0 +1,128 @@
+##' Test
+##'
+##' Test
+##' @title Test 
+##' @param hits 
+##' @param out_file 
+##' @param par_list 
+##' @return data.frame
+##' @author Jochen Kruppa
+##' @export
+get_consensus_df <- function(hits, out_file, par_list){
+  dna_read_seqs <- readRDS(str_c(out_file, "_dna_seqs.RDS"))
+  dna_read_seqs_info <- tbl_df(data.frame(str_split(names(dna_read_seqs), "_", simplify = TRUE),
+                                          stringsAsFactors = FALSE))
+  names(dna_read_seqs_info) <- c("genebank_id", "qname", "pos_start", "pos_end")
+  dna_read_seqs_info$pos_start <- as.numeric(dna_read_seqs_info$pos_start)
+  dna_read_seqs_info$pos_end <- as.numeric(dna_read_seqs_info$pos_end)
+  dna_read_seqs_info$seq_id <- names(dna_read_seqs) 
+  ## index the ref sequence and load the subset of sequences
+  runCMD(paste("samtools faidx", par_list["ref_seq_file"]))
+  tmp_hit_ref_fa <- tempfile(pattern = "tmp_hit_ref_",
+                             tmpdir = par_list["tmp_dir"], fileext = ".fa")
+  runCMD(paste("samtools faidx", par_list["ref_seq_file"],
+               str_c(hits, collapse = " "), ">", tmp_hit_ref_fa))
+  hit_ref_seq <- readDNAStringSet(tmp_hit_ref_fa)
+  unlink(tmp_hit_ref_fa)
+  ## info from each hit
+  consensus_info_list <- setNames(llply(hits, function(hit) {
+    ## get the hit information
+    hit_info <- filter(dna_read_seqs_info, genebank_id %in% hit)
+    hit_dna_seqs <- dna_read_seqs[names(dna_read_seqs) %in% hit_info$seq_id]
+    hit_length <- collect(filter(par_list["species_info"], genebank_id == hit))$Length
+    ## align all reads
+    return(list(hit_info = hit_info,
+                hit_length = hit_length,
+                hit_dna_seqs = hit_dna_seqs,
+                hit_ref_seq = hit_ref_seq[hit]))
+  }), hits)
+  consensus_list <- llply(consensus_info_list, function(x) {
+    ## talk(names(x$hit_ref_seq))
+    tmp_aligned_file <- tempfile(pattern = str_c("tmp_aligned_ref_", names(x$hit_ref_seq), "_"),
+                                 tmpdir = par_list["tmp_dir"], fileext = ".fa.gz")
+    l_ply(seq_along(x$hit_dna_seqs), function(i) {
+      if(length(x$hit_length) != 1) {
+        x$hit_length <- mean(x$hit_length)
+      }
+      tmp_hit_dna_seq <- as.character(x$hit_dna_seqs[i])
+      end_correct <- ifelse(x$hit_length - x$hit_info$pos_end[i] < 0,
+                            0,
+                            x$hit_length - x$hit_info$pos_end[i])
+      aligned <- DNAStringSet(str_c(str_dup("-", x$hit_info$pos_start[i]-1),
+                                    tmp_hit_dna_seq,
+                                    str_dup("-", end_correct)))
+      names(aligned) <- names(tmp_hit_dna_seq)
+      writeXStringSet(aligned, tmp_aligned_file, append = TRUE, compress = TRUE)
+    })
+    hit_read_aligned <- subseq(readDNAStringSet(tmp_aligned_file), 1, width(x$hit_ref_seq))
+    if(par_list["clean"]){
+      unlink(tmp_aligned_file)
+    } else {
+      file.copy(tmp_aligned_file, dirname(out_file), overwrite = TRUE)
+    }
+    ## get the consensus
+    ## library(msa)
+    con_mat_raw <- consensusMatrix(hit_read_aligned, baseOnly = TRUE, as.prob = FALSE)
+    con_mat <- apply(con_mat_raw, 2, function(x) {x/sum(x[-5])})
+    row.names(con_mat)[5] <- "-"
+    ## consensus string
+    con_str <- row.names(con_mat)[apply(con_mat, 2,
+                                        function(x) ifelse(x[5] == Inf, 5, which.max(x[-5])))]
+    hit_con_seq <- DNAStringSet(str_c(con_str, collapse = ""))
+    ## consensus prob
+    con_prob <- apply(con_mat, 2, function(x) ifelse(x[5] == Inf, 0, max(x[-5])))
+    ## get the consensus makes no sense -> must be one file...
+    con_ref_seq <- compareStrings(x$hit_ref_seq, hit_con_seq)
+    names(con_ref_seq) <- unique(x$hit_info$genebank_id)
+    comp_dna <- function(x,y) {as.vector(as.matrix(x) == as.matrix(y))}
+    comp_dna_bool <- comp_dna(hit_con_seq, x$hit_ref_seq)
+    ## get the run values of the same symbol
+    run_hit_df <- ddply(data.frame(lengths = rle(comp_dna_bool)$lengths,
+                                   values = rle(comp_dna_bool)$values), c("values"), summarize,
+                        max(lengths))
+    run_len_info <- c(summary(rle(comp_dna_bool)$lengths),
+                      run_to_ref = run_hit_df[2,2], run_not_to_ref = run_hit_df[1,2])
+    ## get the coverage to the reference     
+    coverage_equal_ref <- mean(comp_dna_bool)
+    coverage_overall_ref <- mean(!str_detect(str_split(as.character(hit_con_seq), "", simplify = TRUE), "-"))
+    return(list(consensus_seq = setNames(hit_con_seq,
+                                         names(x$hit_ref_seq)),
+                consensus_to_refseq = setNames(BStringSet(con_ref_seq),
+                                               names(x$hit_ref_seq)),
+                consensus_df = tibble(genebank_id = unique(x$hit_info$genebank_id),
+                                      con_prob,
+                                      pos = 1:length(con_prob),
+                                      bool = comp_dna_bool),
+                entropy = entropy::entropy(comp_dna_bool, unit = "log2"),
+                run_len = run_len_info,
+                median_con_prob = summary(con_prob, na.rm = TRUE),
+                coverage_equal_ref = coverage_equal_ref,
+                coverage_overall_ref = coverage_overall_ref
+                ))
+  }, .parallel = TRUE)
+  writeXStringSet(Reduce(c, llply(consensus_list, function(x) x$consensus_seq)),
+                  str_c(out_file, "_consensus.fa"))
+  writeXStringSet(Reduce(c, llply(consensus_list, function(x) x$consensus_to_refseq)),
+                  str_c(out_file, "_consensus_to_refseq.fa"))
+  return(list(consensus_df = tbl_df(ldply(consensus_list, function(x) x$consensus_df)),
+              entropy_df = setNames(tbl_df(ldply(consensus_list, function(x) x$entropy)),
+                                    c("genebank_id", "entropy")),
+              run_len_df = setNames(tbl_df(ldply(consensus_list, function(x) x$run_len)),
+                                    c("genebank_id", "min", "first", "median", "mean", "third", "max",
+                                      "run_to_ref", "run_not_to_ref")),
+              median_con_prob_df = setNames(tbl_df(ldply(consensus_list, function(x) x$median_con_prob)),
+                                            c("genebank_id", "min", "first", "median", "mean", "third", "max")),
+              coverage_equal_ref_df = setNames(tbl_df(ldply(consensus_list, function(x) x$coverage_equal_ref)),
+                                               c("genebank_id", "coverage_equal_ref")),
+              coverage_overall_ref_df = setNames(tbl_df(ldply(consensus_list, function(x) x$coverage_overall_ref)),
+                                                 c("genebank_id", "coverage_overall_ref"))
+              )
+         )
+}
+
+
+    
+
+
+
+  
