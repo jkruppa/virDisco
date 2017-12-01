@@ -1,6 +1,19 @@
 # viralDetectTools
 Modules for a viral detection pipeline. Uses external tools and software. No standalone.
 
+
+
+## Installation
+
+The development version from github. Do not do it, if you are not sure what you are doing!
+
+```R
+# install.packages("devtools")
+devtools::install_github("jkruppa/dataTools")
+```
+
+# Tutorial
+
 ```R
   A DNAStringSet instance of length 98
        width seq                                             names
