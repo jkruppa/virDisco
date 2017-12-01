@@ -9,7 +9,7 @@ The development version from github. Do not do it, if you are not sure what you 
 
 ```R
 # install.packages("devtools")
-devtools::install_github("jkruppa/dataTools")
+devtools::install_github("jkruppa/viralDetectTools")
 ```
 
 # Tutorial
