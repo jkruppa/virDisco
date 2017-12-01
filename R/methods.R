@@ -2,10 +2,15 @@ setMethod(
   f = "[",
   signature = "program_list",
   definition = function(x, i, j, drop) {
-    if(i == "bowtie") {return(x@bowtie)} else {}
+    if(i == "bowtie2") {return(x@bowtie2)} else {}
     if(i == "pauda") {return(x@pauda)} else {}
     if(i == "samtools") {return(x@samtools)} else {}
     if(i == "trimmomatic") {return(x@trimmomatic)} else {}
+    if(i == "star") {return(x@star)} else {}
+    if(i == "pandaseq") {return(x@pandaseq)} else {}
+    if(i == "ete3") {return(x@ete3)} else {}
+    if(i == "blastn") {return(x@blastn)} else {}
+    if(i == "seqtk") {return(x@seqtk)} else {}
   }
 )
 
@@ -14,10 +19,15 @@ setReplaceMethod(
   f = "[",
   signature = "program_list",
   definition = function(x, i, j , value) {
-    if(i == "bowtie") {x@bowtie <- value} else {}
+    if(i == "bowtie2") {x@bowtie2 <- value} else {}
     if(i == "pauda") {x@pauda <- value} else {}
     if(i == "samtools") {x@samtools <- value} else {}
     if(i == "trimmomatic") {x@trimmomatic <- value} else {}
+    if(i == "star") {x@star <- value} else {}
+    if(i == "pandaseq") {x@pandaseq <- value} else {}
+    if(i == "ete3") {x@ete3 <- value} else {}
+    if(i == "blastn") {x@blastn <- value} else {}
+    if(i == "seqtk") {x@seqtk <- value} else {}
   }
 )
 
@@ -26,10 +36,15 @@ setMethod(
   f = "show",
   signature = "program_list",
   definition = function(object) {
-    cat(str_c("Bowtie path set to ", object@bowtie, "\n"))   
+    cat(str_c("Bowtie2 path set to ", object@bowtie2, "\n"))   
     cat(str_c("Pauda path set to ", object@pauda, "\n"))
     cat(str_c("Samtools path set to ", object@samtools, "\n"))    
     cat(str_c("Trimmomatic path set to ", object@trimmomatic, "\n"))
+    cat(str_c("Star path set to ", object@star, "\n"))   
+    cat(str_c("Pandaseq path set to ", object@pandaseq, "\n"))
+    cat(str_c("Ete3 path set to ", object@ete3, "\n"))    
+    cat(str_c("Blastn path set to ", object@blastn, "\n"))
+    cat(str_c("Seqtk path set to ", object@seqtk, "\n"))
   }
 )
 

@@ -53,11 +53,21 @@ set_par_list <- function(index_genome_dir,
 set_program_list <- function(bowtie_dir,
                              pauda_dir,
                              samtools_dir,
-                             trimmomatic_dir)
+                             trimmomatic_dir,
+                             star_dir,
+                             pandaseq_dir,
+                             seqtk_dir,
+                             blastn_dir,
+                             ete3_dir)
 {
   new(Class = "program_list",
       bowtie = bowtie_dir,
       pauda = pauda_dir,
       samtools = samtools_dir,
-      trimmomatic = trimmomatic_dir)
+      trimmomatic = trimmomatic_dir,
+      star = star_dir,
+      pandaseq = pandaseq_dir,
+      seqtk = seqtk_dir,
+      blastn = blastn_dir,
+      ete3 = ete3_dir)
 }

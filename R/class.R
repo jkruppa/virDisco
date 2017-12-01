@@ -2,14 +2,34 @@
 setClass(
   Class = "program_list",
   representation = representation(
-    bowtie = "character",
+    bowtie2 = "character",
+    star = "character",
     pauda = "character",
+    pandaseq = "character",
+    ete3 = "character",
+    blastn = "character",
+    seqtk = "character",
     samtools = "character",
     trimmomatic = "character"
   ),
   validity = function(object){
-    if(!file.exists(object@bowtie)) {
-      stop("Cannot find dir 'bowtie': No such file or directory")
+    if(!file.exists(object@ete3)) {
+      stop("Cannot find dir 'ete3': No such file or directory")
+    }
+    if(!file.exists(object@blastn)) {
+      stop("Cannot find dir 'blastn': No such file or directory")
+    }
+    if(!file.exists(object@seqtk)) {
+      stop("Cannot find dir 'seqtk': No such file or directory")
+    }
+    if(!file.exists(object@pandaseq)) {
+      stop("Cannot find dir 'pandaseq': No such file or directory")
+    }
+    if(!file.exists(object@star)) {
+      stop("Cannot find dir 'star': No such file or directory")
+    }
+    if(!file.exists(object@bowtie2)) {
+      stop("Cannot find dir 'bowtie2': No such file or directory")
     }
     if(!file.exists(object@pauda)) {
       stop("Cannot find dir 'pauda': No such file or directory")

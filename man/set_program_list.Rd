@@ -4,7 +4,8 @@
 \alias{set_program_list}
 \title{Test}
 \usage{
-set_program_list(bowtie_dir, pauda_dir, samtools_dir, trimmomatic_dir)
+set_program_list(bowtie_dir, pauda_dir, samtools_dir, trimmomatic_dir, star_dir,
+  pandaseq_dir, seqtk_dir, blastn_dir, ete3_dir)
 }
 \arguments{
 \item{bowtie_dir}{}
