@@ -270,5 +270,5 @@ R> artificial_genome_mapping(in_file = viral_files$in_file,
 ### Phylogenetic tree by the findings
 
 <p align="center">
-  <img src="img/NGS-10001_tree.png" width="800">
+  <img src="img/NGS-10001_tree.png" width="600">
 </p>
