@@ -1,14 +1,14 @@
 # viralDetectTools
-Modules for a viral detection pipeline. Uses external tools and software. No standalone.
+
+The viralDetectTools is a R package with uses many third party programs. Therefore, these programs must be installed on the computer. Further, many of these third party programs are based on Linux. Therefore, the viralDetectTools package is more or less a Linux only R package. Still, it can be installed and used, but some functions will not work.
 
 ## Table of Contents
 1. [Installation](#installation)
 2. [Tutorial](#tutorial)
 
-
 ## Installation
 
-The development version from github. Do not do it, if you are not sure what you are doing!
+The development version from github:
 
 ```R
 devtools::install_github("jkruppa/viralDetectTools")
@@ -16,7 +16,21 @@ devtools::install_github("jkruppa/viralDetectTools")
 
 ## Tutorial
 
+The package has many dependencies, which must be installed first. Some programes migth be in the load path, others might not. To make it more relaiable for the user, all programs must be specified first into a `program_list`. The `program_list` object is a S4 class, which checks all the paths to the program executables first. 
+
 ### Dependencies
+
+In the first step a `program_list` object including all the path to the program exectuables must be generated. The following programs are needed for the viralDetectTools.
+
+1. Bowtie2 DNA mapper http://bowtie-bio.sourceforge.net/bowtie2/index.shtml
+2. Star mapper \[optional\] https://github.com/alexdobin/STAR
+3. PAUDA - a poor man’s BLASTX https://ab.inf.uni-tuebingen.de/software/pauda
+4. PANDAseq https://github.com/neufeld/pandaseq
+5. ETE Toolkit http://etetoolkit.org/download/
+6. BLAST+ executables https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download
+7. Seqtk https://github.com/lh3/seqtk
+8. Samtools http://www.htslib.org/
+9. Trimmomatic http://www.usadellab.org/cms/?page=trimmomatic
 
 ```R
 program_list <- set_program_list(bowtie_dir = file.path(programDir, ... , "bowtie2"),
