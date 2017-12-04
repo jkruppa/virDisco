@@ -32,6 +32,8 @@ In the first step a `program_list` object including all the path to the program 
 8. Samtools http://www.htslib.org/
 9. Trimmomatic http://www.usadellab.org/cms/?page=trimmomatic
 
+The function `set_program_list` generates a S4 object of the paths to the executables and checks if all files are existing.
+
 ```R
 program_list <- set_program_list(bowtie_dir = file.path(programDir, ... , "bowtie2"),
                                  star_dir = file.path(programDir, ... , "STAR"),
@@ -47,6 +49,10 @@ program_list <- set_program_list(bowtie_dir = file.path(programDir, ... , "bowti
 ```
 
 ### File setup
+
+While the run of the viralDetectTools many files are produced and needed. Therefore a good file system managment should be used and setup. It is not a good idea to store and save all the input and output files into one single folder. The package includes 10000 paired reads from a Illumina MiSeq. Some of the steps are redundant but will help to understand the process.
+
+All the files will be stored in the `main_dir`, which is located in the tmp folder of your PC. Change this line to use a different folder as root folder. Further, we need a tmp folder, here `tmp_viral_dir`,  to store all the temporal files. In this example it does not really matter but in a real example the intermediate files become really big and must not be stored.
 
 ```R
 ## install packages
