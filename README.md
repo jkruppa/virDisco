@@ -1,6 +1,9 @@
 # viralDetectTools
 Modules for a viral detection pipeline. Uses external tools and software. No standalone.
 
+## Table of Contents
+1. [Installation](#installation)
+2. [Tutorial](#tutorial)
 
 
 ## Installation
@@ -11,9 +14,9 @@ The development version from github. Do not do it, if you are not sure what you 
 devtools::install_github("jkruppa/viralDetectTools")
 ```
 
-# Tutorial
+## Tutorial
 
-## Dependencies
+### Dependencies
 
 ```R
 program_list <- set_program_list(bowtie_dir = file.path(programDir, ... , "bowtie2"),
@@ -29,6 +32,8 @@ program_list <- set_program_list(bowtie_dir = file.path(programDir, ... , "bowti
                                  trimmomatic_dir = file.path(programDir, ... , "trimmomatic-0.36.jar"))
 ```
 
+### File setup
+
 ```R
 ## install packages
 ## install.packages("pacman")
@@ -41,7 +46,11 @@ out_dir <- file.path(main_dir, "output")
 tmp_viral_dir <- file.path(main_dir, "tmp")
 dir.create(in_dir)
 dir.create(out_dir)
+```
 
+### Example read files and viral reference genomes
+
+```R
 ## load the data
 data(infected_fastq)
 R1_fq <- file.path(in_dir, "NGS-10001_R1.fastq.gz")
@@ -92,6 +101,9 @@ R> aa_seqs
  [521]   470 MNPNQKIITIGSVSLGLVVLNI...DHEVADWSWHDGAILPFDIDKM AFX84739.1_CY1268...
 ```
 
+### Build reference genome for Bowtie2 and Pauda
+
+
 ```R
 viral_ref_dna_fa <- file.path(in_dir, "viral_ref_dna.fa") 
 viral_ref_aa_fa <- file.path(in_dir, "viral_ref_aa.fa") 
@@ -110,6 +122,8 @@ viral_index_list <- build_index(dna_set = dna_seqs,
                                 index_name = "viral",
                                 force = FALSE)
 ```
+
+### Setup SQL database
 
 ```R
 ## load the data implemented in the package
@@ -132,8 +146,6 @@ R> aa_info_db
  10 ASV51317.1    KX943323         1    1824 235361
  # ... with 509 more rows
 ```
-
-
 
 ```R
 data(strain_info_db)
@@ -174,6 +186,12 @@ setup_species_info_sqlite(genebank_id = strain_info_db$genebank_id,
                           description = strain_info_db$Description,
                           tax_id = strain_info_db$tax_id,
                           db_file = strain_info_db_file)
+
+```
+
+### Start artifical genome mapping
+
+```R
 
 ## parameter list
 par_viral_list <- set_par_list(index_genome_dir = viral_index_list$bowtie_index, 
@@ -225,5 +243,6 @@ R> artificial_genome_mapping(in_file = viral_files$in_file,
  Dez 04 14:02:22 ..... Finished
 ```
 
+## Output files
 
 
