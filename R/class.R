@@ -81,6 +81,7 @@ setClass(
     plot_id = "character",
     mapper = "character",
     num_plot = "numeric",
+    ncore = "numeric",
     pdf_file = "character"
   ),
   prototype = prototype(
@@ -97,6 +98,7 @@ setClass(
     check_host = TRUE,
     mapper = "bowtie",
     num_plot = 25,
+    ncore = 1,
     prot_info = structure(tibble(), class = c("tbl_dbi", "empty")),
     species_info = structure(tibble(), class = c("tbl_dbi", "empty")),
     tmp_dir = file.path("/home/temp"),
