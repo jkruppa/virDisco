@@ -248,27 +248,27 @@ R> artificial_genome_mapping(in_file = viral_files$in_file,
 ### Count \*.xlsx file
 
 <p align="center">
-  <img src="img/NGS-10001_xlsx.png" width="600">
+  <img src="img/NGS-10001_xlsx.png" width="800">
 </p>
 
 ### Summary file of the sequence visualization
 
 <p align="center">
-  <img src="img/NGS-10001_00.png" width="600">
+  <img src="img/NGS-10001_00.png" width="800">
 </p>
 
 ### First and second figure out of 25
 
 <p align="center">
-  <img src="img/NGS-10001_01.png" width="600">
+  <img src="img/NGS-10001_01.png" width="800">
 </p>
 
 <p align="center">
-  <img src="img/NGS-10001_02.png" width="600">
+  <img src="img/NGS-10001_02.png" width="800">
 </p>
 
 ### Phylogenetic tree by the findings
 
 <p align="center">
-  <img src="img/NGS-10001_tree.png" width="600">
+  <img src="img/NGS-10001_tree.png" width="800">
 </p>
