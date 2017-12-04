@@ -9,8 +9,9 @@
 ##' @param bowtie 
 ##' @param pauda 
 ##' @param star 
+##' @param force 
 ##' @param tmp_dir 
-##' @return file.list
+##' @return file.list 
 ##' @author Jochen Kruppa
 ##' @export
 build_index <- function(dna_set, aa_set,
@@ -19,6 +20,7 @@ build_index <- function(dna_set, aa_set,
                         bowtie = TRUE,
                         pauda = TRUE,
                         star = FALSE,
+                        force = FALSE,
                         tmp_dir = tempdir()){
   talk("Setup files")
   ## file handling for the analysis
@@ -45,6 +47,20 @@ build_index <- function(dna_set, aa_set,
   ## generate index
   star_index <- file.path(index_dir, "star")
   bowtie_index <- file.path(index_dir, "bowtie", str_c(index_name, "_bowtie"))
+  pauda_tmp_index <- file.path(tmp_dir, "pauda")
+  ## file checking
+  if(file.exists(dirname(bowtie_index)) & !force & bowtie){
+    bowtie <- FALSE
+    warning("Bowtie index exists. Skiping. Use 'force = TRUE' to overwrite...")
+  }
+  if(file.exists(dirname(star_index)) & !force & star){
+    star <- FALSE
+    warning("Star index exists. Skiping. Use 'force = TRUE' to overwrite...")
+  }
+  if(file.exists(dirname(pauda_tmp_index)) & !force & pauda){
+    pauda <- FALSE
+    warning("Pauda index exists. Skiping. Use 'force = TRUE' to overwrite...")
+  }
   ## start bowtie
   if(bowtie){
     if(!file.exists(dirname(bowtie_index))) dir.create(dirname(bowtie_index))
@@ -70,7 +86,6 @@ build_index <- function(dna_set, aa_set,
   }  
   if(pauda){ 
     ## build PAUDA index by bowtie2
-    pauda_tmp_index <- file.path(tmp_dir, "pauda")
     if(file.exists(pauda_tmp_index)) unlink(pauda_tmp_index, recursive = TRUE)
     ## do NOT create the dir...
     talk("Start pauda build")
