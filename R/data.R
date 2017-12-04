@@ -1,5 +1,18 @@
 #' Dataset
 #'
+#' Test
+#'
+#' @format A list with two entries:
+#' \describe{
+#'   \item{R1}{Fastq reads object with 10000 paired reads of R1}
+#'   \item{R2}{Fastq reads object with 10000 paired reads of R2}
+#' }
+#' @source \url{ftp://ftp.ncbi.nlm.nih.gov/genbank}
+"infected_fastq"
+
+
+#' Dataset
+#'
 #' A dataset containing 1000 DNA sequences from the NCBI GenBank.
 #'
 #' @format A fasta file with 1000 entries. The names are split by ' ' meaning:
