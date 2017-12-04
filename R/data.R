@@ -8,6 +8,56 @@
 #'   \item{R2}{Fastq reads object with 10000 paired reads of R2}
 #' }
 #' @source \url{ftp://ftp.ncbi.nlm.nih.gov/genbank}
+"NHS_10001_count_tbl"
+
+#' Dataset
+#'
+#' Test
+#'
+#' @format A list with two entries:
+#' \describe{
+#'   \item{R1}{Fastq reads object with 10000 paired reads of R1}
+#'   \item{R2}{Fastq reads object with 10000 paired reads of R2}
+#' }
+#' @source \url{ftp://ftp.ncbi.nlm.nih.gov/genbank}
+"NHS_10001_map_aa_list"
+
+
+#' Dataset
+#'
+#' Test
+#'
+#' @format A list with two entries:
+#' \describe{
+#'   \item{R1}{Fastq reads object with 10000 paired reads of R1}
+#'   \item{R2}{Fastq reads object with 10000 paired reads of R2}
+#' }
+#' @source \url{ftp://ftp.ncbi.nlm.nih.gov/genbank}
+"NHS_10001_consensus"
+
+#' Dataset
+#'
+#' Test
+#'
+#' @format A list with two entries:
+#' \describe{
+#'   \item{R1}{Fastq reads object with 10000 paired reads of R1}
+#'   \item{R2}{Fastq reads object with 10000 paired reads of R2}
+#' }
+#' @source \url{ftp://ftp.ncbi.nlm.nih.gov/genbank}
+"NHS_10001_map_dna_list"
+
+
+#' Dataset
+#'
+#' Test
+#'
+#' @format A list with two entries:
+#' \describe{
+#'   \item{R1}{Fastq reads object with 10000 paired reads of R1}
+#'   \item{R2}{Fastq reads object with 10000 paired reads of R2}
+#' }
+#' @source \url{ftp://ftp.ncbi.nlm.nih.gov/genbank}
 "infected_fastq"
 
 

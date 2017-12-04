@@ -5,7 +5,8 @@
 \title{Test}
 \usage{
 build_index(dna_set, aa_set, index_dir = NULL, index_name = NULL,
-  bowtie = TRUE, pauda = TRUE, star = FALSE, tmp_dir = tempdir())
+  bowtie = TRUE, pauda = TRUE, star = FALSE, force = FALSE,
+  tmp_dir = tempdir())
 }
 \arguments{
 \item{dna_set}{}
@@ -21,6 +22,8 @@ build_index(dna_set, aa_set, index_dir = NULL, index_name = NULL,
 \item{pauda}{}
 
 \item{star}{}
+
+\item{force}{}
 
 \item{tmp_dir}{}
 }
