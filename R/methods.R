@@ -79,7 +79,7 @@ setMethod(
     if(i == "sql_dir") {return(x@sql_dir)} else {}
     if(i == "pdf_file") {return(x@pdf_file)} else {}
     if(i == "ref_seq_file") {return(x@ref_seq_file)} else {}
-    if(i == "ncores") {return(x@ncores)} else {}
+    if(i == "ncore") {return(x@ncore)} else {}
     if(i == "species_info") {return(x@species_info)} else {}
     if(i == "prot_info") {return(x@prot_info)} else {}
   }
@@ -104,7 +104,7 @@ setReplaceMethod(
     if(i == "clean") {x@clean <- value} else {}
     if(i == "tmp_dir") {x@tmp_dir <- value} else {}
     if(i == "mapper") {x@mapper <- value} else {}
-    if(i == "ncores") {x@mapper <- value} else {}
+    if(i == "ncore") {x@ncore <- value} else {}
     if(i == "pdf_file") {x@pdf_file <- value} else {}
     if(i == "ref_seq_file") {x@ref_seq_file <- value} else {}
     return(x)
