@@ -70,6 +70,8 @@ dir.create(out_dir)
 
 ### Example read files and viral reference genomes
 
+The example input files can be used directly, stored in the `/data` folder of this project or loaded directly in R by the following commands. Still, the external programs need the fastq files saved omn disc. Therefore, we write the fastq reads to two fastq files. We assume always to find gzipped files. 
+
 ```R
 ## load the data
 data(infected_fastq)
@@ -78,10 +80,18 @@ R2_fq <- file.path(in_dir, "NGS-10001_R2.fastq.gz")
 
 ## write the read data to fastq files
 mapply(writeFastq, infected_fastq, list(R1_fq, R2_fq))
+```
 
+### Build reference genome for Bowtie2 and Pauda
+
+In the following we want to detect some viral strains in the infected fastq files. To make it more convenient, we have already build a small subset of DNA sequences inclduing viral strains, which might have been infected out sample. Therefore, we want now map the fastq reads to the reference DNA sequences. First have a closer look to the reference sequences.
+
+```R
 ## load the reference DNA sequences
 data(dna_seqs)
 ```
+
+The reference sequences are all stored in the `DNAStringSet` container coming from the R package `Biostrings`. Here we have 287 sequences of the Morbillivirus, which might be infected our sample. Some of the reads should belong to some of the viral strains. 
 
 ```R
 R> dna_seqs
@@ -100,9 +110,13 @@ R> dna_seqs
  [287]   924 GCATTAATTTTAGATATCAAAA...TCACACTTTCATCAGTATTACA X84739 X84739 Por...
 ```
 
+Further, we have also the amino acid sequences of the DNA sequences. Overall 521 amino acid sequences, each coding for a gene of a viral strain, are avialable.
+
 ```R
 data(aa_seqs)
 ```
+
+The amino acid sequences are stored in a `AAStringSet` container giving the same usability as  for the DNA sequences.
 
 ```R
 R> aa_seqs
@@ -121,8 +135,7 @@ R> aa_seqs
  [521]   470 MNPNQKIITIGSVSLGLVVLNI...DHEVADWSWHDGAILPFDIDKM AFX84739.1_CY1268...
 ```
 
-### Build reference genome for Bowtie2 and Pauda
-
+The user is free to build up his own DNA and amino acid sequence database. We used the information on the NCBI GenBank FTP server ftp://ftp.ncbi.nlm.nih.gov/genbank. All available viral strains can be downloaded and parsed. The files are stored in the `embl` format and information can be gathered by the EMBOSS Programs https://www.ebi.ac.uk/Tools/emboss/. 
 
 ```R
 viral_ref_dna_fa <- file.path(in_dir, "viral_ref_dna.fa") 
