@@ -45,16 +45,27 @@ set_par_list <- function(index_genome_dir,
 ##' @title Test 
 ##' @param bowtie_dir 
 ##' @param pauda_dir 
+##' @param star_dir 
+##' @param bowtie_build_dir 
+##' @param pauda_build_dir 
+##' @param star_build_dir 
 ##' @param samtools_dir 
 ##' @param trimmomatic_dir 
+##' @param pandaseq_dir 
+##' @param seqtk_dir 
+##' @param blastn_dir 
+##' @param ete3_dir 
 ##' @return program_list
 ##' @author Jochen Kruppa
 ##' @export
 set_program_list <- function(bowtie_dir,
                              pauda_dir,
+                             star_dir,
+                             bowtie_build_dir,
+                             pauda_build_dir,
+                             star_build_dir,
                              samtools_dir,
                              trimmomatic_dir,
-                             star_dir,
                              pandaseq_dir,
                              seqtk_dir,
                              blastn_dir,
@@ -63,6 +74,10 @@ set_program_list <- function(bowtie_dir,
   new(Class = "program_list",
       bowtie2 = bowtie_dir,
       pauda = pauda_dir,
+      star = star_dir,
+      bowtie2_build = bowtie_build_dir,
+      pauda_build = pauda_build_dir,
+      star_build = star_build_dir,
       samtools = samtools_dir,
       trimmomatic = trimmomatic_dir,
       star = star_dir,
