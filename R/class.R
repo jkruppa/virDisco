@@ -5,7 +5,6 @@ setClass(
     bowtie2 = "character",
     bowtie2_build = "character",
     star = "character",
-    star_build = "character",
     pauda = "character",
     pauda_build = "character",    
     pandaseq = "character",
@@ -35,9 +34,6 @@ setClass(
       stop("Cannot find dir 'bowtie2': No such file or directory")
     }
     if(!file.exists(object@pauda)) {
-      stop("Cannot find dir 'pauda': No such file or directory")
-    }
-    if(!file.exists(object@star_build)) {
       stop("Cannot find dir 'pauda': No such file or directory")
     }
     if(!file.exists(object@pauda_build)) {

@@ -9,7 +9,6 @@ setMethod(
     if(i == "samtools") {return(x@samtools)} else {}
     if(i == "trimmomatic") {return(x@trimmomatic)} else {}
     if(i == "star") {return(x@star)} else {}
-    if(i == "star_build") {return(x@star_build)} else {}
     if(i == "pandaseq") {return(x@pandaseq)} else {}
     if(i == "ete3") {return(x@ete3)} else {}
     if(i == "blastn") {return(x@blastn)} else {}
@@ -27,10 +26,8 @@ setReplaceMethod(
     if(i == "star") {x@star <- value} else {}
     if(i == "bowtie2_build") {x@bowtie2_build <- value} else {}
     if(i == "pauda_build") {x@pauda_build <- value} else {}
-    if(i == "star_build") {x@star_build <- value} else {}
     if(i == "samtools") {x@samtools <- value} else {}
     if(i == "trimmomatic") {x@trimmomatic <- value} else {}
-    if(i == "star") {x@star <- value} else {}
     if(i == "pandaseq") {x@pandaseq <- value} else {}
     if(i == "ete3") {x@ete3 <- value} else {}
     if(i == "blastn") {x@blastn <- value} else {}
@@ -48,7 +45,6 @@ setMethod(
     cat(str_c("Star path set to ", object@star, "\n"))   
     cat(str_c("Bowtie2_build path set to ", object@bowtie2_build, "\n"))   
     cat(str_c("Pauda_build path set to ", object@pauda_build, "\n"))
-    cat(str_c("Star_build path set to ", object@star_build, "\n"))   
     cat(str_c("Samtools path set to ", object@samtools, "\n"))    
     cat(str_c("Trimmomatic path set to ", object@trimmomatic, "\n"))
     cat(str_c("Star path set to ", object@star, "\n"))   

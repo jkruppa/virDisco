@@ -5,8 +5,8 @@
 \title{Test}
 \usage{
 set_program_list(bowtie_dir, pauda_dir, star_dir, bowtie_build_dir,
-  pauda_build_dir, star_build_dir, samtools_dir, trimmomatic_dir, pandaseq_dir,
-  seqtk_dir, blastn_dir, ete3_dir)
+  pauda_build_dir, samtools_dir, trimmomatic_dir, pandaseq_dir, seqtk_dir,
+  blastn_dir, ete3_dir)
 }
 \arguments{
 \item{bowtie_dir}{}
@@ -19,8 +19,6 @@ set_program_list(bowtie_dir, pauda_dir, star_dir, bowtie_build_dir,
 
 \item{pauda_build_dir}{}
 
-\item{star_build_dir}{}
-
 \item{samtools_dir}{}
 
 \item{trimmomatic_dir}{}
@@ -32,6 +30,8 @@ set_program_list(bowtie_dir, pauda_dir, star_dir, bowtie_build_dir,
 \item{blastn_dir}{}
 
 \item{ete3_dir}{}
+
+\item{star_build_dir}{}
 }
 \value{
 program_list
