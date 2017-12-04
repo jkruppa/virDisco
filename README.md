@@ -245,4 +245,18 @@ R> artificial_genome_mapping(in_file = viral_files$in_file,
 
 ## Output files
 
+<p align="center">
+  <img src="img/NGS-10001_00.png" width="300">
+</p>
 
+<p align="center">
+  <img src="img/NGS-10001_01.png" width="300">
+</p>
+
+<p align="center">
+  <img src="img/NGS-10001_02.png" width="300">
+</p>
+
+<p align="center">
+  <img src="img/NGS-10001_tree.png" width="300">
+</p>
