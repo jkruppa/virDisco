@@ -15,9 +15,6 @@ ete2_plot(tax_ids, out_file, pdf_file, clean = FALSE)
 
 \item{clean}{}
 }
-\value{
-Test
-}
 \description{
 Test
 }
