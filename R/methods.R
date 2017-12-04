@@ -47,7 +47,6 @@ setMethod(
     cat(str_c("Pauda_build path set to ", object@pauda_build, "\n"))
     cat(str_c("Samtools path set to ", object@samtools, "\n"))    
     cat(str_c("Trimmomatic path set to ", object@trimmomatic, "\n"))
-    cat(str_c("Star path set to ", object@star, "\n"))   
     cat(str_c("Pandaseq path set to ", object@pandaseq, "\n"))
     cat(str_c("Ete3 path set to ", object@ete3, "\n"))    
     cat(str_c("Blastn path set to ", object@blastn, "\n"))
