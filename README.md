@@ -194,7 +194,7 @@ R> aa_seqs
  [521]   470 MNPNQKIITIGSVSLGLVVLNI...DHEVADWSWHDGAILPFDIDKM AFX84739.1_CY1268...
 ```
 
-The user is free to build up his own DNA and amino acid sequence database. We used the information on the NCBI GenBank FTP server ftp://ftp.ncbi.nlm.nih.gov/genbank. All available viral strains can be downloaded and parsed. The files are stored in the `embl` format and information can be gathered by the EMBOSS Programs https://www.ebi.ac.uk/Tools/emboss/. 
+The user is free to build up his own DNA and amino acid sequence database. We used the information on the NCBI GenBank FTP server ftp://ftp.ncbi.nlm.nih.gov/genbank. All available viral strains from the NCBI ftp server can be downloaded and parsed. The NCBI GenBank files are stored in the `embl` format and any given information can be gathered by the EMBOSS Programs https://www.ebi.ac.uk/Tools/emboss/. 
 
 ```R
 viral_ref_dna_fa <- file.path(in_dir, "viral_ref_dna.fa") 
@@ -212,15 +212,20 @@ viral_index_list <- build_index(dna_set = dna_seqs,
                                 aa_set = aa_seqs,
                                 index_dir = viral_index_dir,
                                 index_name = "viral",
-                                force = FALSE)
+                                force = FALSE) ## should the given dir be overwriten?
 ```
 
 ### Setup SQL database
+
+One main feature of the viralDetectTools is the visualization of the mapping results. Only a subset of the findings will be overall plotted, given by the parameter `pat_list["num_plot"]`. In this example we have already to sqlite3 databases. One inlducing all the protein and genebank_ids as well as the gene/protein start position and end position. This database can be very big. In our example only 519 genes are included. There is no more time needed  to filter the data if there would be millions of rows. 
 
 ```R
 ## load the data implemented in the package
 data(aa_info_db)
 ```
+
+The `aa_info_db` includes five columns shown in the following. Each gene (`prot_id`) has at least one species `genebank_id`.
+
 ```R
 R> aa_info_db
  # A tibble: 519 x 5
@@ -238,6 +243,8 @@ R> aa_info_db
  10 ASV51317.1    KX943323         1    1824 235361
  # ... with 509 more rows
 ```
+
+The second database `strain_info_db` includes the infromation on the species, the length of the sequence, tax id, and more information on the organism and the description.
 
 ```R
 data(strain_info_db)
@@ -261,6 +268,8 @@ R> select(strain_info_db,
  10    JQ326991  36410  JQ326991    541 Cetacean morbillivirus
  # ... with 277 more rows, and 1 more variables: Description <chr>
 ```
+
+To make it easier for the user, we implemented to functions to generate the sqlite3 databases. Both functions need the given informations and will then setup the sqlite3 databases in the given `sql_dir`. Please make sure, that the file system can handle sqlite3 databases.
 
 ```R
 aa_info_db_file <- file.path(in_dir, "aa_info_db.sqlite3")
