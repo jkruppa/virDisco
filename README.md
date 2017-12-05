@@ -1,4 +1,4 @@
-# viralDetectTools
+# R package viralDetectTools
 
 The viralDetectTools is a R package with uses many third party programs. Therefore, these programs must be installed on the computer. Further, many of these third party programs are based on Linux. Therefore, the viralDetectTools package is more or less a Linux only R package. Still, it can be installed and used, but some functions will not work.
 
@@ -290,7 +290,13 @@ setup_species_info_sqlite(genebank_id = strain_info_db$genebank_id,
 
 ```
 
+Now all the setup is done for the final mapping run.
+
 ### Start artifical genome mapping
+
+The mapping of the sequence reads is controlled by the fuction `artificial_genome_mapping`. The function needs only three inputs, the infiles, the outfile, and the S4 class `par_list`. The later is needed to get all the parameters trough the function calls. Here we also did some modifications. `par_viral_list["tmp_dir"]` changes the defualt temp dir and `par_viral_list["check_host"] <- FALSE` avoids host checking by blastn. The host checking can be very time consuming.
+
+Finally, the file setup is done by the function `get_sub_files`. Therefore, the name of the sample is needed and the indir, where the sample file is stored, and the out dir, where the results files should be written to. Finally, the artificial mapping of the sequence reads is started.
 
 ```R
 
@@ -316,6 +322,7 @@ artificial_genome_mapping(in_file = viral_files$in_file,
                           par_list = par_viral_list)
 ```
 
+In the following the log of the artificial genome mapping is printed. The function itself does not return any value.
 
 ```R
 R> artificial_genome_mapping(in_file = viral_files$in_file,
