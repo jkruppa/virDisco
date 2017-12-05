@@ -361,17 +361,23 @@ The output files containing three important files
 
 ### Count \*.xlsx file
 
+The count file includes all the counts of the mapped DNA reads and the translated amino acid reads. Then the results are ranked by the combined ranks of the DNA and amino acid ranks. The last column indicates the description of the viral strain, while the first column reports the NCBI GenBank ID, which can be directly inserted on the NCBI homepage to get more infomation on the finding.
+
 <p align="center">
   <img src="img/NGS-10001_xlsx.png" width="800">
 </p>
 
 ### Summary file of the sequence visualization
 
+The plotting function gnerates first a overview plot of the standard informations on the sample name, the number of reads and the number of reads after quality control, if the reads were paired, and the running time. Finally, a host check will be reported based on 100 randomly selected reads, which have been blasted.
+
 <p align="center">
   <img src="img/NGS-10001_00.png" width="800">
 </p>
 
 ### First and second figure out of 25
+
+Depending on the parameter in `par_list["num_plot"]` 25 plots are generated from the TOP25. In general the position of each single maped read from the DNA mapping and the amino mapping is visualized.
 
 <p align="center">
   <img src="img/NGS-10001_01.png" width="800">
@@ -382,6 +388,8 @@ The output files containing three important files
 </p>
 
 ### Phylogenetic tree by the findings
+
+We use the ete-toolkit for the automatic generation of phylogenetic trees. This is more a overview of findings.
 
 <p align="center">
   <img src="img/NGS-10001_tree.png" width="600">
