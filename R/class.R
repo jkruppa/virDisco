@@ -1,4 +1,4 @@
-## define class par_list
+
 setClass(
   Class = "program_list",
   representation = representation(

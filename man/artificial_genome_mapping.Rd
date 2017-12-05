@@ -2,25 +2,31 @@
 % Please edit documentation in R/artificial_genome_mapping.R
 \name{artificial_genome_mapping}
 \alias{artificial_genome_mapping}
-\title{Test}
+\title{Control function for the artificial mapping}
 \usage{
 artificial_genome_mapping(in_file, out_file, par_list)
 }
 \arguments{
-\item{in_file}{}
+\item{in_file}{list of *.fastq.gz file(s) by
+\code{\link{get_sub_files}}}
 
-\item{out_file}{}
+\item{out_file}{file path of the outfile}
 
-\item{par_list}{}
-}
-\value{
-Test
+\item{par_list}{parameter list gnerated by
+\code{\link{set_par_list}}}
 }
 \description{
-Test
+The control function of the pipeline of the artificial genome
+mapping.
 }
 \details{
-Test
+This function needs the fastq infiles as a named list and
+additonal parameters set in the par_list by the function
+\code{\link{set_par_list}}.
+}
+\examples{
+
+## This function needs dpendencies and file handling, see \\url{https://github.com/jkruppa/viralDetectTools} for a comprehensive tutorial.
 }
 \author{
 Jochen Kruppa

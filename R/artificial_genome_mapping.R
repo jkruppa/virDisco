@@ -1,13 +1,21 @@
-##' Test
+##' The control function of the pipeline of the artificial genome
+##' mapping.
 ##'
-##' Test
-##' @title Test 
-##' @param in_file 
-##' @param out_file 
-##' @param par_list 
-##' @return Test
+##' This function needs the fastq infiles as a named list and
+##' additonal parameters set in the par_list by the function
+##' \code{\link{set_par_list}}. 
+##' @title Control function for the artificial mapping
+##' @param in_file list of *.fastq.gz file(s) by
+##'   \code{\link{get_sub_files}}
+##' @param out_file file path of the outfile
+##' @param par_list parameter list gnerated by
+##'   \code{\link{set_par_list}}
+##' @return NULL
 ##' @author Jochen Kruppa
 ##' @export
+##' @examples
+##'
+##' ## This function needs dpendencies and file handling, see \url{https://github.com/jkruppa/viralDetectTools} for a comprehensive tutorial.
 artificial_genome_mapping <- function(in_file,
                                       out_file,
                                       par_list
@@ -70,7 +78,7 @@ artificial_genome_mapping <- function(in_file,
                                                              "adapters", "TruSeq3-PE.fa"),
                                    log_file = file.path(par_list["tmp_dir"],
                                                         str_c(basename(out_file), "_trim.log")))
-  ## go on here: www.biostars.org/p/165333
+  ## start DNA mapping
   if(par_list["run_dna_mapping"]){
     talk("Start DNA mapping")
     map_dna_list <- map_dna_ref(infile = in_file,
