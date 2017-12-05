@@ -5,6 +5,7 @@ The viralDetectTools is a R package with uses many third party programs. Therefo
 ## Table of Contents
 1. [Installation](#installation)
 2. [Tutorial](#tutorial)
+3. [S4 class par_list](#S4 class 'par_list')
 
 ## Installation
 
