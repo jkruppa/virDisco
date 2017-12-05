@@ -372,7 +372,7 @@ The count file includes all the counts of the mapped DNA reads and the translate
 The plotting function gnerates first a overview plot of the standard informations on the sample name, the number of reads and the number of reads after quality control, if the reads were paired, and the running time. Finally, a host check will be reported based on 100 randomly selected reads, which have been blasted.
 
 <p align="center">
-  <img src="img/NGS-10001_00.png" width="800">
+  <img src="img/NGS-10001_00.png" width="700">
 </p>
 
 ### First and second figure out of 25
@@ -380,11 +380,11 @@ The plotting function gnerates first a overview plot of the standard information
 Depending on the parameter in `par_list["num_plot"]` 25 plots are generated from the TOP25. In general the position of each single maped read from the DNA mapping and the amino mapping is visualized.
 
 <p align="center">
-  <img src="img/NGS-10001_01.png" width="800">
+  <img src="img/NGS-10001_01.png" width="700">
 </p>
 
 <p align="center">
-  <img src="img/NGS-10001_02.png" width="800">
+  <img src="img/NGS-10001_02.png" width="700">
 </p>
 
 ### Phylogenetic tree by the findings
@@ -392,5 +392,5 @@ Depending on the parameter in `par_list["num_plot"]` 25 plots are generated from
 We use the ete-toolkit for the automatic generation of phylogenetic trees. This is more a overview of findings.
 
 <p align="center">
-  <img src="img/NGS-10001_tree.png" width="600">
+  <img src="img/NGS-10001_tree.png" width="500">
 </p>
