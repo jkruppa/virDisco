@@ -353,6 +353,12 @@ R> artificial_genome_mapping(in_file = viral_files$in_file,
 
 ## Output files
 
+The output files containing three important files
+
+1. The ordered counts of the mapped DNA and amino acid reads
+2. The visualization of the mapping results into a single pdf file
+3. The phylogenetic tree of all findings, where a tax ID was available
+
 ### Count \*.xlsx file
 
 <p align="center">
