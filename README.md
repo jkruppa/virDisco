@@ -48,6 +48,65 @@ program_list <- set_program_list(bowtie_dir = file.path(programDir, ... , "bowti
                                  trimmomatic_dir = file.path(programDir, ... , "trimmomatic-0.36.jar"))
 ```
 
+### S4 class 'par_list'
+
+The viral detection pipeline is controlled by a S4 object of the class `par_list`. In this class all parameters for the detection pipeline are stored. Some of the representations have default values. 
+
+```R
+setClass(
+  Class = "par_list",
+  representation = representation(
+    tax = "logical",
+    qc = "logical",
+    clean = "logical",
+    paired = "logical",
+    plot = "logical",
+    black_list = "character",
+    gen_prot_sep = "character",
+    check_host = "logical",
+    run_dna_mapping = "logical",
+    run_pep_mapping = "logical",
+    consensus = "logical",
+    tmp_dir = "character",
+    sql_dir = "character",
+    index_genome_dir = "character",
+    index_amino_dir = "character",
+    ref_seq_file = "character",
+    prot_info = "tbl_dbi",
+    species_info = "tbl_dbi",
+    plot_id = "character",
+    mapper = "character",
+    num_plot = "numeric",
+    ncore = "numeric",
+    pdf_file = "character"
+  ),
+  prototype = prototype(
+    tax = TRUE,
+    clean = TRUE,
+    paired = FALSE,
+    plot = TRUE,
+    plot_id = "",
+    run_dna_mapping = TRUE,
+    run_pep_mapping = TRUE,
+    consensus = TRUE,
+    gen_prot_sep = "_",
+    black_list = "",
+    check_host = TRUE,
+    mapper = "bowtie",
+    num_plot = 25,
+    ncore = 1,
+    prot_info = structure(tibble(), class = c("tbl_dbi", "empty")),
+    species_info = structure(tibble(), class = c("tbl_dbi", "empty")),
+    tmp_dir = file.path("/home/temp"),
+    sql_dir = file.path("/home/sql")
+  )
+  [...] ## validity functions are truncated, see R/class.R for more information
+)
+
+
+```
+
+
 ### File setup
 
 While the run of the viralDetectTools many files are produced and needed. Therefore a good file system managment should be used and setup. It is not a good idea to store and save all the input and output files into one single folder. The package includes 10000 paired reads from a Illumina MiSeq. Some of the steps are redundant but will help to understand the process.
