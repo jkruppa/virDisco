@@ -109,7 +109,7 @@ artificial_genome_mapping <- function(in_file,
   ord_df <- ord_df[!ord_df$genebank_id %in% par_list["black_list"], ]
   ## we remove all viral strains with a low coverage
   good_coverage <- coverage_filter(ord_df$genebank_id,
-                                   map_pep_list,
+                                   map_dna_list,
                                    par_list) %>%
     filter(coverage >= 0.05) %>%
     select(genebank_id)
@@ -147,7 +147,7 @@ artificial_genome_mapping <- function(in_file,
     ord_df <- ord_df[1:par_list["num_plot"],]
   }
   ## if no plot_ids are given run on findings
-  if(nchar(par_list["plot_id"]) == 0) { 
+  if(nchar(par_list["plot_id"])[1] == 0) { 
     par_list["plot_id"] <- ord_df$genebank_id
   } 
   if(par_list["consensus"]){
