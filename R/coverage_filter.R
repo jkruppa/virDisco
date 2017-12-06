@@ -43,13 +43,17 @@ coverage_filter <- function(hit_id, map_dna_list, par_list, out_file){
   print(p)
   dev.off()
   png(str_c(out_file, "_read_length_hist.png"), width = 18, height = 18, res = 300, units = "cm")
+  dens <- density(coverage_tbl$mean_read_length)
+  max_y <- which.max(dens$y)
+  x_break <- c(dens$x[max_y], round(seq(from = min(dens$x), to = max(dens$x), length.out = 5)))
   p <- ggplot(coverage_tbl, aes(mean_read_length)) +
     geom_density(fill = par$cbbPalette[3], alpha = 0.6) +
-    theme_bw() +
-    xlab("Read length") + ylab("Density") +
-    ggtitle(str_c(basename(out_file), " - Mean read length"))    
+    theme_bw() + xlab("Read length") + ylab("Density") +
+    geom_vline(xintercept = dens$x[max_y], color = par$cbbPalette[7]) +
+    ggtitle(str_c(basename(out_file), " - Mean read length")) +
+    scale_x_continuous(breaks = x_break)
   print(p)
-  dev.off()
+  dev.off()  
   return(coverage_tbl)
 }
 
