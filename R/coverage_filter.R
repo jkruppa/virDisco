@@ -29,7 +29,7 @@ coverage_filter <- function(hit_id, map_dna_list, par_list, out_file){
   p <- ggplot(coverage_tbl, aes(coverage)) +
     geom_density(fill = par$cbbPalette[3], alpha = 0.6) +
     theme_bw() +
-    xlab("Read length") + ylab("Density") +
+    xlab("Coverage of the reference genome") + ylab("Density") +
     ggtitle(str_c(basename(out_file), " - Coverage"))  +
     geom_vline(xintercept = 0.05, color = par$cbbPalette[7])
   print(p)
