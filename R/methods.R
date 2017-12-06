@@ -145,9 +145,16 @@ setMethod(
     }
   }
 )
-
+##' Desc
+##'
+##' Detail
+##' @title Test 
+##' @param object 
+##' @return boolean
+##' @author Jochen Kruppa
+##' @export
 setGeneric("tbl_sqlite_check", function(object) {standardGeneric("tbl_sqlite_check")})
-##
+
 setMethod(
   f = "tbl_sqlite_check",
   signature = "par_list",

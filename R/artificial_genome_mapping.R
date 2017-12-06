@@ -107,6 +107,13 @@ artificial_genome_mapping <- function(in_file,
   ord_df <- ord_findings(map_dna_list, map_pep_list)  
   ## remove some strange references by black_list
   ord_df <- ord_df[!ord_df$genebank_id %in% par_list["black_list"], ]
+  ## we remove all viral strains with a low coverage
+  good_coverage <- coverage_filter(ord_df$genebank_id, par_list) %>%
+    filter(coverage >= 0.05) %>%
+    select(genebank_id)
+  ## filter for the coverage
+  ord_df <- ord_df[ord_df$genebank_id %in% good_coverage$genebank_id,]
+  ## get the description  
   genbank_id_desc_df <- collect(select(filter(par_list["species_info"],
                                               genebank_id %in% ord_df$genebank_id),
                                        c(genebank_id, Description))) 
