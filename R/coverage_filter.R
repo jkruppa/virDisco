@@ -29,13 +29,13 @@ coverage_filter <- function(hit_id, map_dna_list, par_list){
     geom_density(aes(y = ..count..), fill = par$cbbPalette[3], alpha = 0.6) +
     theme_bw() +
     xlab("Read length") + ylab("Count") +
-    ggtitle(x)    
+    ggtitle(str_c(x, " - Coverage"))    
   dev.off()
   png(str_c(out_file, "_mapq_hist.png"), width = 18, height = 18, res = 300, units = "cm")
   ggplot(coverage_tbl, aes(mean_mapq)) +
     geom_density(aes(y = ..count..), fill = par$cbbPalette[3], alpha = 0.6) +
       theme_bw() + xlim(c(0, 255)) +
-    xlab("Mappping quality") + ylab("Count") +
+    xlab("Mapping quality") + ylab("Count") +
     ggtitle(str_c(x, " - Mean mapping quality"))    
   dev.off()
   png(str_c(out_file, "_read_length_hist.png"), width = 18, height = 18, res = 300, units = "cm")
