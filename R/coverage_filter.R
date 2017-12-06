@@ -30,21 +30,21 @@ coverage_filter <- function(hit_id, map_dna_list, par_list, out_file){
     geom_density(aes(y = ..count..), fill = par$cbbPalette[3], alpha = 0.6) +
     theme_bw() +
     xlab("Read length") + ylab("Count") +
-    ggtitle(str_c(x, " - Coverage"))    
+    ggtitle(str_c(basename(out_file), " - Coverage"))    
   dev.off()
   png(str_c(out_file, "_mapq_hist.png"), width = 18, height = 18, res = 300, units = "cm")
   ggplot(coverage_tbl, aes(mean_mapq)) +
     geom_density(aes(y = ..count..), fill = par$cbbPalette[3], alpha = 0.6) +
       theme_bw() + xlim(c(0, 255)) +
     xlab("Mapping quality") + ylab("Count") +
-    ggtitle(str_c(x, " - Mean mapping quality"))    
+    ggtitle(str_c(basename(out_file), " - Mean mapping quality"))    
   dev.off()
   png(str_c(out_file, "_read_length_hist.png"), width = 18, height = 18, res = 300, units = "cm")
   ggplot(coverage_tbl, aes(mean_read_length)) +
     geom_density(aes(y = ..count..), fill = par$cbbPalette[3], alpha = 0.6) +
     theme_bw() +
     xlab("Read length") + ylab("Count") +
-    ggtitle(str_c(x, " - Mean read length"))    
+    ggtitle(str_c(basename(out_file), " - Mean read length"))    
   dev.off()
   return(coverage_tbl)
 }
