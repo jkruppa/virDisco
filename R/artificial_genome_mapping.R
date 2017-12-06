@@ -189,6 +189,7 @@ artificial_genome_mapping <- function(in_file,
     talk("Start generating the mapping pdf -> Stopped, not wanted")
   }
   ## clean the temp folder
+  unlink(dir0(dirname(out_file), "\\.png")) ## clean png_files
   gc()
   if(par_list["clean"]) unlink(dir0(par_list["tmp_dir"]))
   talk("Finished\n")
