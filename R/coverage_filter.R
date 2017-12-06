@@ -35,9 +35,9 @@ coverage_filter <- function(hit_id, map_dna_list, par_list, out_file){
   print(p)
   dev.off()
   png(str_c(out_file, "_mapq_hist.png"), width = 18, height = 18, res = 300, units = "cm")
-  ggplot(coverage_tbl, aes(mean_mapq)) +
-    p <- geom_density(fill = par$cbbPalette[3], alpha = 0.6) +
-      theme_bw() + xlim(c(0, 255)) +
+  p <-   ggplot(coverage_tbl, aes(mean_mapq)) +
+    geom_density(fill = par$cbbPalette[3], alpha = 0.6) +
+    theme_bw() + xlim(c(0, 255)) +
     xlab("Mapping quality") + ylab("Density") +
     ggtitle(str_c(basename(out_file), " - Mean mapping quality"))    
   print(p)
