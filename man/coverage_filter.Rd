@@ -4,7 +4,7 @@
 \alias{coverage_filter}
 \title{Test}
 \usage{
-coverage_filter(hit_id, map_dna_list, par_list)
+coverage_filter(hit_id, map_dna_list, par_list, out_file)
 }
 \arguments{
 \item{hit_id}{}
@@ -12,6 +12,8 @@ coverage_filter(hit_id, map_dna_list, par_list)
 \item{map_dna_list}{}
 
 \item{par_list}{}
+
+\item{out_file}{}
 }
 \value{
 tibble

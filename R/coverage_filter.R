@@ -5,10 +5,11 @@
 ##' @param hit_id 
 ##' @param map_dna_list 
 ##' @param par_list 
+##' @param out_file 
 ##' @return tibble
 ##' @author Jochen Kruppa
 ##' @export
-coverage_filter <- function(hit_id, map_dna_list, par_list){
+coverage_filter <- function(hit_id, map_dna_list, par_list, out_file){
   viral_length <- collect(filter(par_list["species_info"], genebank_id %in% hit_id)) %>%
     select(genebank_id, length = Length)
   coverage_tbl <- ldply(hit_id, function(x) {

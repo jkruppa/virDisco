@@ -110,7 +110,8 @@ artificial_genome_mapping <- function(in_file,
   ## we remove all viral strains with a low coverage
   good_coverage <- coverage_filter(ord_df$genebank_id,
                                    map_dna_list,
-                                   par_list) %>%
+                                   par_list,
+                                   out_file) %>%
     filter(coverage >= 0.05) %>%
     select(genebank_id)
   ## filter for the coverage
