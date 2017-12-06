@@ -4,10 +4,12 @@
 \alias{coverage_filter}
 \title{Test}
 \usage{
-coverage_filter(hit_id, par_list)
+coverage_filter(hit_id, map_dna_list, par_list)
 }
 \arguments{
 \item{hit_id}{}
+
+\item{map_dna_list}{}
 
 \item{par_list}{}
 }
