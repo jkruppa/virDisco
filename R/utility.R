@@ -8,15 +8,15 @@
 ##' @export
 plot_time_sample <- function(batch_fastq_files) {
   require(scales)
-  batch_raw_dates <- gsub("batch_", "", str_split(batch_fastq_files, "/", simplify = TRUE)[,1])
+  batch_raw_dates <- gsub("batch_", "", str_split(batch_fastq_files, "/", simplify = TRUE)[,6])
   batch_dates_df <- na.omit(tibble(dates = as.Date(batch_raw_dates, "%Y%m%d")))
-  n_count <- nrow(batch_dates_df)
-  p <- ggplot(batch_dates_df, aes(x = dates)) + geom_bar() +
+  n_count <- nrow(batch_dates_df)/2
+  p <- ggplot(batch_dates_df, aes(x = dates)) + geom_bar(aes(y = ..count../2)) +
     scale_x_date(labels = date_format("%b-%Y"),
                  breaks = unique(batch_dates_df)$dates) +
-    annotate("text", x = unique(batch_dates_df)$dates[1], y = 45,
+    annotate("text", x = unique(batch_dates_df)$dates[1], y = 25,
              label = str_c("Run samples: ", n_count), hjust = 0) +
-    theme_bw()
+    theme_bw() + ylab("Count")
   p <- p + theme(axis.text.x = element_text(angle = 60, hjust = 1))
   return(p)
 }
