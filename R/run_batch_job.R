@@ -51,7 +51,12 @@ run_batch_job <- function(batch_in_dir, batch_out_dir, par_list, run_samples = N
   batch_res_dir <- file.path(dirname(batch_out_dir),
                              str_c(batch_res_name, "_results"))
   message(batch_res_dir)
-  dir.create(batch_res_dir)
+  if(!file.exists(batch_res_dir)){
+    dir.create(batch_res_dir)
+  } else {
+    batch_res_dir <- str_c(batch_res_dir, "_", stringi::stri_rand_strings(1, 10)) 
+    dir.create(batch_res_dir)
+  }
   ## copy pdf and xlsx 
   file.copy(batch_pdf_files, batch_res_dir)
   file.copy(batch_xlsx_files, batch_res_dir)
