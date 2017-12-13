@@ -9,7 +9,7 @@
 ##' @param minlength 
 ##' @param illuminaclip 
 ##' @param log_file 
-##' @return NULL
+##' @return Test
 ##' @author Jochen Kruppa
 ##' @export
 fastq_trimmer <- function (inFile, outFile, leading = 10, trailing = 10, minlength = 50, 
@@ -18,7 +18,7 @@ fastq_trimmer <- function (inFile, outFile, leading = 10, trailing = 10, minleng
       if(length(inFile) == 2) {
         paired_outFile <- gsub("trimmed", "trimmed.paired", outFile)
         unpaired_outFile <- gsub("trimmed", "trimmed.unpaired", outFile)
-        fastq_trimmer_CMD <- paste("java -jar", program_list["trimmomatic"], 
+        fastq_trimmer_CMD <- paste("java -jar", trimmomatic, 
                                    "PE",
                                    "-threads", par$nCores,
                                    "-phred33",
@@ -36,7 +36,7 @@ fastq_trimmer <- function (inFile, outFile, leading = 10, trailing = 10, minleng
                                    "2>", log_file)
     }
     else {
-      fastq_trimmer_CMD <- paste("java -jar", program_list["trimmomatic"], 
+      fastq_trimmer_CMD <- paste("java -jar", trimmomatic, 
                                  "SE",
                                  "-threads", par$nCores,
                                  "-phred33",
@@ -89,6 +89,15 @@ fastq_quality_control <- function(inFile, tmpDir, leading = 10,
     out_file <- list(setNames(laply(tmpTrimFq, function(x) gsub("trimmed.", "trimmed.paired.", x)),
                               c("R1", "R2")))
     names(out_file) <- names(inFile)
+    ## min length is really 50
+    talk("Remove reads shorter than 50bp")
+    trim_fq_list <- llply(unlist(out_file), readFastq)
+    long_pos <- intersect(which(width(trim_fq_list[[1]]) >= 50),
+                          which(width(trim_fq_list[[2]]) >= 50))
+    unlink(unlist(out_file))
+    l_ply(seq_along(trim_fq_list), function(i) writeFastq(trim_fq_list[[i]][long_pos],
+                                                          unlist(out_file)[i]),
+          .parallel = TRUE)
   } else {
     ## this is redundant I know, but single reads are not fully tested yet
     tmpTrimFq <- file.path(tmpDir, gsub("fastq|fq", "trimmed.fq", basename(tmp_in_file)))
@@ -99,6 +108,14 @@ fastq_quality_control <- function(inFile, tmpDir, leading = 10,
     out_file <- list(setNames(laply(tmpTrimFq, function(x) gsub("trimmed.", "trimmed.", x)),
                               c("R1")))
     names(out_file) <- names(inFile)
+    ## min length is really 50
+    talk("Remove reads shorter than 50bp")
+    trim_fq_list <- llply(unlist(out_file), readFastq)
+    long_pos <- which(width(trim_fq_list[[1]]) >= 50)
+    unlink(unlist(out_file))
+    l_ply(seq_along(trim_fq_list), function(i) writeFastq(trim_fq_list[[i]][long_pos],
+                                                          unlist(out_file)[i]),
+          .parallel = TRUE)
   }
   return(out_file)
 }

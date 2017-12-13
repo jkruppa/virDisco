@@ -22,6 +22,9 @@ fastq_trimmer(inFile, outFile, leading = 10, trailing = 10,
 
 \item{log_file}{}
 }
+\value{
+Test
+}
 \description{
 Test
 }
