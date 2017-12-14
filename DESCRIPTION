@@ -1,4 +1,4 @@
-Package: viralDetectTools
+Package: virDisco
 Title: Modules for a viral detection pipeline
 Version: 0.0.0.9073
 Authors@R: as.person(c(
