@@ -21,21 +21,21 @@ artificial_genome_mapping <- function(in_file,
                                       par_list
                                       )
 {
-  talk("Write to ", dirname(out_file))
+  talk("[DATA HANDLING] Write to ", dirname(out_file))
   ## some checks for file handling later on
   require(tools)
   require(png)
   proc_start_tm <- proc.time()
   ## generate tmp dir if not exists
   if(!file.exists(par_list["tmp_dir"])) {
-    talk("Temp dir ", par_list["tmp_dir"], " not found. Will be created...")
+    talk("[DATA HANDLING] Temp dir ", par_list["tmp_dir"], " not found. Will be created...")
     dir.create(par_list["tmp_dir"])
   } else {
-    talk("Temp dir ", par_list["tmp_dir"], " found. Will be removed...")
+    talk("[DATA HANDLING] Temp dir ", par_list["tmp_dir"], " found. Will be removed...")
     if(par_list["tmp_dir"] == file.path("/home/temp/"))
       stop("Temp dir is '/home/temp/'! Stop, this not a good idea...")
     unlink(par_list["tmp_dir"], recursive = TRUE)
-    talk("Temp dir ", par_list["tmp_dir"], " will be created...")
+    talk("[DATA HANDLING] Temp dir ", par_list["tmp_dir"], " will be created...")
     dir.create(par_list["tmp_dir"])    
   }
   ## check if mapper and index a coherent  
@@ -68,7 +68,7 @@ artificial_genome_mapping <- function(in_file,
   if(any(class(par_list@species_info) == "empty") | any(class(par_list@prot_info) == "empty")) {
     par_list["plot"] <- FALSE
   } else {
-    if(tbl_sqlite_check(par_list)) talk("Gene and species information is correct")
+    if(tbl_sqlite_check(par_list)) talk("[DATA HANDLING] Gene and species information is correct")
   }
   ## begin with trimming
   ## fastq quality control and trimming
@@ -80,30 +80,30 @@ artificial_genome_mapping <- function(in_file,
                                                         str_c(basename(out_file), "_trim.log")))
   ## start DNA mapping
   if(par_list["run_dna_mapping"]){
-    talk("Start DNA mapping")
+    talk("[DNA MAPPING] Start DNA mapping")
     map_dna_list <- map_dna_ref(infile = in_file,
                                 outfile = str_c(out_file, ".sam"),
                                 par_list)
-    talk("Save DNA mapping results...")
+    talk("[DNA MAPPING] Save DNA mapping results...")
     saveRDS(map_dna_list, str_c(out_file, "_map_dna_list.RDS"))
   } else {
-    talk("Start DNA mapping -> Stopped due to prior results")
+    talk("[DNA MAPPING] Start DNA mapping -> Stopped due to prior results")
     map_dna_list <- readRDS(str_c(out_file, "_map_dna_list.RDS"))
   }
   ## run PEP mapping
   if(par_list["run_pep_mapping"]){
-    talk("Start AMINO mapping")
+    talk("[AMINO MAPPING] Start AMINO mapping")
     map_pep_list <- map_pep_ref(infile = in_file,
                                 outfile = str_c(out_file, ".blastx"),
                                 par_list)
-    talk("Save AMINO mapping results...")
+    talk("[AMINO MAPPING] Save AMINO mapping results...")
     saveRDS(map_pep_list, str_c(out_file, "_map_pep_list.RDS"))
   } else {
-    talk("Start AMINO mapping -> Stopped due to prior results")
+    talk("[AMINO MAPPING] Start AMINO mapping -> Stopped due to prior results")
     map_pep_list <- readRDS(str_c(out_file, "_map_pep_list.RDS"))
   }
   ## build results xlsx
-  talk("Save hits to xlsx")
+  talk("[RESULTS] Save hits to xlsx")
   ord_df <- ord_findings(map_dna_list, map_pep_list)  
   ## remove some strange references by black_list
   ord_df <- ord_df[!ord_df$genebank_id %in% par_list["black_list"], ]
@@ -129,7 +129,7 @@ artificial_genome_mapping <- function(in_file,
                     amino_rank = ord_df$rank_pep,
                     description = genbank_id_desc_map[[genebank_id]])
   openxlsx::write.xlsx(xlsx_df, file.path(str_c(out_file, ".xlsx")), row.names = FALSE)
-  talk("Generate pylogenetic tree")
+  talk("[RESULTS] Generate pylogenetic tree")
   tax_ids <- collect(select(filter(par_list["species_info"],
                                    genebank_id %in% ord_df$genebank_id), tax_id))
   if(par_list["tax"] && nrow(tax_ids) != 0){
@@ -152,7 +152,7 @@ artificial_genome_mapping <- function(in_file,
     par_list["plot_id"] <- ord_df$genebank_id
   } 
   if(par_list["consensus"]){
-    talk("Generate consensus of reads to reference")
+    talk("[CONSENSUS] Generate consensus of reads to reference")
     consensus_list <- get_consensus_df(hits = par_list["plot_id"],
                                        out_file,
                                        par_list)
@@ -174,7 +174,7 @@ artificial_genome_mapping <- function(in_file,
                                    out_file, par_list, proc_start_tm)
   ## plot the thing  
   if(par_list["plot"]){
-    talk("Start generating the mapping pdf")
+    talk("[PLOT] Start generating the mapping pdf")
     mapping_dna_plot(genebank_id = par_list["plot_id"],
                      consensus_df = consensus_list$consensus_df,
                      dna_alignment_df = map_dna_list$alignment_df,
@@ -186,12 +186,12 @@ artificial_genome_mapping <- function(in_file,
                                        str_c(out_file, ".pdf"), par_list["pdf_file"]),
                      par_list)
   } else {
-    talk("Start generating the mapping pdf -> Stopped, not wanted")
+    talk("[PLOT] Start generating the mapping pdf -> Stopped, not wanted")
   }
   ## clean the temp folder
   unlink(dir0(dirname(out_file), "\\.png")) ## clean png_files
   gc()
   if(par_list["clean"]) unlink(dir0(par_list["tmp_dir"]))
-  talk("Finished\n")
+  talk("[FIN] Finished\n")
 }
 

@@ -83,14 +83,14 @@ fastq_quality_control <- function(inFile, tmpDir, leading = 10,
   if(length(tmp_in_file) == 2){
     tmpTrimFq <- file.path(tmpDir, gsub("fastq|fq", "trimmed.fq", basename(tmp_in_file)))
     names(tmpTrimFq) <- names(tmp_in_file)
-    talk("Start trimming")
+    talk("[TRIMMING] Start trimming")
     fastq_trimmer(inFile = tmp_in_file, outFile = tmpTrimFq, leading, trailing, minlength, 
                   illumninaclip, log_file)
     out_file <- list(setNames(laply(tmpTrimFq, function(x) gsub("trimmed.", "trimmed.paired.", x)),
                               c("R1", "R2")))
     names(out_file) <- names(inFile)
     ## min length is really 50
-    talk("Remove reads shorter than 50bp")
+    talk("[TRIMMING] Remove reads shorter than 50bp")
     trim_fq_list <- llply(unlist(out_file), readFastq)
     long_pos <- intersect(which(width(trim_fq_list[[1]]) >= 50),
                           which(width(trim_fq_list[[2]]) >= 50))

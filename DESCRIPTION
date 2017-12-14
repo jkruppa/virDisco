@@ -1,6 +1,6 @@
 Package: virDisco
 Title: Modules for a viral detection pipeline
-Version: 0.0.0.9077
+Version: 0.0.0.9078
 Authors@R: as.person(c(
     "Klaus Jung <Klaus.Jung@tiho-hannover.de> [aut, cre]", 
     "Jochen Kruppa <Jochen.Kruppa@tiho-hannover.de> [aut]"
