@@ -109,7 +109,7 @@ setClass(
 
 ### File setup
 
-While the run of the viralDetectTools many files are produced and needed. Therefore a good file system managment should be used and setup. It is not a good idea to store and save all the input and output files into one single folder. The package includes 10000 paired reads from a Illumina MiSeq. Some of the steps are redundant but will help to understand the process.
+While the run of the virDisco many files are produced and needed. Therefore a good file system managment should be used and setup. It is not a good idea to store and save all the input and output files into one single folder. The package includes 10000 paired reads from a Illumina MiSeq. Some of the steps are redundant but will help to understand the process.
 
 All the files will be stored in the `main_dir`, which is located in the tmp folder of your PC. Change this line to use a different folder as root folder. Further, we need a tmp folder, here `tmp_viral_dir`,  to store all the temporal files. In this example it does not really matter but in a real example the intermediate files become really big and must not be stored.
 
@@ -217,7 +217,7 @@ viral_index_list <- build_index(dna_set = dna_seqs,
 
 ### Setup SQL database
 
-One main feature of the viralDetectTools is the visualization of the mapping results. Only a subset of the findings will be overall plotted, given by the parameter `pat_list["num_plot"]`. In this example we have already to sqlite3 databases. One inlducing all the protein and genebank_ids as well as the gene/protein start position and end position. This database can be very big. In our example only 519 genes are included. There is no more time needed  to filter the data if there would be millions of rows. 
+One main feature of the virDisco is the visualization of the mapping results. Only a subset of the findings will be overall plotted, given by the parameter `pat_list["num_plot"]`. In this example we have already to sqlite3 databases. One inlducing all the protein and genebank_ids as well as the gene/protein start position and end position. This database can be very big. In our example only 519 genes are included. There is no more time needed  to filter the data if there would be millions of rows. 
 
 ```R
 ## load the data implemented in the package
