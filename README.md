@@ -1,6 +1,6 @@
-# R package viralDetectTools
+# R package virDisco
 
-The viralDetectTools is a R package with uses many third party programs. Therefore, these programs must be installed on the computer. Further, many of these third party programs are based on Linux. Therefore, the viralDetectTools package is more or less a Linux only R package. Still, it can be installed and used, but some functions will not work.
+The virDisco, short for virus detection and discovery, is a R package with uses many third party programs. Therefore, these programs must be installed on the computer. Further, many of these third party programs are based on Linux. Therefore, the virDisco package is more or less a Linux only R package. Still, it can be installed and used, but some functions will not work.
 
 ## Table of Contents
 1. [Installation](#installation)
@@ -11,7 +11,7 @@ The viralDetectTools is a R package with uses many third party programs. Therefo
 The development version from github:
 
 ```R
-devtools::install_github("jkruppa/viralDetectTools")
+devtools::install_github("jkruppa/virDisco")
 ```
 
 ## Tutorial
@@ -20,7 +20,7 @@ The package has many dependencies, which must be installed first. Some programes
 
 ### Dependencies
 
-In the first step a `program_list` object including all the path to the program exectuables must be generated. The following programs are needed for the viralDetectTools.
+In the first step a `program_list` object including all the path to the program exectuables must be generated. The following programs are needed for the virDisco.
 
 1. Bowtie2 DNA mapper http://bowtie-bio.sourceforge.net/bowtie2/index.shtml
 2. Star mapper \[optional\] https://github.com/alexdobin/STAR
