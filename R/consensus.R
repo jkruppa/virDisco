@@ -9,6 +9,7 @@
 ##' @author Jochen Kruppa
 ##' @export
 get_consensus_df <- function(hits, out_file, par_list){
+  talk("[CONSENSUS] Get sequence information on hits")
   dna_read_seqs <- readRDS(str_c(out_file, "_dna_seqs.RDS"))
   dna_read_seqs_info <- tbl_df(data.frame(str_split(names(dna_read_seqs), "_", simplify = TRUE),
                                           stringsAsFactors = FALSE))
@@ -25,7 +26,7 @@ get_consensus_df <- function(hits, out_file, par_list){
   hit_ref_seq <- readDNAStringSet(tmp_hit_ref_fa)
   unlink(tmp_hit_ref_fa)
   ## info from each hit
-  talk("[CONSENSUS] Get information from each hit")
+  talk("[CONSENSUS] Get species information from each hit")
   consensus_info_list <- setNames(llply(hits, function(hit) {
     ## get the hit information
     hit_info <- filter(dna_read_seqs_info, genebank_id %in% hit)
