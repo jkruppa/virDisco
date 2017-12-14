@@ -25,6 +25,7 @@ get_consensus_df <- function(hits, out_file, par_list){
   hit_ref_seq <- readDNAStringSet(tmp_hit_ref_fa)
   unlink(tmp_hit_ref_fa)
   ## info from each hit
+  talk("[CONSENSUS] Get information from each hit")
   consensus_info_list <- setNames(llply(hits, function(hit) {
     ## get the hit information
     hit_info <- filter(dna_read_seqs_info, genebank_id %in% hit)
@@ -36,6 +37,7 @@ get_consensus_df <- function(hits, out_file, par_list){
                 hit_dna_seqs = hit_dna_seqs,
                 hit_ref_seq = hit_ref_seq[hit]))
   }), hits)
+  talk("[CONSENSUS] Align reads to the reference sequence")
   consensus_list <- llply(consensus_info_list, function(x) {
     ## talk(names(x$hit_ref_seq))
     tmp_aligned_file <- tempfile(pattern = str_c("tmp_aligned_ref_", names(x$hit_ref_seq), "_"),
@@ -100,6 +102,7 @@ get_consensus_df <- function(hits, out_file, par_list){
                 coverage_overall_ref = coverage_overall_ref
                 ))
   }, .parallel = TRUE)
+  talk("[CONSENSUS] Write consensus seqeunces to file")
   writeXStringSet(Reduce(c, llply(consensus_list, function(x) x$consensus_seq)),
                   str_c(out_file, "_consensus.fa"))
   writeXStringSet(Reduce(c, llply(consensus_list, function(x) x$consensus_to_refseq)),
