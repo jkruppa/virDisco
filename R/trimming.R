@@ -92,30 +92,42 @@ fastq_quality_control <- function(inFile, tmpDir, leading = 10,
     ## min length is really 50
     talk("[TRIMMING] Remove reads shorter than 50bp")
     trim_fq_list <- llply(unlist(out_file), readFastq)
+    num_reads <- sum(laply(trim_fq_list, length))
     long_pos <- intersect(which(width(trim_fq_list[[1]]) >= 50),
                           which(width(trim_fq_list[[2]]) >= 50))
+    num_qc_reads <- 2 * length(long_pos)
+    mean_read_length <- mean(width(trim_fq_list[[1]][long_pos]))
     unlink(unlist(out_file))
     l_ply(seq_along(trim_fq_list), function(i) writeFastq(trim_fq_list[[i]][long_pos],
                                                           unlist(out_file)[i]),
           .parallel = TRUE)
+    ## write trim_log
+    trim_log <- tibble(num_reads, num_qc_reads, mean_read_length)
+    write_delim(trim_log, log_file)    
   } else {
     ## this is redundant I know, but single reads are not fully tested yet
     tmpTrimFq <- file.path(tmpDir, gsub("fastq|fq", "trimmed.fq", basename(tmp_in_file)))
     names(tmpTrimFq) <- names(tmp_in_file)
-    talk("Start trimming")
+    talk("[TRIMMING] Start trimming")
     fastq_trimmer(inFile = tmp_in_file, outFile = tmpTrimFq, leading, trailing, minlength, 
                   illumninaclip, log_file)     
     out_file <- list(setNames(laply(tmpTrimFq, function(x) gsub("trimmed.", "trimmed.", x)),
                               c("R1")))
     names(out_file) <- names(inFile)
     ## min length is really 50
-    talk("Remove reads shorter than 50bp")
+    talk("[TRIMMING] Remove reads shorter than 50bp")
     trim_fq_list <- llply(unlist(out_file), readFastq)
+    num_reads <- sum(laply(trim_fq_list, length))
     long_pos <- which(width(trim_fq_list[[1]]) >= 50)
+    num_qc_reads <- length(long_pos)
+    mean_read_length <- mean(width(trim_fq_list[[1]][long_pos]))
     unlink(unlist(out_file))
     l_ply(seq_along(trim_fq_list), function(i) writeFastq(trim_fq_list[[i]][long_pos],
                                                           unlist(out_file)[i]),
           .parallel = TRUE)
+    ## write trim_log
+    trim_log <- tibble(num_reads, num_qc_reads, mean_read_length)
+    write_delim(trim_log, log_file)    
   }
   return(out_file)
 }

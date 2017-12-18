@@ -82,7 +82,9 @@ setMethod(
     if(i == "ncore") {return(x@ncore)} else {}
     if(i == "species_info") {return(x@species_info)} else {}
     if(i == "prot_info") {return(x@prot_info)} else {}
-  }
+    if(i == "map_dna_in") {return(x@map_dna_in)} else {}
+    if(i == "map_pep_in") {return(x@map_pep_in)} else {}
+ }
 )
 
 setReplaceMethod(
@@ -107,6 +109,8 @@ setReplaceMethod(
     if(i == "ncore") {x@ncore <- value} else {}
     if(i == "pdf_file") {x@pdf_file <- value} else {}
     if(i == "ref_seq_file") {x@ref_seq_file <- value} else {}
+    if(i == "map_dna_in") {x@map_dna_in <- value} else {}
+    if(i == "map_pep_in") {x@map_pep_in <- value} else {}
     return(x)
   }
 )
