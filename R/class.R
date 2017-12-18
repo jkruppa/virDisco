@@ -60,8 +60,8 @@ setOldClass("tbl_dbi")
 setClass(
   Class = "par_list",
   representation = representation(
-    map_dna_in = "character",
-    map_pep_in = "character",    
+    map_dna_in = "list",
+    map_pep_in = "list",    
     tax = "logical",
     qc = "logical",
     decoy = "logical",
