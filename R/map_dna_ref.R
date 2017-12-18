@@ -71,7 +71,15 @@ map_dna_ref <- function(infile, outfile, par_list, min_hit = 5, all = FALSE){
   alignment_table_clean <- alignment_table_sorted[alignment_table_sorted > min_hit]
   ## get the count data frame
   count_df <- setNames(ldply(alignment_table_clean), c("genebank_id", "read_count"))
+    ## get in the decoy information
+  decoy_pos <- str_detect(count_df$genebank_id, "decoy")
+  false_positive <- count_df[decoy_pos,]$read_count / sum(count_df[!decoy_pos,]$read_count)
+  ## adjusted count by false positives
+  count_df %<>% 
+    mutate(read_count_adj = round(read_count * false_positive)) %>%
+    extract(!decoy_pos,)
   ## return list with counts and aligment information
   return(list(count_df = select(count_df, genebank_id, count_read = read_count),
-              alignment_df = alignment_df))
+              alignment_df = alignment_df,
+              false_positive = false_positive))
 }
