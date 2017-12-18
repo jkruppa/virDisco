@@ -4,12 +4,14 @@
 \alias{sam2bam_serial}
 \title{Test}
 \usage{
-sam2bam_serial(sam_files, keep = FALSE)
+sam2bam_serial(sam_files, keep = FALSE, index_sort = FALSE)
 }
 \arguments{
 \item{sam_files}{}
 
 \item{keep}{}
+
+\item{index_sort}{}
 }
 \description{
 Test
