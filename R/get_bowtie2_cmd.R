@@ -32,8 +32,9 @@ get_bowtie2_cmd <- function(inFile, samOutFile, referenceDir, method, p = 32, al
                   switch(method,
                          "end-to-end" = {
                            paste(
-                             "--very-fast",
-                             str_c("--score-min L,0,-", 0.95))
+                             "--very-fast"## ,
+                             ## str_c("--score-min L,0,-", 0.95)
+                           )
                          },
                          "local" = {
                            paste(
