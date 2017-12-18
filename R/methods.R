@@ -84,6 +84,7 @@ setMethod(
     if(i == "prot_info") {return(x@prot_info)} else {}
     if(i == "map_dna_in") {return(x@map_dna_in)} else {}
     if(i == "map_pep_in") {return(x@map_pep_in)} else {}
+    if(i == "decoy") {return(x@decoy)} else {}
  }
 )
 
@@ -111,6 +112,7 @@ setReplaceMethod(
     if(i == "ref_seq_file") {x@ref_seq_file <- value} else {}
     if(i == "map_dna_in") {x@map_dna_in <- value} else {}
     if(i == "map_pep_in") {x@map_pep_in <- value} else {}
+    if(i == "decoy") {x@decoy <- value} else {}
     return(x)
   }
 )
