@@ -12,7 +12,7 @@ map_pep_ref <- function(infile, outfile, par_list){
   ## mapping to pep reference
   if(par_list["paired"]) {
     infile <- unlist(infile)
-    talk("Run pandaseq to build up one fastq file")
+    talk("[AMINO MAPPING] Run pandaseq to build up one fastq file")
     log_file <- file.path(tmpDir, "pandaseq.log")
     panda_cmd <- paste(program_list["pandaseq"],
                        "-f", infile[1],
@@ -37,7 +37,7 @@ map_pep_ref <- function(infile, outfile, par_list){
       infile <- gsub(".gz", "", infile)
     }       
   }
-  talk("Run pauda")
+  talk("[AMINO MAPPING] Run pauda")
   ## get the paths to programs
   pauda_in_file <- ifelse(par_list["paired"],
                           gsub(".blastx", "_combinded_mod.fa", outfile), infile)
@@ -52,7 +52,7 @@ map_pep_ref <- function(infile, outfile, par_list){
                      )
   runCMD(pauda_cmd)
   ## get count df
-  talk("Process pauda hits")
+  talk("[AMINO MAPPING] Process pauda hits")
   pauda_hits_df <- get_pauda_hits(file = gsub(".blastx", "_pep.blastx", outfile),
                                   par_list) 
   ## clean everything
