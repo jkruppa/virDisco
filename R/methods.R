@@ -85,6 +85,8 @@ setMethod(
     if(i == "map_dna_in") {return(x@map_dna_in)} else {}
     if(i == "map_pep_in") {return(x@map_pep_in)} else {}
     if(i == "decoy") {return(x@decoy)} else {}
+    if(i == "num_decoy_reads") {return(x@num_decoy_reads)} else {}
+    if(i == "min_coverage") {return(x@min_coverage)} else {}
  }
 )
 
@@ -113,6 +115,8 @@ setReplaceMethod(
     if(i == "map_dna_in") {x@map_dna_in <- value} else {}
     if(i == "map_pep_in") {x@map_pep_in <- value} else {}
     if(i == "decoy") {x@decoy <- value} else {}
+    if(i == "num_decoy_reads") {x@num_decoy_reads <- value} else {}
+    if(i == "min_coverage") {x@min_coverage <- value} else {}
     return(x)
   }
 )

@@ -60,6 +60,8 @@ setOldClass("tbl_dbi")
 setClass(
   Class = "par_list",
   representation = representation(
+    num_decoy_reads = "numeric",
+    min_coverage = "numeric",
     map_dna_in = "list",
     map_pep_in = "list",    
     tax = "logical",
@@ -88,6 +90,8 @@ setClass(
     pdf_file = "character"
   ),
   prototype = prototype(
+    num_decoy_reads = 500,
+    min_coverage = 0.05,
     tax = TRUE,
     clean = TRUE,
     paired = FALSE,
