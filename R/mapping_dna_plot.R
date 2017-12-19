@@ -61,8 +61,20 @@ mapping_dna_plot <- function(genebank_id,
                label = str_c('paste(bold("Host species: "), \"', sample_info$host, "\")"),
                hjust = 0, parse = TRUE) +
       annotate("text", 0, 13,
-               label = str_c('paste(bold("Run time: "), \"', sample_info$run_time, "\")"),
+               label = str_c('paste(bold("Multi map rate: "), \"',
+                             round(par_list["map_dna_stats"]$multi_map_rate, 2), "\")"),
                hjust = 0, parse = TRUE) +
+      annotate("text", 0, 12,
+               label = str_c('paste(bold("True positive rate: "), \"',
+                             round(par_list["map_dna_stats"]$true_positive, 2), "\")"),
+               hjust = 0, parse = TRUE) +
+      annotate("text", 0, 11,
+               label = str_c('paste(bold("False positive rate: "), \"',
+                             round(par_list["map_dna_stats"]$false_positive, 2), "\")"),
+               hjust = 0, parse = TRUE) +
+      annotate("text", 0, 10,
+               label = str_c('paste(bold("Run time: "), \"', sample_info$run_time, "\")"),
+               hjust = 0, parse = TRUE) +  
       ## bottom
       annotate("text", 20, 0,
                label = "The number of reads is estimated by trimmomatic",
