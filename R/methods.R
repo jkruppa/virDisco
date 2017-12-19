@@ -115,7 +115,7 @@ setReplaceMethod(
     if(i == "pdf_file") {x@pdf_file <- value} else {}
     if(i == "ref_seq_file") {x@ref_seq_file <- value} else {}
     if(i == "map_dna_in") {x@map_dna_in <- value} else {}
-    if(i == "map_dna_stats") {x@map_dna_in <- value} else {}
+    if(i == "map_dna_stats") {x@map_dna_stats <- value} else {}
     if(i == "map_pep_in") {x@map_pep_in <- value} else {}
     if(i == "decoy") {x@decoy <- value} else {}
     if(i == "num_decoy_reads") {x@num_decoy_reads <- value} else {}
