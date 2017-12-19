@@ -25,6 +25,7 @@ artificial_genome_mapping <- function(in_file,
   ## some checks for file handling later on
   require(tools)
   require(png)
+  require(openxlsx)
   proc_start_tm <- proc.time()
   ## generate tmp dir if not exists
   if(!file.exists(par_list["tmp_dir"])) {

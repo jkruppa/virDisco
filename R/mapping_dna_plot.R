@@ -255,7 +255,7 @@ mapping_dna_plot <- function(genebank_id,
     }, .progress = "text")
     ## put the png's into one pdf
   }
-  talk("Transfrom png files to one pdf")
+  talk("[PLOT] Transfrom png files to one pdf")
   png_files <- c(png_files[1],
                  str_c(out_file, "_coverage.png"),
                  str_c(out_file, "_read_length_hist.png"),
