@@ -4,11 +4,16 @@
 \alias{fastq_quality_control}
 \title{Main fastq quality function}
 \usage{
-fastq_quality_control(inFile, leading = 10, trailing = 10, minlength = 50,
-  illumninaclip, par_list)
+fastq_quality_control(inFile, illumninaclip, par_list, leading = 10,
+  trailing = 10, minlength = 50)
 }
 \arguments{
 \item{inFile}{Fastq infile}
+
+\item{illumninaclip}{Remove the adapter from illumina by TruSeq2
+or TruSeq3 protocol}
+
+\item{par_list}{}
 
 \item{leading}{Numeric. Remove leading low quality or N bases
 (below quality 10 [default])}
@@ -17,11 +22,6 @@ fastq_quality_control(inFile, leading = 10, trailing = 10, minlength = 50,
 (below quality 10 [default])}
 
 \item{minlength}{Min read length to keep. 50 [default]}
-
-\item{illumninaclip}{Remove the adapter from illumina by TruSeq2
-or TruSeq3 protocol}
-
-\item{par_list}{}
 
 \item{log_file}{write the trimmomatic output to file}
 }

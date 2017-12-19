@@ -59,24 +59,24 @@ fastq_trimmer <- function (inFile, outFile, leading = 10, trailing = 10, minleng
 ##' fastq_quality_filter and fastq_trimmer. Stores files in a tempDir.
 ##' @title Main fastq quality function
 ##' @param inFile Fastq infile
+##' @param illumninaclip Remove the adapter from illumina by TruSeq2
+##'   or TruSeq3 protocol
+##' @param par_list 
 ##' @param leading Numeric. Remove leading low quality or N bases
 ##'   (below quality 10 [default])
 ##' @param trailing Numeric. Remove trailing low quality or N bases
 ##'   (below quality 10 [default])
 ##' @param minlength Min read length to keep. 50 [default]
-##' @param illumninaclip Remove the adapter from illumina by TruSeq2
-##'   or TruSeq3 protocol
-##' @param par_list 
 ##' @param log_file write the trimmomatic output to file
 ##' @return NULL
 ##' @author Jochen Kruppa
 ##' @export
 fastq_quality_control <- function(inFile,
+                                  illumninaclip,
+                                  par_list,
                                   leading = 10, 
                                   trailing = 10,
-                                  minlength = 50,
-                                  illumninaclip,
-                                  par_list)
+                                  minlength = 50)
 {
   ## talk("Write all temporal files to /home/temp")
   log_file <- file.path(par_list["tmp_dir"],
