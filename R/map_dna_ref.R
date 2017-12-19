@@ -67,13 +67,14 @@ map_dna_ref <- function(infile, outfile, par_list, min_hit = 5, all = FALSE){
   ## get the aligment data frame for plotting
   qname_raw <- str_split(alignment_bam$qname, ":", simplify = TRUE)
   alignment_df <- tibble(genebank_id = alignment_bam$rname,
-                             qname = qname_raw[, ncol(qname_raw)],
-                             strand = alignment_bam$strand,
-                             read_length = alignment_bam$qwidth,
-                             pos_start = alignment_bam$pos,
-                             pos_end = pos_start + read_length - 1,
-                             mapq = alignment_bam$mapq,
-                             seq_id = str_c(genebank_id, qname, pos_start, pos_end, sep = "_"))
+                         qname = qname_raw[, ncol(qname_raw)],
+                         strand = alignment_bam$strand,
+                         read_length = alignment_bam$qwidth,
+                         pos_start = alignment_bam$pos,
+                         pos_end = pos_start + read_length - 1,
+                         mapq = alignment_bam$mapq,
+                         seq_id = str_c(genebank_id, qname, pos_start, pos_end, sep = "_")) %>%
+    extract(-str_which(.$genebank_id, "decoy"),) ## remove any decoy reads
   ## get the raw read seqs
   seqs_raw <- alignment_bam$seq
   names(seqs_raw) <- with(alignment_df, str_c(genebank_id, qname, pos_start, pos_end, sep = "_"))
@@ -86,8 +87,7 @@ map_dna_ref <- function(infile, outfile, par_list, min_hit = 5, all = FALSE){
   alignment_table_sorted <- sort(alignment_table, decreasing = TRUE)
   alignment_table_clean <- alignment_table_sorted[alignment_table_sorted > min_hit]
   ## get the count data frame
-  count_df <- setNames(ldply(alignment_table_clean), c("genebank_id", "read_count")) %>%
-    extract(-str_which(.$genebank_id, "decoy"),)
+  count_df <- setNames(ldply(alignment_table_clean), c("genebank_id", "read_count"))
   ## return list with counts and aligment information
   return(list(count_df = select(count_df, genebank_id, count_read = read_count),
               alignment_df = alignment_df,
