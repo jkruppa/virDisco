@@ -76,7 +76,7 @@ map_dna_ref <- function(infile, outfile, par_list, min_hit = 5, all = FALSE){
                              seq_id = str_c(genebank_id, qname, pos_start, pos_end, sep = "_"))
   ## get the raw read seqs
   seqs_raw <- alignment_bam$seq
-  names(seqs_raw) <- with(alignment_raw_df, str_c(genebank_id, qname, pos_start, pos_end, sep = "_"))
+  names(seqs_raw) <- with(alignment_df, str_c(genebank_id, qname, pos_start, pos_end, sep = "_"))
   ## filter the seqs
   seqs <- seqs_raw[names(seqs_raw) %in% alignment_df$seq_id]
   seq_file <- gsub(".sam", "_dna_seqs.RDS", outfile)
