@@ -203,7 +203,7 @@ artificial_genome_mapping <- function(in_file,
     }
   }
   ## build the sample info file to get more information on the sample
-  sample_info <- build_sample_info(sample_in = in_file,
+  sample_info <- build_sample_info(sample_in = par_list["map_dna_in"],
                                    out_file, par_list, proc_start_tm)
   ## plot the thing  
   if(par_list["plot"]){

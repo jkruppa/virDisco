@@ -60,7 +60,7 @@ map_dna_ref <- function(infile, outfile, par_list, min_hit = 5, all = FALSE){
   false_positive <- (read_ref_table["decoy", "viral"] + read_ref_table["sample", "decoy"]) / sum(read_ref_table)
   ## get the aligment data frame for plotting
   qname_raw <- str_split(alignment_bam$qname, ":", simplify = TRUE)
-  alignment_raw_df <- tibble(genebank_id = alignment_bam$rname,
+  alignment_df <- tibble(genebank_id = alignment_bam$rname,
                              qname = qname_raw[, ncol(qname_raw)],
                              strand = alignment_bam$strand,
                              read_length = alignment_bam$qwidth,
@@ -68,7 +68,6 @@ map_dna_ref <- function(infile, outfile, par_list, min_hit = 5, all = FALSE){
                              pos_end = pos_start + read_length - 1,
                              mapq = alignment_bam$mapq,
                              seq_id = str_c(genebank_id, qname, pos_start, pos_end, sep = "_"))
-  alignment_df <- filter(alignment_raw_df, mapq > 0 & read_length > (0.25 * max(read_length)))
   ## get the raw read seqs
   seqs_raw <- alignment_bam$seq
   names(seqs_raw) <- with(alignment_raw_df, str_c(genebank_id, qname, pos_start, pos_end, sep = "_"))
@@ -81,7 +80,8 @@ map_dna_ref <- function(infile, outfile, par_list, min_hit = 5, all = FALSE){
   alignment_table_sorted <- sort(alignment_table, decreasing = TRUE)
   alignment_table_clean <- alignment_table_sorted[alignment_table_sorted > min_hit]
   ## get the count data frame
-  count_df <- setNames(ldply(alignment_table_clean), c("genebank_id", "read_count"))
+  count_df <- setNames(ldply(alignment_table_clean), c("genebank_id", "read_count")) %>%
+    extract(-str_which(.$genebank_id, "decoy"),)
   ## return list with counts and aligment information
   return(list(count_df = select(count_df, genebank_id, count_read = read_count),
               alignment_df = alignment_df,

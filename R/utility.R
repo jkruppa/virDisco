@@ -167,18 +167,13 @@ ord_findings <- function(map_dna_list, map_pep_list) {
 ##' @author Jochen Kruppa
 ##' @export
 build_sample_info <- function(sample_in, out_file = NULL, par_list, proc_start_tm){
-  talk("Get the number of raw reads")
+  talk("[SAMPLE INFO] Build sample info")
+  talk("[SAMPLE INFO] Get the number of raw reads")
   if(par_list["qc"]) {
     trim_log_file <- dir0(par_list["tmp_dir"], str_c(basename(out_file), "_trim.log"))
-    if(par_list["paired"]) {    
-      info_line <- grep("Input Read Pairs", readLines(trim_log_file), value = TRUE)
-      num_reads <- gsub("Input Read Pairs:\\s(.*)\\sBoth.*", "\\1", info_line)
-      num_qc_reads <- gsub(".*Both Surviving:\\s(.*)\\sForward.*", "\\1", info_line)
-    } else {
-      info_line <- grep("Input Reads", readLines(trim_log_file), value = TRUE)
-      num_reads <- gsub("Input Reads:\\s(.*)\\sSurv.*", "\\1", info_line)
-      num_qc_reads <- gsub(".*Surviving:\\s(.*)\\sDropped.*", "\\1", info_line)      
-    }
+    trim_info_df <- read.table(trim_log_file, header = TRUE)
+    num_reads <- trim_info_df$num_reads
+    num_qc_reads <- trim_info_df$num_qc_reads
   } else {
     ## if gz change to zcat
     cat <- ifelse(any(grepl(".gz$", unlist(sample_in))), "zcat", "cat")
@@ -190,8 +185,8 @@ build_sample_info <- function(sample_in, out_file = NULL, par_list, proc_start_t
     ##
     num_qc_reads <- "No quality check and trimming executed"
   }
-  talk("Build sample info")
   if(par_list["check_host"]){
+    talk("[SAMPLE INFO] Check host")
     host <- check_host(sample_in)
   } else {
     host <- "no host checked"    
