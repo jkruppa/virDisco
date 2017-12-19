@@ -4,14 +4,11 @@
 \alias{fastq_quality_control}
 \title{Main fastq quality function}
 \usage{
-fastq_quality_control(inFile, tmpDir, leading = 10, trailing = 10,
-  minlength = 50, illumninaclip, log_file)
+fastq_quality_control(inFile, leading = 10, trailing = 10, minlength = 50,
+  illumninaclip, par_list)
 }
 \arguments{
 \item{inFile}{Fastq infile}
-
-\item{tmpDir}{Where to store the temporal files. Files will be
-removed automatically}
 
 \item{leading}{Numeric. Remove leading low quality or N bases
 (below quality 10 [default])}
@@ -24,9 +21,9 @@ removed automatically}
 \item{illumninaclip}{Remove the adapter from illumina by TruSeq2
 or TruSeq3 protocol}
 
-\item{log_file}{write the trimmomatic output to file}
+\item{par_list}{}
 
-\item{outFile}{Fastq outfile}
+\item{log_file}{write the trimmomatic output to file}
 }
 \description{
 Main fastq quality function

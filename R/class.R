@@ -61,6 +61,7 @@ setClass(
   Class = "par_list",
   representation = representation(
     num_decoy_reads = "numeric",
+    min_num_reads = "numeric",
     min_coverage = "numeric",
     map_dna_in = "list",
     map_pep_in = "list",    
@@ -92,6 +93,7 @@ setClass(
   prototype = prototype(
     num_decoy_reads = 500,
     min_coverage = 0.05,
+    min_num_reads = 50,
     tax = TRUE,
     clean = TRUE,
     paired = FALSE,

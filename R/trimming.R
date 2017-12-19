@@ -59,8 +59,6 @@ fastq_trimmer <- function (inFile, outFile, leading = 10, trailing = 10, minleng
 ##' fastq_quality_filter and fastq_trimmer. Stores files in a tempDir.
 ##' @title Main fastq quality function
 ##' @param inFile Fastq infile
-##' @param tmpDir Where to store the temporal files. Files will be
-##'   removed automatically
 ##' @param leading Numeric. Remove leading low quality or N bases
 ##'   (below quality 10 [default])
 ##' @param trailing Numeric. Remove trailing low quality or N bases
@@ -68,20 +66,25 @@ fastq_trimmer <- function (inFile, outFile, leading = 10, trailing = 10, minleng
 ##' @param minlength Min read length to keep. 50 [default]
 ##' @param illumninaclip Remove the adapter from illumina by TruSeq2
 ##'   or TruSeq3 protocol
+##' @param par_list 
 ##' @param log_file write the trimmomatic output to file
-##' @param outFile Fastq outfile
 ##' @return NULL
 ##' @author Jochen Kruppa
 ##' @export
-fastq_quality_control <- function(inFile, tmpDir, leading = 10, 
-                                  trailing = 10, minlength = 50,
-                                  illumninaclip, log_file)
+fastq_quality_control <- function(inFile,
+                                  leading = 10, 
+                                  trailing = 10,
+                                  minlength = 50,
+                                  illumninaclip,
+                                  par_list)
 {
   ## talk("Write all temporal files to /home/temp")
+  log_file <- file.path(par_list["tmp_dir"],
+                        str_c(names(inFile), "_trim.log"))
   tmp_in_file <- unlist(inFile)
   names(tmp_in_file) <- gsub(".*\\.", "", names(tmp_in_file))
   if(length(tmp_in_file) == 2){
-    tmpTrimFq <- file.path(tmpDir, gsub("fastq|fq", "trimmed.fq", basename(tmp_in_file)))
+    tmpTrimFq <- file.path(par_list["tmp_dir"], gsub("fastq|fq", "trimmed.fq", basename(tmp_in_file)))
     names(tmpTrimFq) <- names(tmp_in_file)
     talk("[TRIMMING] Start trimming")
     fastq_trimmer(inFile = tmp_in_file, outFile = tmpTrimFq, leading, trailing, minlength, 
@@ -90,11 +93,11 @@ fastq_quality_control <- function(inFile, tmpDir, leading = 10,
                               c("R1", "R2")))
     names(out_file) <- names(inFile)
     ## min length is really 50
-    talk("[TRIMMING] Remove reads shorter than 50bp")
+    talk(str_c("[TRIMMING] Remove reads shorter than ", par_list["min_num_reads"], "bp"))
     trim_fq_list <- llply(unlist(out_file), readFastq)
     num_reads <- sum(laply(trim_fq_list, length))
-    long_pos <- intersect(which(width(trim_fq_list[[1]]) >= 50),
-                          which(width(trim_fq_list[[2]]) >= 50))
+    long_pos <- intersect(which(width(trim_fq_list[[1]]) >= par_list["min_num_reads"]),
+                          which(width(trim_fq_list[[2]]) >= par_list["min_num_reads"]))
     num_qc_reads <- 2 * length(long_pos)
     mean_read_length <- mean(width(trim_fq_list[[1]][long_pos]))
     unlink(unlist(out_file))
@@ -106,7 +109,7 @@ fastq_quality_control <- function(inFile, tmpDir, leading = 10,
     write_delim(trim_log, log_file)    
   } else {
     ## this is redundant I know, but single reads are not fully tested yet
-    tmpTrimFq <- file.path(tmpDir, gsub("fastq|fq", "trimmed.fq", basename(tmp_in_file)))
+    tmpTrimFq <- file.path(par_list["tmp_dir"], gsub("fastq|fq", "trimmed.fq", basename(tmp_in_file)))
     names(tmpTrimFq) <- names(tmp_in_file)
     talk("[TRIMMING] Start trimming")
     fastq_trimmer(inFile = tmp_in_file, outFile = tmpTrimFq, leading, trailing, minlength, 
@@ -115,10 +118,10 @@ fastq_quality_control <- function(inFile, tmpDir, leading = 10,
                               c("R1")))
     names(out_file) <- names(inFile)
     ## min length is really 50
-    talk("[TRIMMING] Remove reads shorter than 50bp")
+    talk(str_c("[TRIMMING] Remove reads shorter than ", par_list["min_num_reads"], "bp"))
     trim_fq_list <- llply(unlist(out_file), readFastq)
     num_reads <- sum(laply(trim_fq_list, length))
-    long_pos <- which(width(trim_fq_list[[1]]) >= 50)
+    long_pos <- which(width(trim_fq_list[[1]]) >= par_list["min_num_reads"])
     num_qc_reads <- length(long_pos)
     mean_read_length <- mean(width(trim_fq_list[[1]][long_pos]))
     unlink(unlist(out_file))
