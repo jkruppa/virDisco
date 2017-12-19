@@ -72,16 +72,49 @@ artificial_genome_mapping <- function(in_file,
   }
   ## begin with trimming
   ## fastq quality control and trimming
-  in_file <- fastq_quality_control(inFile = in_file,
-                                   tmpDir = par_list["tmp_dir"],
-                                   illumninaclip = file.path(dirname(program_list["trimmomatic"]),
-                                                             "adapters", "TruSeq3-PE.fa"),
-                                   log_file = file.path(par_list["tmp_dir"],
-                                                        str_c(basename(out_file), "_trim.log")))
+  ## fastq quality control and trimming
+  if(!par_list["qc"] & par_list["decoy"]){
+    stop("If you want to use the decoy approach set qc = TRUE")
+  }
+   ## start QC by trimming and read removing
+  if(par_list["qc"]){
+    trim_out_file <- fastq_quality_control(inFile = in_file,
+                                           illumninaclip = file.path(dirname(program_list["trimmomatic"]),
+                                                                     "adapters", "TruSeq3-PE.fa"),
+                                           par_list)
+    par_list["map_dna_in"] <- trim_out_file
+    par_list["map_pep_in"] <- trim_out_file
+  } else {
+    par_list["map_dna_in"] <- in_file
+    par_list["map_pep_in"] <- in_file    
+  }
+  ## start generating decoy reads
+  if(par_list["decoy"]){
+    talk("[DECOY] Generating decoy reads")
+    ref_seq <- readDNAStringSet(par_list["ref_seq_file"])
+    decoy_seq <- ref_seq[sample(str_which(names(ref_seq), "decoy"), 1)]
+    read_info <- read.table(file.path(par_list["tmp_dir"],
+                                      str_c(basename(out_file), "_trim.log")), header = TRUE)
+    ## start generating the decoy reads depending on the mean read length
+    generate_decoy_reads(decoy_seq,
+                         read_length = read_info$mean_read_length,
+                         read_num = par_list["num_decoy_reads"])
+    ## combine the decoy reads with the true reads
+    decoy_read_files <- dir0(par_list["tmp_dir"], "decoy")
+    decoy_R1_fq <- file.path(par_list["tmp_dir"], str_c(names(in_file), "_decoy_R1.fq.gz"))
+    decoy_R2_fq <- file.path(par_list["tmp_dir"], str_c(names(in_file), "_decoy_R2.fq.gz"))
+    runCMD(paste("cat", par_list["map_dna_in"][[1]]["R1"], str_subset(decoy_read_files, "_R1_"),
+                 ">", decoy_R1_fq))
+    runCMD(paste("cat", par_list["map_dna_in"][[1]]["R2"], str_subset(decoy_read_files, "_R2_"),
+                 ">", decoy_R2_fq))
+    ## set the decoy in files as the new in files for mapping
+    par_list["map_dna_in"][[1]]["R1"] <- decoy_R1_fq
+    par_list["map_dna_in"][[1]]["R2"] <- decoy_R2_fq
+  }
   ## start DNA mapping
   if(par_list["run_dna_mapping"]){
     talk("[DNA MAPPING] Start DNA mapping")
-    map_dna_list <- map_dna_ref(infile = in_file,
+    map_dna_list <- map_dna_ref(infile = par_list["map_dna_in"],
                                 outfile = str_c(out_file, ".sam"),
                                 par_list)
     talk("[DNA MAPPING] Save DNA mapping results...")
@@ -93,7 +126,7 @@ artificial_genome_mapping <- function(in_file,
   ## run PEP mapping
   if(par_list["run_pep_mapping"]){
     talk("[AMINO MAPPING] Start AMINO mapping")
-    map_pep_list <- map_pep_ref(infile = in_file,
+    map_pep_list <- map_pep_ref(infile = par_list["map_pep_in"],
                                 outfile = str_c(out_file, ".blastx"),
                                 par_list)
     talk("[AMINO MAPPING] Save AMINO mapping results...")
@@ -112,7 +145,7 @@ artificial_genome_mapping <- function(in_file,
                                    map_dna_list,
                                    par_list,
                                    out_file) %>%
-    filter(coverage >= 0.05) %>%
+    filter(coverage >= par_list["min_coverage"]) %>%
     select(genebank_id)
   ## filter for the coverage
   ord_df <- ord_df[ord_df$genebank_id %in% good_coverage$genebank_id,]
