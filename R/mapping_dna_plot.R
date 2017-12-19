@@ -258,7 +258,6 @@ mapping_dna_plot <- function(genebank_id,
   talk("Transfrom png files to one pdf")
   png_files <- c(png_files[1],
                  str_c(out_file, "_coverage.png"),
-                 str_c(out_file, "_mapq_hist.png"),
                  str_c(out_file, "_read_length_hist.png"),
                  png_files[2:length(png_files)])
   png_plots <- llply(png_files, function(x) {
