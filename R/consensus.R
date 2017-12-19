@@ -18,11 +18,13 @@ get_consensus_df <- function(hits, out_file, par_list){
   dna_read_seqs_info$pos_end <- as.numeric(dna_read_seqs_info$pos_end)
   dna_read_seqs_info$seq_id <- names(dna_read_seqs) 
   ## index the ref sequence and load the subset of sequences
-  runCMD(paste("samtools faidx", par_list["ref_seq_file"]))
+  runCMD(paste("samtools faidx", par_list["ref_seq_file"],
+               "2>", file.path(tmpDir, "samtools.log")))
   tmp_hit_ref_fa <- tempfile(pattern = "tmp_hit_ref_",
                              tmpdir = par_list["tmp_dir"], fileext = ".fa")
   runCMD(paste("samtools faidx", par_list["ref_seq_file"],
-               str_c(hits, collapse = " "), ">", tmp_hit_ref_fa))
+               str_c(hits, collapse = " "), ">", tmp_hit_ref_fa,
+               "2>", file.path(tmpDir, "samtools.log")))
   hit_ref_seq <- readDNAStringSet(tmp_hit_ref_fa)
   unlink(tmp_hit_ref_fa)
   ## info from each hit

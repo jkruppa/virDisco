@@ -59,6 +59,7 @@ map_dna_ref <- function(infile, outfile, par_list, min_hit = 5, all = FALSE){
     multi_map_rate <- sum(read_ref_table["decoy", ]) / (2 * par_list["num_decoy_reads"])
     true_positive <- read_ref_table["decoy", "decoy"] / sum(read_ref_table["decoy", ])
     false_positive <- (read_ref_table["decoy", "viral"] + read_ref_table["sample", "decoy"]) / sum(read_ref_table)
+    ## decoy position
   } else {
     multi_map_rate <- "unkown"
     true_positive <- "unkown"
@@ -73,16 +74,22 @@ map_dna_ref <- function(infile, outfile, par_list, min_hit = 5, all = FALSE){
                          pos_start = alignment_bam$pos,
                          pos_end = pos_start + read_length - 1,
                          mapq = alignment_bam$mapq,
-                         seq_id = str_c(genebank_id, qname, pos_start, pos_end, sep = "_")) %>%
-    extract(-str_which(.$genebank_id, "decoy"),) ## remove any decoy reads
+                         seq_id = str_c(genebank_id, qname, pos_start, pos_end, sep = "_"))
+  ## decoy position
+  if(par_list["decoy"]){
+    decoy_pos <- !str_detect(alignment_df$genebank_id, "decoy")
+  } else {
+    decoy_pos <- rep(TRUE, length(alignment_df$genebank_id))
+  }
   ## get the raw read seqs
   seqs_raw <- alignment_bam$seq
   names(seqs_raw) <- with(alignment_df, str_c(genebank_id, qname, pos_start, pos_end, sep = "_"))
   ## filter the seqs
-  seqs <- seqs_raw[names(seqs_raw) %in% alignment_df$seq_id]
+  seqs <- seqs_raw[names(seqs_raw) %in% alignment_df$seq_id[decoy_pos]]
   seq_file <- gsub(".sam", "_dna_seqs.RDS", outfile)
   saveRDS(seqs, seq_file)
   ## get the counts
+  alignment_df <- alignment_df[decoy_pos,]
   alignment_table <- table(alignment_df$genebank_id) 
   alignment_table_sorted <- sort(alignment_table, decreasing = TRUE)
   alignment_table_clean <- alignment_table_sorted[alignment_table_sorted > min_hit]
