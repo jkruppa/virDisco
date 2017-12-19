@@ -83,6 +83,7 @@ setMethod(
     if(i == "species_info") {return(x@species_info)} else {}
     if(i == "prot_info") {return(x@prot_info)} else {}
     if(i == "map_dna_in") {return(x@map_dna_in)} else {}
+    if(i == "map_dna_stats") {return(x@map_dna_stats)} else {}
     if(i == "map_pep_in") {return(x@map_pep_in)} else {}
     if(i == "decoy") {return(x@decoy)} else {}
     if(i == "num_decoy_reads") {return(x@num_decoy_reads)} else {}
@@ -114,6 +115,7 @@ setReplaceMethod(
     if(i == "pdf_file") {x@pdf_file <- value} else {}
     if(i == "ref_seq_file") {x@ref_seq_file <- value} else {}
     if(i == "map_dna_in") {x@map_dna_in <- value} else {}
+    if(i == "map_dna_stats") {x@map_dna_in <- value} else {}
     if(i == "map_pep_in") {x@map_pep_in <- value} else {}
     if(i == "decoy") {x@decoy <- value} else {}
     if(i == "num_decoy_reads") {x@num_decoy_reads <- value} else {}

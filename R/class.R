@@ -64,6 +64,7 @@ setClass(
     min_num_reads = "numeric",
     min_coverage = "numeric",
     map_dna_in = "list",
+    map_dna_stats = "list",
     map_pep_in = "list",    
     tax = "logical",
     qc = "logical",
