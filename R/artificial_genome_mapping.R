@@ -123,6 +123,10 @@ artificial_genome_mapping <- function(in_file,
     talk("[DNA MAPPING] Start DNA mapping -> Stopped due to prior results")
     map_dna_list <- readRDS(str_c(out_file, "_map_dna_list.RDS"))
   }
+  ## get the mapping stats
+  if(par_list["decoy"]){
+    par_list["map_dna_stats"] <- as.list(map_dna_list$stats)
+  }
   ## run PEP mapping
   if(par_list["run_pep_mapping"]){
     talk("[AMINO MAPPING] Start AMINO mapping")

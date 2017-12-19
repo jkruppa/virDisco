@@ -48,16 +48,22 @@ map_dna_ref <- function(infile, outfile, par_list, min_hit = 5, all = FALSE){
   ## read in bam files
   alignment_bam <- Reduce(c, scanBam(bam_file))
   ## get read / reference information (qname is read, rname is reference)
-  read_ref_tbl <- tibble(read = alignment_bam$qname, ref = alignment_bam$rname) %>%
-    mutate(read = str_replace(read, "R1_|R2_", "")) %>%
-    mutate(read = ifelse(str_detect(read, "decoy"), "decoy", "sample")) %>%
-    mutate(ref = ifelse(str_detect(ref, "decoy"), "decoy", "viral")) %>%
-    mutate(match = str_c(read, "_", ref))
-  ## build up the 2x2 table
-  read_ref_table <- table(reads = read_ref_tbl$read, ref = read_ref_tbl$ref)
-  multi_map_rate <- sum(read_ref_table["decoy", ]) / (2 * par_list["num_decoy_reads"])
-  true_positive <- read_ref_table["decoy", "decoy"] / sum(read_ref_table["decoy", ])
-  false_positive <- (read_ref_table["decoy", "viral"] + read_ref_table["sample", "decoy"]) / sum(read_ref_table)
+  if(par_list["decoy"]) {
+    read_ref_tbl <- tibble(read = alignment_bam$qname, ref = alignment_bam$rname) %>%
+      mutate(read = str_replace(read, "R1_|R2_", "")) %>%
+      mutate(read = ifelse(str_detect(read, "decoy"), "decoy", "sample")) %>%
+      mutate(ref = ifelse(str_detect(ref, "decoy"), "decoy", "viral")) %>%
+      mutate(match = str_c(read, "_", ref))
+    ## build up the 2x2 table
+    read_ref_table <- table(reads = read_ref_tbl$read, ref = read_ref_tbl$ref)
+    multi_map_rate <- sum(read_ref_table["decoy", ]) / (2 * par_list["num_decoy_reads"])
+    true_positive <- read_ref_table["decoy", "decoy"] / sum(read_ref_table["decoy", ])
+    false_positive <- (read_ref_table["decoy", "viral"] + read_ref_table["sample", "decoy"]) / sum(read_ref_table)
+  } else {
+    multi_map_rate <- "unkown"
+    true_positive <- "unkown"
+    false_positive <- "unkown"
+  }
   ## get the aligment data frame for plotting
   qname_raw <- str_split(alignment_bam$qname, ":", simplify = TRUE)
   alignment_df <- tibble(genebank_id = alignment_bam$rname,

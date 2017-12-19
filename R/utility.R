@@ -191,10 +191,7 @@ build_sample_info <- function(sample_in, out_file = NULL, par_list, proc_start_t
   } else {
     host <- "no host checked"    
   }
-  if(length(names(sample_in)) >= 1){
-    sample_name <- basename(out_file)
-  }
-  sample_info <- tibble(sample_name = sample_name,
+  sample_info <- tibble(sample_name = names(sample_in),
                         num_reads = num_reads,
                         sequencing = ifelse(par_list["paired"], "paired-end", "single-end"),
                         host,
