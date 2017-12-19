@@ -118,7 +118,7 @@ setReplaceMethod(
     if(i == "decoy") {x@decoy <- value} else {}
     if(i == "num_decoy_reads") {x@num_decoy_reads <- value} else {}
     if(i == "min_coverage") {x@min_coverage <- value} else {}
-    if(i == "min_num_reads") {x@min_coverage <- value} else {}
+    if(i == "min_num_reads") {x@min_num_reads <- value} else {}
     return(x)
   }
 )

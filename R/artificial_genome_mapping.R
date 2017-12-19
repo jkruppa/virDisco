@@ -194,7 +194,7 @@ artificial_genome_mapping <- function(in_file,
     ## save consensus_list
     saveRDS(consensus_list, str_c(out_file, "_consensus.RDS"))    
   } else {
-    talk("Generate consensus of reads to reference -> Stopped due to prior results OR not wanted")
+    talk("[CONSENSUS] Generate consensus of reads to reference -> Stopped due to prior results OR not wanted")
     if(file.exists(str_c(out_file, "_consensus.RDS"))) {
       consensus_list <- readRDS(str_c(out_file, "_consensus.RDS"))
       par_list["consensus"] <- TRUE     
