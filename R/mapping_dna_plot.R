@@ -97,7 +97,8 @@ mapping_dna_plot <- function(genebank_id,
     flag_dna_reduce <- FALSE
     flag_pep_reduce <- FALSE
     virus_info <- collect(filter(viral_info_df, genebank_id == x))
-    tmp_df <- filter(dna_alignment_df, genebank_id == x)
+    tmp_df <- filter(dna_alignment_df, genebank_id == x) %>%
+      arrange(pos_start)
     tmp_df$id <- seq(0.5, 8, length.out = nrow(tmp_df))
     ## get the gene positions
     tmp_gene_df <- collect(filter(aa_info_df, genebank_id == x))
