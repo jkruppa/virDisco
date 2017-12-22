@@ -18,7 +18,7 @@ Bowtie2 up to one hundred multi maps per read. Finally, we set
 alignment to be judged as valid.
 
 | Source file  | Line          | From  | To   |
-|------------- |:-------------:| -----:|-----:|
+|------------- |-------------| -----|-----|
 | z1\_protein2pna.sh | 56 | --Xmx20 | --Xmx50|
 | z4\_bowtie-on-pna.sh | 26 | bowtie2-align | bowtie2|
 | | 45 | N=1 | N=0|
