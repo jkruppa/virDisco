@@ -39,7 +39,7 @@ In the first step a `program_list` object including all the path to the program 
 8. Samtools http://www.htslib.org/
 9. Trimmomatic http://www.usadellab.org/cms/?page=trimmomatic
 
-Some changes to the Pauda source code has to be done to use Pauda in our pipeline: [Changes to the Pauda code](doc/pauda_changes.md)
+**CAUTION** Some changes to the Pauda source code has to be done to use Pauda in our pipeline: [Changes to the Pauda code](doc/pauda_changes.md)
 
 The function `set_program_list` generates a S4 object of the paths to the executables and checks if all files are existing.
 
