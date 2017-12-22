@@ -24,3 +24,4 @@ alignment to be judged as valid.
 | | 59 | --Xmx8 | --Xmx50|
 | z6\_blastx2rma.sh | 27 | --Xmx8 | --Xmx50|
 
+Source: http://ab.inf.uni-tuebingen.de/data/software/pauda/download/welcome.html
