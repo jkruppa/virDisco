@@ -13,9 +13,6 @@ Bowtie2 up to one hundred multi maps per read. Finally, we set
 `-score-min` from 35 to 10, which is the minimum score for a
 alignment to be judged as valid.
 
-
-**Changes to the Pauda source code for the amino acid mapping to the artificial amino acid reference genome:** -Xmx changes the available memory to 50GB, in z4\_bowtie-on-pna.sh Bowtie2 parameters are set and the bowtie2 program call was updated.
-
 | Source file  | Line          | From  | To   |
 |------------- |:-------------:| -----:|-----:|
 | z1\_protein2pna.sh | 56 | --Xmx20 | --Xmx50|
