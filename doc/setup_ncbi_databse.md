@@ -1,10 +1,9 @@
 # Setup the NCBI GenBank database
 
-The virDisco, short for virus detection and discovery, is a R package with uses many third party programs. Therefore, these programs must be installed on the computer. Further, many of these third party programs are based on Linux. Therefore, the virDisco package is more or less a Linux only R package. Still, it can be installed and used, but some functions will not work.
+In the following the download and processing of the NCBI GenBank *viral* database is demonstrated. We use hier chunks of R code and the user might like to adjust the download.
 
 
 ## Get the files
-
 
 
 ```R
