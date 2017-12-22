@@ -340,7 +340,7 @@ R> artificial_genome_mapping(in_file = viral_files$in_file,
  Dez 04 14:01:34 ..... Gene and species information is correct
  Dez 04 14:01:34 ..... Start trimming
  Dez 04 14:01:35 ..... Start DNA mapping
- Dez 04 14:01:36 ..... Working on NGS-10001_dna.sam
+ Dez 04 14:01:36 ..... Working on NGS_10001_dna.sam
  Dez 04 14:01:37 ..... Save DNA mapping results...
  Dez 04 14:01:37 ..... Start AMINO mapping
  Dez 04 14:01:37 ..... Run pandaseq to build up one fastq file
