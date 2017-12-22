@@ -13,6 +13,13 @@ The development version from github:
 ```R
 devtools::install_github("jkruppa/virDisco")
 ```
+## Setup NCBI GenBank database
+
+[Contribution guidelines for this project](doc/setup_ncbi_databse.md)
+
+
+
+
 
 ## Tutorial
 
