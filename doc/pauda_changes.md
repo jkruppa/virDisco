@@ -14,10 +14,7 @@ Bowtie2 up to one hundred multi maps per read. Finally, we set
 alignment to be judged as valid.
 
 
-  \caption{Changes to the Pauda source code for the amino acid mapping to
-    the artificial amino acid reference genome: -Xmx changes the available
-    memory to 50GB, in z4\_bowtie-on-pna.sh Bowtie2 parameters are set and
-    the bowtie2 program call was updated.}
+**Changes to the Pauda source code for the amino acid mapping to the artificial amino acid reference genome:** -Xmx changes the available memory to 50GB, in z4\_bowtie-on-pna.sh Bowtie2 parameters are set and the bowtie2 program call was updated.
 
 | Source file  | Line          | From  | To   |
 |------------- |:-------------:| -----:|-----:|
@@ -26,7 +23,7 @@ alignment to be judged as valid.
 | | 45 | N=1 | N=0|
 | | 46 | K=30 | K=100|
 | | 49 | MS=35 | MS=10| 
-| z5\_sam2blastx.sh | 50 & --Xmx8 | --Xmx50|
+| z5\_sam2blastx.sh | 50 | --Xmx8 | --Xmx50|
 | | 59 | --Xmx8 | --Xmx50|
 | z6\_blastx2rma.sh | 27 | --Xmx8 | --Xmx50|
 
