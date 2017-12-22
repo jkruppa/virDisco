@@ -15,9 +15,9 @@ devtools::install_github("jkruppa/virDisco")
 ```
 ## Setup NCBI GenBank database
 
-If the user has not a sequence database available, it might be feasible to download the NCBI GenBank database and process it.
+If the user has not a sequence database available, it might be feasible to download the NCBI GenBank database and process the database. 
 
-[Contribution guidelines for this project](doc/setup_ncbi_databse.md)
+[Download, Processing and Saving of the NCBI GenBank viral database](doc/setup_ncbi_databse.md)
 
 ## Tutorial
 
