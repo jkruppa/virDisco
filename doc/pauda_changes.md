@@ -1,5 +1,9 @@
 # Changes to the Pauda source code
 
+## Source
+Original source: http://ab.inf.uni-tuebingen.de/data/software/pauda/download/welcome.html
+
+## Changes
 Several changes to the Pauda implementation were necessary
 to fulfill our requirements. The following Table shows all
 changes with the connected program line. First, we changed the command
@@ -24,4 +28,3 @@ alignment to be judged as valid.
 | | 59 | --Xmx8 | --Xmx50|
 | z6\_blastx2rma.sh | 27 | --Xmx8 | --Xmx50|
 
-Source: http://ab.inf.uni-tuebingen.de/data/software/pauda/download/welcome.html
