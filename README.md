@@ -15,11 +15,9 @@ devtools::install_github("jkruppa/virDisco")
 ```
 ## Setup NCBI GenBank database
 
+If the user has not a sequence database available, it might be feasible to download the NCBI GenBank database and process it.
+
 [Contribution guidelines for this project](doc/setup_ncbi_databse.md)
-
-
-
-
 
 ## Tutorial
 
@@ -28,6 +26,8 @@ The package has many dependencies, which must be installed first. Some programes
 ### Dependencies
 
 In the first step a `program_list` object including all the path to the program exectuables must be generated. The following programs are needed for the virDisco.
+
+**CAUTION** Some changes to the Pauda source code hav to be done to use Pauda in our pipeline: [Changes to the Pauda code](doc/pauda_changes.md)
 
 1. Bowtie2 DNA mapper http://bowtie-bio.sourceforge.net/bowtie2/index.shtml
 2. Star mapper \[optional\] https://github.com/alexdobin/STAR
@@ -38,8 +38,6 @@ In the first step a `program_list` object including all the path to the program 
 7. Seqtk https://github.com/lh3/seqtk
 8. Samtools http://www.htslib.org/
 9. Trimmomatic http://www.usadellab.org/cms/?page=trimmomatic
-
-**CAUTION** Some changes to the Pauda source code has to be done to use Pauda in our pipeline: [Changes to the Pauda code](doc/pauda_changes.md)
 
 The function `set_program_list` generates a S4 object of the paths to the executables and checks if all files are existing.
 
