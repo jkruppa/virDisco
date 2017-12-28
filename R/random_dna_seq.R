@@ -29,7 +29,7 @@ random_dna_seq <- function(inFile, outFile, k, n = 1, clean = TRUE,
   formatterCMD <- paste(fasta_formatter,
                         "-i", inFile,
                         "-o", tmpFile)
-  runCMD(formatterCMD)
+  try(system(formatterCMD))
   ## build up commands: second shuffle the tmp file
   uShuffleCMD <- paste(fasta_uShuffle,
                        "<", tmpFile,
@@ -39,7 +39,7 @@ random_dna_seq <- function(inFile, outFile, k, n = 1, clean = TRUE,
                        ## "-seed", 20160916,
                        ">", outFile,
                        "2>", file.path(tmpDir, "shuffle.log"))
-  runCMD(uShuffleCMD)
+  try(system(uShuffleCMD))
   ## clean...
   if(clean){
     file.remove(tmpFile)
