@@ -27,7 +27,7 @@ The package has many dependencies, which must be installed first. Some programes
 
 In the first step a `program_list` object including all the path to the program exectuables must be generated. The following programs are needed for the virDisco.
 
-**CAUTION** Some changes to the Pauda source code hav to be done to use Pauda in our pipeline: [Changes to the Pauda code](doc/pauda_changes.md)
+**CAUTION** Some changes to the Pauda source code have to be done to use Pauda in our pipeline: [Changes to the Pauda code](doc/pauda_changes.md)
 
 1. Bowtie2 DNA mapper http://bowtie-bio.sourceforge.net/bowtie2/index.shtml
 2. Star mapper \[optional\] https://github.com/alexdobin/STAR
