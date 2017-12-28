@@ -11,6 +11,7 @@ All the files will be stored in the `main_dir`, which is located in the tmp fold
 ```R
 library(pacman) ## install pacman if needed
 p_load(RCurl, stringr, plyr)
+
 ## setup the file system in the temp dir
 main_dir <- tempdir()
 tmp_viral_dir <- file.path(main_dir, "tmp")
@@ -19,6 +20,7 @@ genbank_ncbi_dir <- file.path(main_dir, "genbank_ncbi", "viral")
 dir.create(genbank_ncbi_dir, recursive = TRUE)
 dir.create(tmp_viral_dir, recursive = TRUE)
 dir.create(sql_viral_dir, recursive = TRUE)
+
 ## Pauda dir, set to your own installation
 paudaDir <- file.path("/home/programs/pauda-1.0.1/pauda-1.0.1/bin")
 pauda_run <- file.path(paudaDir, "pauda-run")
