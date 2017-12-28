@@ -10,7 +10,7 @@ All the files will be stored in the `main_dir`, which is located in the tmp fold
 
 ```R
 library(pacman) ## install pacman if needed
-p_load(RCurl, stringr, plyr, Biostrings)
+p_load(RCurl, stringr, plyr, Biostrings, readr, tidyverse, ShortRead)
 
 ## setup the file system in the temp dir
 main_dir <- tempdir()
@@ -135,6 +135,49 @@ Finally, we must remove some non `ACGT` letters from the sequences. This will ta
 gbvrl_multi_comb_seq_list <- llply(gbvrl_multi_seq_list, function(x) {
   DNAStringSet(gsub("[^ACGT]", "", Reduce(c, x)))
 }, .parallel = TRUE)
+```
+
+In the next step the sequences will be shuffled. Therefore, two programs are needed. First, the program `formatter` form the `fastx-Toolkit` (http://hannonlab.cshl.edu/fastx_toolkit/) to make the fasta files two liner, with no line break and the program `uShuffle` for the shuffling of the sequence.
+
+```R
+fasta_formatter <- file.path("/home/programs", "fastx-Toolkit/bin/fasta_formatter")
+fasta_uShuffle <- file.path("/home/programs", "fasta_ushuffle/fasta_ushuffle")
+
+k <- 15
+l_ply(seq_along(gbvrl_multi_comb_seq_list), function(i){
+  chunk_in <- file.path(tmp_viral_dir, str_c("chunk_in_", str_pad(i, 3, pad = "0"), ".fa"))
+  chunk_out <- file.path(tmp_viral_dir, str_c("chunk_out_", str_pad(i, 3, pad = "0"), ".fa"))
+  writeFasta(DNAStringSet(gbvrl_multi_comb_seq_list[[i]]), chunk_in)
+  ## decoy random sequence 
+  random_dna_seq(fasta_formatter = fasta_formatter,
+                 fasta_uShuffle = fasta_uShuffle,
+                 inFile = chunk_in,
+                 outFile = chunk_out,
+                 k = k,
+                 tmpDir = tmp_viral_dir)
+  unlink(chunk_in)
+}, .progress = "text")
+```
+In the last step, we combine the shuffled chunk files and the original viral sequences into one final file `gbvrl_multi_decoy_15.fa`.
+
+```R
+## get everything together in one file
+chunk_out_files <- dir(tmp_viral_dir, "chunk_out", full.names = TRUE)
+decoy_k <- DNAStringSet(Reduce(c, llply(chunk_out_files, function(x){
+  message(x)
+  readDNAStringSet(x)}
+  )))
+names(decoy_k) <- rep("decoy_15", length(decoy_k))
+decoy_k_file <- file.path(genbank_ncbi_dir, str_c("viral_decoy_k", k , ".fa"))
+writeXStringSet(decoy_k, decoy_k_file)
+
+## remove all chunk files
+unlink(chunk_out_files)
+
+## now we build up the reference
+gbvrl_multi_decoy_k_seq <- c(gbvrl_multi_seq, decoy_k)
+gbvrl_multi_decoy_k_seq_file <- file.path(genbank_ncbi_dir, "gbvrl_multi_decoy_15.fa")
+writeXStringSet(gbvrl_multi_decoy_k_seq, gbvrl_multi_decoy_k_seq_file)
 ```
 
 
