@@ -1,3 +1,26 @@
+##' Time function
+##'
+##' Time function
+##' @title Time function 
+##' @param ... 
+##' @return Time in specified format
+##' @author Jochen Kruppa
+TIME <- function(...) format(Sys.time(), "%b %d %X")
+
+
+##' Message function with time
+##'
+##' Message function with time
+##' @title Message function with time 
+##' @param ... 
+##' @return Message with time
+##' @author Jochen Kruppa
+##' @export
+talk <- function(...) {
+  require(stringr)
+  message(str_c(TIME(), " ..... "), ...)
+}
+
 ##' desc
 ##'
 ##' detail

@@ -1,3 +1,40 @@
+##' desc
+##'
+##' detail
+##' @title title 
+##' @param ncbi_aa_seq 
+##' @param db_file 
+##' @return Null
+##' @author Jochen Kruppa
+##' @export
+setup_aa_info_sqlite <- function(ncbi_aa_seq, db_file){
+  talk("Build info data frame")
+  if(file.exists(db_file)) stop(str_c(db_file, " exists and must be deleted first!"))
+  aa_pos_df <- ldply(names(ncbi_aa_seq), function(x){
+    if(nchar(x) > 40) {
+      info <- str_split(str_split(x, " ", simplify = TRUE)[,1], "_", simplify = TRUE)
+      return(tibble(prot_id = info[1], genebank_id = info[1],
+                    pos_start = info[2], pos_end = info[3]))
+    } else {
+      tmp_df <- tbl_df(str_split(x, "_", simplify = TRUE))
+      if(length(tmp_df) == 5){
+        tmp_df <- tibble(tmp_df[[1]], str_c(tmp_df[2], "_", tmp_df[3]), tmp_df[[4]], tmp_df[[5]])
+      }
+      names(tmp_df) <- c("prot_id", "genebank_id", "pos_start", "pos_end")
+      return(tmp_df)
+    }
+  }, .parallel = FALSE, .progress = "text")
+  aa_pos_df$ind <- 1:nrow(aa_pos_df)
+  aa_pos_df$pos_start <- as.numeric(aa_pos_df$pos_start)  
+  aa_pos_df$pos_end <- as.numeric(aa_pos_df$pos_end)
+  ## build up sql lite data base
+  talk("Setup SQLite")
+  aa_info_db <- src_sqlite(db_file, create = TRUE)
+  aa_info_sqlite <- copy_to(aa_info_db, aa_pos_df, temporary = FALSE)
+}
+
+
+
 ##' Test
 ##'
 ##' Test
