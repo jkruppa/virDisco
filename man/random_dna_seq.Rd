@@ -4,7 +4,8 @@
 \alias{random_dna_seq}
 \title{title}
 \usage{
-random_dna_seq(inFile, outFile, k, n = 1, clean = TRUE)
+random_dna_seq(inFile, outFile, k, n = 1, clean = TRUE, tmpDir,
+  fasta_formatter = NULL, fasta_uShuffle = NULL)
 }
 \arguments{
 \item{inFile}{}
@@ -16,6 +17,12 @@ random_dna_seq(inFile, outFile, k, n = 1, clean = TRUE)
 \item{n}{}
 
 \item{clean}{}
+
+\item{tmpDir}{}
+
+\item{fasta_formatter}{}
+
+\item{fasta_uShuffle}{}
 }
 \value{
 Null
