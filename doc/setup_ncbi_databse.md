@@ -243,4 +243,94 @@ cat_cmd <- paste("find", tmpDir, "-name '*_aa.fa' -exec cat {} \\; >",
 runCMD(cat_cmd)
 ```
 
+## Step 3.1: Build bowtie-index on AMINO data
+
+
+```R
+## build PAUDA index by bowtie2
+pauda_build_dir <- file.path(tmp_viral_dir, "viral_multi_pauda_bowtie")
+
+##                                        
+runCMD(paste(pauda_build,
+             file.path(genbank_ncbi_dir, "gbvrl_multi_aa.fa"),
+             pauda_build_dir))
+
+file.copy(list.files(pauda_build_dir, full.names = TRUE),
+          file.path(dirname(genbank_ncbi_dir), "viral_multi_pauda_bowtie"),
+          recursive = TRUE)
+```
+
+## Step 3.2: Get the start and end of peptides i.e. genes
+
+```R
+ncbi_aa_fa <- file.path(genbank_ncbi_dir, "gbvrl_multi_aa.fa")
+aa_info_db_file <- file.path(sql_viral_dir, "gbvrl_aa_info.sqlite3")
+
+
+ncbi_aa_seq <- readAAStringSet(ncbi_aa_fa)
+
+setup_aa_info_sqlite(ncbi_aa_seq, db_file = aa_info_db_file)
+```
+
+## Step 3.3: Get the species and description information
+
+```R
+genbank_ncbi_info_df <- tbl_df(ldply(genbank_ncbi_dna_files, function(x) {
+  sample <- basename(x)
+  message("Working on ", sample)
+  tmp_feat_file <- file.path(tmp_viral_dir, str_c(sample, "_feat.fa"))
+  ##
+  message("\tExtract feats")
+  extractfeatCMD <- paste("extractfeat", 
+                          "-sequence", x,
+                          "-outseq", tmp_feat_file,
+                          "-type", "source",
+                          "-describe", "'db_xref | strain | mol_type'",
+                          "-join",
+                          "-auto",
+                          "1>", file.path(tmp_viral_dir, "emboss.log"), "2>&1") # be quiet
+  runCMD(extractfeatCMD)
+  ## collect feature information
+  tmp_feat_set <- readDNAStringSet(tmp_feat_file)
+  tmp_aa_info <- ldply(names(tmp_feat_set), function(x) {
+    info_raw <- str_split(x, " ", simplify = TRUE)
+    genebank_id <- str_split(info_raw[,1], "_", simplify = TRUE)[1]
+    mol_type <- gsub(".*mol_type=\\\"(.*)\\\", strain=.*", "\\1", x)
+    strain <- gsub(".*strain=\\\"(.*)\\\", db.*", "\\1", x)
+    tax_id <- gsub(".*taxon:(.*)\\\"\\).*", "\\1", x)
+    return(data.frame(genebank_id, mol_type, strain, tax_id))
+  })
+  ## get sequence information
+  tmp_info_file <- file.path(tmp_viral_dir, str_c(sample, "_info.txt"))
+  ##
+  message("\tExtract info")
+  infoseqCMD <- paste("infoseq", 
+                      "-sequence", x,
+                      "-outfile", tmp_info_file,
+                      "-nocolumns",
+                      "-delimiter", "'\t'",
+                      "-nodatabase",
+                      "-nopgc",
+                      "-notype",
+                      "-nousa",
+                      #"-noname",
+                      "-auto",
+                      "1>", file.path(tmp_viral_dir, "emboss.log"), "2>&1") # be quiet
+  runCMD(infoseqCMD)
+  tmp_seq_info <- tbl_df(read.delim(tmp_info_file, as.is = TRUE))
+  tmp_info <- left_join(tbl_df(tmp_aa_info), tbl_df(tmp_seq_info),
+                        by = c("genebank_id" = "Name"))
+  message("Finished\n")
+  return(tmp_info)
+}))
+```
+
+```R
+## copy everything to sqlite
+genbank_ncbi_info_db_file <- file.path(sql_viral_dir, "gbvrl_info.sqlite3")
+genbank_ncbi_info_db <- src_sqlite(genbank_ncbi_info_db_file, create = TRUE)
+genbank_ncbi_info_sqlite <- copy_to(genbank_ncbi_info_db, genbank_ncbi_info_df, temporary = FALSE)
+```R
+
+
 
