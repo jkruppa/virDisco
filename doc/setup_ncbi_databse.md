@@ -180,8 +180,22 @@ gbvrl_multi_decoy_k_seq_file <- file.path(genbank_ncbi_dir, "gbvrl_multi_decoy_1
 writeXStringSet(gbvrl_multi_decoy_k_seq, gbvrl_multi_decoy_k_seq_file)
 ```
 
+## Step 2.1: Build bowtie-index on DNA data
 
+You can run the mapping with the Bowtie2 mapper or the Star mapper. Both mapper need a indexed reference genome, which will be buil in the following.
 
+```R
+referenceViralMultiFile <- file.path(genbank_ncbi_dir, "gbvrl_multi_decoy_15.fa")
+referenceViralBowtieDir <- file.path(dirname(genbank_ncbi_dir),
+                                     "viral_multi_bowtie/viral_multi_bowtie")
+if(!file.exists(dirname(referenceViralBowtieDir))) dir.create(dirname(referenceViralBowtieDir))
+
+bowtie2BuildCMD <- paste("bowtie2-build",
+                         "-q",
+                         referenceViralMultiFile,
+                         referenceViralBowtieDir)
+try(system(bowtie2BuildCMD))
+```
 
 
 
