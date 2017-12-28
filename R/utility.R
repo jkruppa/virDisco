@@ -1,3 +1,38 @@
+##' desc
+##'
+##' detail
+##' @title test 
+##' @param seqs 
+##' @param threshold 
+##' @return null
+##' @author Jochen Kruppa
+##' @export
+get_seq_chunks_by_threshold <- function(seqs, threshold){
+    ## get the file size
+    seqList <- list()
+    startCnt <- 1
+    endCnt <- 1
+    writeCnt <- 1
+    repeat{
+        tmpSize <- sum(width(seqs[startCnt:endCnt]))
+        if(tmpSize >= threshold){
+            endCnt <- endCnt - 1
+            seqList[[writeCnt]] <- seqs[startCnt:endCnt]
+            writeCnt <- writeCnt + 1
+            startCnt <- endCnt + 1
+        }
+        if(endCnt >= length(seqs)) {
+           seqList[[writeCnt]] <- seqs[startCnt:endCnt]
+           return(seqList)
+           break
+        }
+        endCnt <- endCnt + 1
+    }
+    names(seqList) <- str_pad(seq_along(seqList), 3, pad = "0")
+    return(seqList)
+}
+
+
 ##' Test
 ##'
 ##' Test
