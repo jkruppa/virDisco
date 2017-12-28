@@ -197,5 +197,50 @@ bowtie2BuildCMD <- paste("bowtie2-build",
 try(system(bowtie2BuildCMD))
 ```
 
+## Step 2.2: Build star-index on DNA data
+
+```R
+referenceViralStarDir <- file.path(dirname(genbank_ncbi_dir), "viral_multi_star/viral_multi_star")
+
+dir.create(dirname(referenceViralStarDir), showWarnings = FALSE)    
+star_build_CMD <- paste(STAR,
+                        "--runMode", "genomeGenerate",
+                        "--genomeDir", dirname(referenceViralStarDir), 
+                        "--genomeFastaFiles", referenceViralMultiFile,
+                        "--genomeChrBinNbits", 10, 
+                        "--runThreadN", par$nCores)
+try(system(star_build_CMD))
+```
+
+## Step 3:  Extract all peptide sequences from files of Step 2
+
+```R
+l_ply(genbank_ncbi_dna_files, function(x) {
+  sample <- basename(x)
+  talk("Working on ", sample)
+  tmp_cds_amino_file <- file.path(tmpDir, str_c(sample, "_cds_amino.fa"))
+  tmp_cds_set <- readDNAStringSet(tmp_cds_amino_file)
+  talk("Get the amino information and write to file")
+  aa_file <- file.path(tmpDir, str_c(sample, "_aa.fa"))
+  if(file.exists(aa_file)) unlink(aa_file)
+  l_ply(names(tmp_cds_set), function(x) {
+    if(grepl("translation", x)){
+      tmp_aa_set <- AAStringSet(gsub(".*translation=\\\"(.*)\\\"\\).*", "\\1", x))
+      ## get the sequence name
+      genbank_id  <- str_split(x, " ", simplify = TRUE)[,1]
+      prot_id <- gsub(".*protein_id=\\\"(.+?)\\\".*", "\\1", x)
+      names(tmp_aa_set) <- str_c(prot_id, genbank_id, sep = "_")
+      writeXStringSet(tmp_aa_set, aa_file, append = TRUE)
+    }
+  }, .progress = "text")
+})
+```
+
+```R
+## combine all fasta files
+cat_cmd <- paste("find", tmpDir, "-name '*_aa.fa' -exec cat {} \\; >",
+                 file.path(genbank_ncbi_dir, "gbvrl_multi_aa.fa"))
+runCMD(cat_cmd)
+```
 
 
