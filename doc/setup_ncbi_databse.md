@@ -2,7 +2,21 @@
 
 In the following the download and processing of the NCBI GenBank *viral* database is demonstrated. We use hier chunks of R code and the user might like to adjust the download.
 
-### File setup for the NCBI GenBank database
+## Table of Contents
+1. [File setup for the NCBI GenBank database](#installation)
+2. [Step 1: Download all viral database files](#setup-ncbi-genbank-database)
+3. [Step 2: Extract all sequences and feature information](#step-1-download-all-viral-database-files)
+4. [Step 3: Add the decoy database](#step-3-add-the-decoy-database)
+5. [Step 4.1: Build bowtie-index on DNA data](#step-41-build-bowtie-index-on-dna-data)
+6. [Step 4.2: Build star-index on DNA data](#step-42-build-star-index-on-dna-data)
+7. [Step 5: Extract all peptide sequences](#step-5-extract-all-peptide-sequences)
+8. [Step 6: Build pauda-index](#step-6-build-pauda-index)
+9. [Step 7.1: SQlite database of gene information](#step-71-sqlite-database-of-gene-information)
+10. [Step 7.2: SQlite database of species and description information](#step-72-sqlite-database-of-of-species-and-description-information)
+
+
+
+## File setup for the NCBI GenBank database
 
 While the run of the virDisco many files are produced and needed. Therefore a good file system managment should be used and setup. It is not a good idea to store and save all the input and output files into one single folder. 
 
@@ -108,7 +122,7 @@ cat_cmd <- paste("find", tmp_viral_dir, "-name '*_dna.fa' -exec cat {} \\; >",
 try(system(cat_cmd, wait = TRUE))
 ```
 
-## Step 2.1: Add the decoy database
+## Step 3: Add the decoy database
 
 We want to shuffle the original sequences of the viral database by a preserved `k`. Therefore, we use the program `uShuffle` (http://digital.cs.usu.edu/~mjiang/ushuffle/). However, `uShuffle` can only handle sequences of the maximal length of 9e6. Therefore, we build up chunks including seuquences of the summed up length smaller than 9e6. 
 
@@ -180,9 +194,9 @@ gbvrl_multi_decoy_k_seq_file <- file.path(genbank_ncbi_dir, "gbvrl_multi_decoy_1
 writeXStringSet(gbvrl_multi_decoy_k_seq, gbvrl_multi_decoy_k_seq_file)
 ```
 
-## Step 2.1: Build bowtie-index on DNA data
+## Step 4.1: Build bowtie-index on DNA data
 
-You can run the mapping with the Bowtie2 mapper or the Star mapper. Both mapper need a indexed reference genome, which will be buil in the following.
+You can run the mapping with the Bowtie2 mapper or the Star mapper. Both mapper need a indexed reference genome, which will be build in the following.
 
 ```R
 referenceViralMultiFile <- file.path(genbank_ncbi_dir, "gbvrl_multi_decoy_15.fa")
@@ -197,7 +211,7 @@ bowtie2BuildCMD <- paste("bowtie2-build",
 try(system(bowtie2BuildCMD))
 ```
 
-## Step 2.2: Build star-index on DNA data
+## Step 4.2: Build star-index on DNA data
 
 ```R
 referenceViralStarDir <- file.path(dirname(genbank_ncbi_dir), "viral_multi_star/viral_multi_star")
@@ -212,7 +226,7 @@ star_build_CMD <- paste(STAR,
 try(system(star_build_CMD))
 ```
 
-## Step 3:  Extract all peptide sequences from files of Step 2
+## Step 5: Extract all peptide sequences
 
 ```R
 l_ply(genbank_ncbi_dna_files, function(x) {
@@ -243,7 +257,7 @@ cat_cmd <- paste("find", tmpDir, "-name '*_aa.fa' -exec cat {} \\; >",
 runCMD(cat_cmd)
 ```
 
-## Step 3.1: Build bowtie-index on AMINO data
+## Step 6: Build pauda-index
 
 
 ```R
@@ -260,7 +274,7 @@ file.copy(list.files(pauda_build_dir, full.names = TRUE),
           recursive = TRUE)
 ```
 
-## Step 3.2: Get the start and end of peptides i.e. genes
+## Step 7.1: SQlite database of gene information
 
 ```R
 ncbi_aa_fa <- file.path(genbank_ncbi_dir, "gbvrl_multi_aa.fa")
@@ -272,7 +286,7 @@ ncbi_aa_seq <- readAAStringSet(ncbi_aa_fa)
 setup_aa_info_sqlite(ncbi_aa_seq, db_file = aa_info_db_file)
 ```
 
-## Step 3.3: Get the species and description information
+## Step 7.2: SQlite database of species and description information
 
 ```R
 genbank_ncbi_info_df <- tbl_df(ldply(genbank_ncbi_dna_files, function(x) {
