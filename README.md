@@ -4,7 +4,8 @@ The virDisco, short for virus detection and discovery, is a R package with uses 
 
 ## Table of Contents
 1. [Installation](#installation)
-2. [Tutorial](#tutorial)
+2. [Setup NCBI GenBank database](#Setup-NCBI-GenBank-database)
+3. [Tutorial](#tutorial)
 
 ## Installation
 
