@@ -2,6 +2,8 @@
 
 In the following the download and processing of the NCBI GenBank *viral* database is demonstrated. We use hier chunks of R code and the user might like to adjust the download.
 
+*Please read first the full tutorial. Some programs must be installed and it might be feasiable to adjust some code chunks for your own purpose. Overall 2.4 million sequences will be parsed. Therefore, start with a small amount of files from NCBI and see what you get.*
+
 ## Table of Contents
 1. [File setup for the NCBI GenBank database](#file-setup-for-the-ncbi-genbank-database)
 2. [Step 1: Download all viral database files](#step-1-download-all-viral-database-files)
@@ -14,13 +16,11 @@ In the following the download and processing of the NCBI GenBank *viral* databas
 9. [Step 7.1: SQlite database of gene information](#step-71-sqlite-database-of-gene-information)
 10. [Step 7.2: SQlite database of species and description information](#step-72-sqlite-database-of-species-and-description-information)
 
-
-
 ## File setup for the NCBI GenBank database
 
 While the run of the virDisco many files are produced and needed. Therefore a good file system managment should be used and setup. It is not a good idea to store and save all the input and output files into one single folder. 
 
-All the files will be stored in the `main_dir`, which is located in the tmp folder of your PC. Change this line to use a different folder as root folder. Further, we need a tmp folder, here `tmp_viral_dir`,  to store all the temporal files. In this example it does not really matter but in a real example the intermediate files become really big and must not be stored.
+Here, all the files will be stored in the `main_dir`, which is located in the tmp folder of your PC. Change this line to use a different folder as root folder. Further, we need a tmp folder, here `tmp_viral_dir`,  to store all the temporal files. In this example it does not really matter but in a real example the intermediate files become really big and must not be stored.
 
 ```R
 library(pacman) ## install pacman if needed
@@ -43,7 +43,7 @@ pauda_build <- file.path(paudaDir, "pauda-build")
 
 ## Step 1: Download all viral database files
 
-In the first step, we will download all ftp GenBank files connected to a virus. This is indicated by `gbvrl.*` at the beginning of  a database file. We wait 5 seconds after each download to avoid any ftp timeout. 
+In the first step, we will download all NCBI GenBank files connected to a virus from the GenBank ftp server. The files are indicated by `gbvrl.*` for a virus at the beginning of each database file. We wait 5 seconds after each download to avoid any ftp timeout. Visit ftp://ftp.ncbi.nlm.nih.gov/genbank for a full overview of available data.
 
 ```R
 ## get all genbank files
@@ -56,15 +56,14 @@ genbank_file_names <- str_split(genbank_file_names_raw, "\n", simplify = TRUE)[1
 genbank_file_virus_names <- grep("gbvrl.*", genbank_file_names, value = TRUE)
 genbank_file_virus <- str_c("ftp://ftp.ncbi.nlm.nih.gov/genbank/", genbank_file_virus_names)
 ```
-
-Normally over 50 files will be downloaded and further processed. To speedup everything, we only select four files.
+Normally over *50 files* will be downloaded and further processed. To speedup everything, we only select *four files*.
 
 ```R
 ## CAUTION we only select four files!
 genbank_file_virus <- genbank_file_virus[1:4] 
 ```
 
-All steps are done from now only with a fraction of all GenBank databasse files! Remove the above code line, to process all files.
+*All steps are done from now only with a fraction of all GenBank databasse files! Remove the above code line, to process all files.*
 
 ```R
 ## download all files to the genbank_ncbi_dir
@@ -87,6 +86,8 @@ all(str_replace(basename(genbank_file_virus), ".gz", "") %in% dir(genbank_ncbi_d
 ## get all the sequence files
 genbank_ncbi_dna_files <- dir(genbank_ncbi_dir, pattern = ".seq$", full.names = TRUE)
 ```
+
+Now, all files are available in the `embl` format. This is nice, because we have the sequence and the gene information. However, the format is not easy to parse. We use therefor the EMBOSS Tools (https://www.ebi.ac.uk/Tools/emboss/).
 
 ## Step 2: Extract all sequences and feature information
 
@@ -196,7 +197,7 @@ writeXStringSet(gbvrl_multi_decoy_k_seq, gbvrl_multi_decoy_k_seq_file)
 
 ## Step 4.1: Build bowtie-index on DNA data
 
-You can run the mapping with the Bowtie2 mapper or the Star mapper. Both mapper need a indexed reference genome, which will be build in the following.
+You can run the mapping in virDisco with the Bowtie2 mapper or the Star mapper. Both mapper need a indexed reference genome, which will be build in the following.
 
 ```R
 referenceViralMultiFile <- file.path(genbank_ncbi_dir, "gbvrl_multi_decoy_15.fa")
@@ -227,6 +228,8 @@ try(system(star_build_CMD))
 ```
 
 ## Step 5: Extract all peptide sequences
+
+
 
 ```R
 l_ply(genbank_ncbi_dna_files, function(x) {
