@@ -2,7 +2,7 @@
 
 In the following the download and processing of the NCBI GenBank *viral* database is demonstrated. We use hier chunks of R code and the user might like to adjust the download.
 
-*Please read first the full tutorial. Some programs must be installed and it might be feasiable to adjust some code chunks for your own purpose. Overall 2.4 million sequences will be parsed. Therefore, start with a small amount of files from NCBI and see what you get.*
+**Please read first the full tutorial. Some programs must be installed and it might be feasiable to adjust some code chunks for your own purpose. Overall 2.4 million sequences will be parsed. Therefore, start with a small amount of files from NCBI and see what you get.**
 
 ## Table of Contents
 1. [File setup for the NCBI GenBank database](#file-setup-for-the-ncbi-genbank-database)
@@ -229,7 +229,7 @@ try(system(star_build_CMD))
 
 ## Step 5: Extract all peptide sequences
 
-
+For the amino mapping, we need the peptide sequences from the `seq` files. This is done in the following code chunk. Depending on your needs, you might change something. Therefore, we have not build up a anonymous function.
 
 ```R
 l_ply(genbank_ncbi_dna_files, function(x) {
@@ -252,6 +252,7 @@ l_ply(genbank_ncbi_dna_files, function(x) {
   }, .progress = "text")
 })
 ```
+Finally, we combine all amino files into one big file.
 
 ```R
 ## combine all fasta files
@@ -262,6 +263,7 @@ runCMD(cat_cmd)
 
 ## Step 6: Build pauda-index
 
+Pauda needs a index of the amino acids. **Caution** Please copy your files and store them accordingly. Here Pauda will build everything in the tmp folder. This might not be wanted in a daily routine.
 
 ```R
 ## build PAUDA index by bowtie2
@@ -279,10 +281,11 @@ file.copy(list.files(pauda_build_dir, full.names = TRUE),
 
 ## Step 7.1: SQlite database of gene information
 
+The final two steps are needed for the visualization. First, we build up a SQlite database with the gene information, and then one SQlite database with the species and descriptiion information.
+
 ```R
 ncbi_aa_fa <- file.path(genbank_ncbi_dir, "gbvrl_multi_aa.fa")
 aa_info_db_file <- file.path(sql_viral_dir, "gbvrl_aa_info.sqlite3")
-
 
 ncbi_aa_seq <- readAAStringSet(ncbi_aa_fa)
 
@@ -342,6 +345,8 @@ genbank_ncbi_info_df <- tbl_df(ldply(genbank_ncbi_dna_files, function(x) {
 }))
 ```
 
+We copy everthing into one SQlite database.
+
 ```R
 ## copy everything to sqlite
 genbank_ncbi_info_db_file <- file.path(sql_viral_dir, "gbvrl_info.sqlite3")
@@ -349,5 +354,5 @@ genbank_ncbi_info_db <- src_sqlite(genbank_ncbi_info_db_file, create = TRUE)
 genbank_ncbi_info_sqlite <- copy_to(genbank_ncbi_info_db, genbank_ncbi_info_df, temporary = FALSE)
 ```R
 
-
+## Fin
 
