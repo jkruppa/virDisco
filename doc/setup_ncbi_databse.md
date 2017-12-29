@@ -352,7 +352,7 @@ We copy everthing into one SQlite database.
 genbank_ncbi_info_db_file <- file.path(sql_viral_dir, "gbvrl_info.sqlite3")
 genbank_ncbi_info_db <- src_sqlite(genbank_ncbi_info_db_file, create = TRUE)
 genbank_ncbi_info_sqlite <- copy_to(genbank_ncbi_info_db, genbank_ncbi_info_df, temporary = FALSE)
-```R
+```
 
 ## Fin
 
