@@ -3,16 +3,16 @@
 In the following the download and processing of the NCBI GenBank *viral* database is demonstrated. We use hier chunks of R code and the user might like to adjust the download.
 
 ## Table of Contents
-1. [File setup for the NCBI GenBank database](#installation)
-2. [Step 1: Download all viral database files](#setup-ncbi-genbank-database)
-3. [Step 2: Extract all sequences and feature information](#step-1-download-all-viral-database-files)
+1. [File setup for the NCBI GenBank database](#file-setup-for-the-ncbi-genbank-database)
+2. [Step 1: Download all viral database files](#step-1-download-all-viral-database-files)
+3. [Step 2: Extract all sequences and feature information](#step-2-extract-all-sequences-and-feature-information)
 4. [Step 3: Add the decoy database](#step-3-add-the-decoy-database)
 5. [Step 4.1: Build bowtie-index on DNA data](#step-41-build-bowtie-index-on-dna-data)
 6. [Step 4.2: Build star-index on DNA data](#step-42-build-star-index-on-dna-data)
 7. [Step 5: Extract all peptide sequences](#step-5-extract-all-peptide-sequences)
 8. [Step 6: Build pauda-index](#step-6-build-pauda-index)
 9. [Step 7.1: SQlite database of gene information](#step-71-sqlite-database-of-gene-information)
-10. [Step 7.2: SQlite database of species and description information](#step-72-sqlite-database-of-of-species-and-description-information)
+10. [Step 7.2: SQlite database of species and description information](#step-72-sqlite-database-of-species-and-description-information)
 
 
 
