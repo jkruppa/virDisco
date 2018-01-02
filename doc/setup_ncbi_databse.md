@@ -2,7 +2,7 @@
 
 In the following the download and processing of the NCBI GenBank *viral* database is demonstrated. We use hier chunks of R code and the user might like to adjust the download.
 
-**Please read first the full tutorial. Some programs must be installed and it might be feasiable to adjust some code chunks for your own purpose. Overall 2.4 million sequences will be parsed. Therefore, start with a small amount of files from NCBI and see what you get.**
+**Please read first the full tutorial. Some programs must be installed and it might be feasable to adjust some code chunks for your own purpose. Overall 2.4 million sequences will be parsed. Therefore, start with a small amount of files from NCBI and see what you get.**
 
 ## Table of Contents
 1. [File setup for the NCBI GenBank database](#file-setup-for-the-ncbi-genbank-database)
