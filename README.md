@@ -64,6 +64,13 @@ The viral detection pipeline is controlled by a S4 object of the class `par_list
 setClass(
   Class = "par_list",
   representation = representation(
+    num_decoy_reads = "numeric",      ## number of generated decoy reads, if decoy is true [500]
+    min_num_reads = "numeric",        ## mimimum number of reads per reference [50] 
+    min_coverage = "numeric",         ## mimimum coverage of the reference by reads to keep the hit [0.05] 
+    map_dna_in = "list",              ## internal file storage for dna mapping 
+    map_dna_stats = "list",           ## internal list for DNA mapping statistics  
+    map_pep_in = "list",              ## internal file storage for amino mapping  
+    decoy = "logical",                ## should the decoy approach be run [false]
     tax = "logical",                  ## should the tax trees are generated [true]
     qc = "logical",                   ## should the quality control by trimmomatic be run [true]
     clean = "logical",                ## should intermediate files be deleted [true] 
@@ -89,6 +96,10 @@ setClass(
     pdf_file = "character"            ## name of the final plot pdf file
   ),
   prototype = prototype(
+    num_decoy_reads = 500,
+    min_coverage = 0.05,
+    min_num_reads = 50,
+    decoy = FALSE,
     tax = TRUE,
     clean = TRUE,
     paired = FALSE,
