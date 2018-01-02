@@ -146,7 +146,7 @@ dir.create(out_dir)
 
 ### Example read files and viral reference genomes
 
-The example input files can be used directly, stored in the `/data` folder of this project or loaded directly in R by the following commands. Still, the external programs need the fastq files saved omn disc. Therefore, we write the fastq reads to two fastq files. We assume always to find gzipped files. 
+The example input files can be used directly, stored in the `/data` folder of this project or loaded directly in R by the following commands. Still, the external programs need the fastq files saved on disc. Therefore, we write the fastq reads to two fastq files. We assume always to find gzipped files. 
 
 ```R
 ## load the data
@@ -160,7 +160,7 @@ mapply(writeFastq, infected_fastq, list(R1_fq, R2_fq))
 
 ### Build reference genome for Bowtie2 and Pauda
 
-In the following we want to detect some viral strains in the infected fastq files. To make it more convenient, we have already build a small subset of DNA sequences inclduing viral strains, which might have been infected out sample. Therefore, we want now map the fastq reads to the reference DNA sequences. First have a closer look to the reference sequences.
+In the following we want to detect some viral strains in the infected fastq files. To make it more convenient, we have already build a small subset of DNA sequences inclduing viral strains, which might have been infected our sample. Therefore, we want now map the fastq reads to the reference DNA sequences. First have a closer look to the reference sequences.
 
 ```R
 ## load the reference DNA sequences
@@ -192,7 +192,7 @@ Further, we have also the amino acid sequences of the DNA sequences. Overall 521
 data(aa_seqs)
 ```
 
-The amino acid sequences are stored in a `AAStringSet` container giving the same usability as  for the DNA sequences.
+The amino acid sequences are stored in a `AAStringSet` container giving the same usability as for the DNA sequences.
 
 ```R
 R> aa_seqs
@@ -286,7 +286,7 @@ R> select(strain_info_db,
  # ... with 277 more rows, and 1 more variables: Description <chr>
 ```
 
-To make it easier for the user, we implemented to functions to generate the sqlite3 databases. Both functions need the given informations and will then setup the sqlite3 databases in the given `sql_dir`. Please make sure, that the file system can handle sqlite3 databases.
+To make it easier for the user, we implemented two R functions to generate the sqlite3 databases. Both functions need the given information and will then setup the sqlite3 databases in the given `sql_dir`. Please make sure, that the file system can handle sqlite3 databases.
 
 ```R
 aa_info_db_file <- file.path(in_dir, "aa_info_db.sqlite3")
@@ -311,7 +311,7 @@ Now all the setup is done for the final mapping run.
 
 ### Start artifical genome mapping
 
-The mapping of the sequence reads is controlled by the fuction `artificial_genome_mapping`. The function needs only three inputs, the infiles, the outfile, and the S4 class `par_list`. The later is needed to get all the parameters trough the function calls. Here we also did some modifications. `par_viral_list["tmp_dir"]` changes the defualt temp dir and `par_viral_list["check_host"] <- FALSE` avoids host checking by blastn. The host checking can be very time consuming.
+The mapping of the sequence reads is controlled by the fuction `artificial_genome_mapping`. The function needs only three inputs, the infiles, the outfile, and the S4 class `par_list`. The later is needed to get all the parameters trough the function calls. Here we also did some modifications. `par_viral_list["tmp_dir"]` changes the default temp dir and `par_viral_list["check_host"] <- FALSE` avoids host checking by blastn. The host checking can be very time consuming.
 
 Finally, the file setup is done by the function `get_sub_files`. Therefore, the name of the sample is needed and the indir, where the sample file is stored, and the out dir, where the results files should be written to. Finally, the artificial mapping of the sequence reads is started.
 
@@ -414,7 +414,7 @@ We use the ete-toolkit for the automatic generation of phylogenetic trees. This 
 
 # Setup NCBI GenBank database
 
-If the user has not a sequence database available, it might be feasible to download the NCBI GenBank database. 
+If the user has not a sequence database available, it might be feasible to download the NCBI GenBank database. in addition, the generation of the decoy database is explained.
 
 [Download, Processing and Saving of the NCBI GenBank viral database](doc/setup_ncbi_databse.md)
 
