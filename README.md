@@ -4,9 +4,9 @@ The virDisco, short for virus detection and discovery, is a R package with uses 
 
 ## Table of Contents
 1. [Installation](#installation)
-2. [Setup NCBI GenBank database](#setup-ncbi-genbank-database)
-3. [Tutorial](#tutorial)
-4. [Output files](#output-files)
+2. [Tutorial](#tutorial)
+3. [Output files](#output-files)
+4. [Setup NCBI GenBank database](#setup-ncbi-genbank-database)
 
 ## Installation
 
@@ -15,15 +15,12 @@ The development version from github:
 ```R
 devtools::install_github("jkruppa/virDisco")
 ```
-## Setup NCBI GenBank database
-
-If the user has not a sequence database available, it might be feasible to download the NCBI GenBank database. 
-
-[Download, Processing and Saving of the NCBI GenBank viral database](doc/setup_ncbi_databse.md)
 
 ## Tutorial
 
 The package has many dependencies, which must be installed first. Some programes migth be in the load path, others might not. To make it more relaiable for the user, all programs must be specified first into a `program_list`. The `program_list` object is a S4 class, which checks all the paths to the program executables first. 
+
+If the decoy approach sould be used, first a decoy and NCBI GenBank database must be build. The following tutorial gives a overview over the standard approach. [Setup NCBI GenBank database](#setup-ncbi-genbank-database) explains, how to download all 2.5 million NCBI GenBank viral sequences and the connected amino acid sequences as well. Moreover, the generation of the decoy database is shown.
 
 ### Dependencies
 
@@ -414,3 +411,11 @@ We use the ete-toolkit for the automatic generation of phylogenetic trees. This 
 <p align="center">
   <img src="img/NGS-10001_tree.png" width="500">
 </p>
+
+# Setup NCBI GenBank database
+
+If the user has not a sequence database available, it might be feasible to download the NCBI GenBank database. 
+
+[Download, Processing and Saving of the NCBI GenBank viral database](doc/setup_ncbi_databse.md)
+
+
