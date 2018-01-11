@@ -2,8 +2,6 @@
 
 export(artificial_genome_mapping)
 export(build_index)
-export(build_sample_info)
-export(check_host)
 export(collapse_df)
 export(coverage_filter)
 export(empty_map_pep_list)

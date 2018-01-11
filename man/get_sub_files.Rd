@@ -2,32 +2,36 @@
 % Please edit documentation in R/utility.R
 \name{get_sub_files}
 \alias{get_sub_files}
-\title{TEst}
+\title{Gather the files for one sample run}
 \usage{
 get_sub_files(sample, batch = NULL, in_dir = NULL, out_dir = NULL,
   name = NULL, gz = FALSE)
 }
 \arguments{
-\item{sample}{}
+\item{sample}{Name of the sample, which is also part of the file
+name}
 
-\item{batch}{}
+\item{batch}{Name of the batch [default = NULL]}
 
-\item{in_dir}{}
+\item{in_dir}{Name of the directory, where the fastq files are
+stored}
 
-\item{out_dir}{}
+\item{out_dir}{Name of the directory, where the files should be
+written}
 
-\item{name}{}
+\item{name}{Name of the sample [expired]}
 
-\item{gz}{}
+\item{gz}{Are the fastq files packed or not? [default = FALSE]}
 }
 \value{
 file.list
 }
 \description{
-Test
+The function gets the file names and locations of a single sample
 }
 \details{
-Test
+The package virDisco needs a very specific file
+declaration. Therefore these functions produces the structure.
 }
 \author{
 Jochen Kruppa

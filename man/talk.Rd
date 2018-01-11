@@ -2,21 +2,22 @@
 % Please edit documentation in R/utility.R
 \name{talk}
 \alias{talk}
-\title{Message function with time}
+\title{Advanced message functionality by time stamp}
 \usage{
 talk(...)
 }
 \arguments{
-\item{...}{}
+\item{...}{Character string}
 }
 \value{
-Message with time
+Message with time stamp
 }
 \description{
-Message function with time
+Advanced message() functionality by time stamp
 }
 \details{
-Message function with time
+Advanced message() functionality by time stamp using the function
+\code{\link{TIME}}.
 }
 \author{
 Jochen Kruppa

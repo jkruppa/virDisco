@@ -2,20 +2,21 @@
 % Please edit documentation in R/utility.R
 \name{fq2fa}
 \alias{fq2fa}
-\title{Test}
+\title{A wrapper for seqtk to convert fastq to fasta}
 \usage{
 fq2fa(fqFile, faFile)
 }
 \arguments{
-\item{fqFile}{}
+\item{fqFile}{File path to fastq infile}
 
-\item{faFile}{}
+\item{faFile}{File path to fasta outfile}
 }
 \description{
-Test
+A wrapper for seqtk to convert fastq to fasta
 }
 \details{
-TEst
+The external program seqtk must be installed and the path must be
+set in the program_list().
 }
 \author{
 Jochen Kruppa

@@ -2,23 +2,25 @@
 % Please edit documentation in R/utility.R
 \name{check_host}
 \alias{check_host}
-\title{Test}
+\title{Experimental function to check the host by blastn}
 \usage{
 check_host(file, force = FALSE)
 }
 \arguments{
-\item{file}{}
+\item{file}{Infile of the sample, see \code{\link{get_sub_files}}.}
 
-\item{force}{}
+\item{force}{Should all files be overwritten?}
 }
 \value{
 data.frame
 }
 \description{
-Test
+A experimental function, which checks the host using blastn
 }
 \details{
-Test
+This very experimental function uses blast and a subset of 100
+read to determine the host of the sample. This works sometimes,
+but it is very time consuming, with sometimes little gain.
 }
 \author{
 Jochen Kruppa

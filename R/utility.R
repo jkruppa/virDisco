@@ -1,19 +1,20 @@
-##' Time function
+##' Small wrapper to extract the time from Sys.time()
 ##'
-##' Time function
-##' @title Time function 
-##' @param ... 
-##' @return Time in specified format
+##' Small wrapper to extract the time from Sys.time()
+##' @title Small wrapper to extract the time from Sys.time() 
+##' @param ... No parameters are needed
+##' @return System time in %b %d %X
 ##' @author Jochen Kruppa
 TIME <- function(...) format(Sys.time(), "%b %d %X")
 
 
-##' Message function with time
+##' Advanced message() functionality by time stamp
 ##'
-##' Message function with time
-##' @title Message function with time 
-##' @param ... 
-##' @return Message with time
+##' Advanced message() functionality by time stamp using the function
+##' \code{\link{TIME}}.
+##' @title Advanced message functionality by time stamp
+##' @param ... Character string
+##' @return Message with time stamp
 ##' @author Jochen Kruppa
 ##' @export
 talk <- function(...) {
@@ -21,13 +22,16 @@ talk <- function(...) {
   message(str_c(TIME(), " ..... "), ...)
 }
 
-##' desc
+##' The function divides a DNAStringSet into a list of smaller objects given a threshold.
 ##'
-##' detail
-##' @title test 
-##' @param seqs 
-##' @param threshold 
-##' @return null
+##' Sometimes programs can not handle to long sequences. The functions
+##' allows to build up chunks without cutting sequences. If the
+##' threshold is exceeded by adding a sequence, the exceeding sequence
+##' will be put in the next chunk.
+##' @title Divide sequences into chunks
+##' @param seqs DNAStringSet object with sequences
+##' @param threshold maximal summed width of sequences in a chunk
+##' @return list() of chunks with the width less the threshold
 ##' @author Jochen Kruppa
 ##' @export
 get_seq_chunks_by_threshold <- function(seqs, threshold){
@@ -56,11 +60,12 @@ get_seq_chunks_by_threshold <- function(seqs, threshold){
 }
 
 
-##' Test
+##' This an experimental function, which is very specific
 ##'
-##' Test
-##' @title Test 
-##' @param batch_fastq_files 
+##' In the daily workflow, some descriptions must be generated. This
+##' is one of the functions.
+##' @title Plot the processed files in a dir
+##' @param batch_fastq_files A list of files to be parsed
 ##' @return ggplot object
 ##' @author Jochen Kruppa
 ##' @export
@@ -79,12 +84,12 @@ plot_time_sample <- function(batch_fastq_files) {
   return(p)
 }
 
-##' Test
+##' Helper function for collapsing a matrix
 ##'
-##' Test
-##' @title Test 
-##' @param mat 
-##' @param sep 
+##' Helper function for collapsing a matrix
+##' @title Collapse a matrix by row 
+##' @param mat A matrix
+##' @param sep A seperator for collapsing
 ##' @return matrix
 ##' @author Jochen Kruppa
 ##' @export
@@ -92,16 +97,20 @@ collapse_df <- function(mat, sep = "_"){
   apply(mat, 1, function(x) str_c(x, collapse = sep))
 }
 
-##' Test
+##' The function gets the file names and locations of a single sample
 ##'
-##' Test
-##' @title TEst
-##' @param sample 
-##' @param batch 
-##' @param in_dir 
-##' @param out_dir 
-##' @param name 
-##' @param gz 
+##' The package virDisco needs a very specific file
+##' declaration. Therefore these functions produces the structure.
+##' @title Gather the files for one sample run
+##' @param sample Name of the sample, which is also part of the file
+##'   name
+##' @param batch Name of the batch [default = NULL]
+##' @param in_dir Name of the directory, where the fastq files are
+##'   stored
+##' @param out_dir Name of the directory, where the files should be
+##'   written
+##' @param name Name of the sample [expired]
+##' @param gz Are the fastq files packed or not? [default = FALSE]
 ##' @return file.list
 ##' @author Jochen Kruppa
 ##' @export
@@ -141,11 +150,11 @@ get_sub_files <- function(sample, batch = NULL, in_dir = NULL, out_dir = NULL, n
   return(list(in_file = sample_in, out = sample_paired_proc))
 }
 
-##' Test
+##' Small tester if a object or file is named
 ##'
-##' Test
-##' @title Test 
-##' @param file 
+##' Small tester if a object or file is named
+##' @title Small tester if a object is named
+##' @param file A file string
 ##' @return logical
 ##' @author Jochen Kruppa
 ##' @export
@@ -153,12 +162,13 @@ is.named <- function(file){
     if(is.null(names(file))) {stop("Named file is needed")}
 }
 
-##' Test
+##' A wrapper for seqtk to convert fastq to fasta
 ##'
-##' TEst
-##' @title Test 
-##' @param fqFile 
-##' @param faFile 
+##' The external program seqtk must be installed and the path must be
+##' set in the program_list().
+##' @title A wrapper for seqtk to convert fastq to fasta
+##' @param fqFile File path to fastq infile
+##' @param faFile File path to fasta outfile
 ##' @return NULL
 ##' @author Jochen Kruppa
 ##' @export
@@ -167,11 +177,12 @@ fq2fa <- function(fqFile, faFile) {
 }
 
 
-##' Test
+##' A [expired] functionality to get the files from a directonary
 ##'
-##' Test
-##' @title Test 
-##' @param dir 
+##' The function is _expired_. Use the function
+##' \code{\link{get_sub_files}} instead.
+##' @title Get all the files prepared in a directory
+##' @param dir Directonary to be read
 ##' @return file.list
 ##' @author Jochen Kruppa
 ##' @export
@@ -193,13 +204,13 @@ prepare_file_list <- function(dir){
   return(fq_paired)
 }
 
-##' Test
+##' The hits from the DNA and AA mapping are merged and ordered by their combined rank.
 ##'
-##' Test
-##' @title Test
-##' @param map_dna_list 
-##' @param map_pep_list 
-##' @return data.frame
+##' The hits from the DNA and AA mapping are merged and ordered by their combined rank.
+##' @title Order the hits of the mapping
+##' @param map_dna_list List with the DNA read hits from \code{\link{map_dna_ref}}
+##' @param map_pep_list List with the AA read hits from \code{\link{map_pep_ref}}
+##' @return Ordered data.frame with the counts
 ##' @author Jochen Kruppa
 ##' @export
 ord_findings <- function(map_dna_list, map_pep_list) {
@@ -213,17 +224,16 @@ ord_findings <- function(map_dna_list, map_pep_list) {
   return(count_ord_df)
 }
 
-##' Test
+##' A function to collect the sample information from the pipeline run.
 ##'
-##' Test
-##' @title Test 
-##' @param sample_in 
-##' @param out_file 
-##' @param par_list 
-##' @param proc_start_tm 
+##' This is a internal function, which collects all information on the sample after the pipeline has run. 
+##' @title Internal function to extract the sample information
+##' @param sample_in Infile of the sample, see \code{\link{get_sub_files}}.
+##' @param out_file Outfile of the sample, see \code{\link{get_sub_files}}.
+##' @param par_list Parameter list, see \code{\link{set_par_list}}.
+##' @param proc_start_tm String of the start time of the pipeline [internal]
 ##' @return data.frame
 ##' @author Jochen Kruppa
-##' @export
 build_sample_info <- function(sample_in, out_file = NULL, par_list, proc_start_tm){
   talk("[SAMPLE INFO] Build sample info")
   talk("[SAMPLE INFO] Get the number of raw reads")
@@ -258,15 +268,16 @@ build_sample_info <- function(sample_in, out_file = NULL, par_list, proc_start_t
   return(sample_info)
 }
 
-##' Test
+##' A experimental function, which checks the host using blastn
 ##'
-##' Test
-##' @title Test 
-##' @param file 
-##' @param force 
+##' This very experimental function uses blast and a subset of 100
+##' read to determine the host of the sample. This works sometimes,
+##' but it is very time consuming, with sometimes little gain.
+##' @title Experimental function to check the host by blastn
+##' @param file Infile of the sample, see \code{\link{get_sub_files}}.
+##' @param force Should all files be overwritten?
 ##' @return data.frame
 ##' @author Jochen Kruppa
-##' @export
 check_host <- function(file, force = FALSE){
   talk("Check host by blasting random reads (n = 100)")
   ## fles for blast

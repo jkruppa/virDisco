@@ -2,23 +2,23 @@
 % Please edit documentation in R/utility.R
 \name{ord_findings}
 \alias{ord_findings}
-\title{Test}
+\title{Order the hits of the mapping}
 \usage{
 ord_findings(map_dna_list, map_pep_list)
 }
 \arguments{
-\item{map_dna_list}{}
+\item{map_dna_list}{List with the DNA read hits from \code{\link{map_dna_ref}}}
 
-\item{map_pep_list}{}
+\item{map_pep_list}{List with the AA read hits from \code{\link{map_pep_ref}}}
 }
 \value{
-data.frame
+Ordered data.frame with the counts
 }
 \description{
-Test
+The hits from the DNA and AA mapping are merged and ordered by their combined rank.
 }
 \details{
-Test
+The hits from the DNA and AA mapping are merged and ordered by their combined rank.
 }
 \author{
 Jochen Kruppa

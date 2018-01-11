@@ -2,21 +2,21 @@
 % Please edit documentation in R/utility.R
 \name{TIME}
 \alias{TIME}
-\title{Time function}
+\title{Small wrapper to extract the time from Sys.time()}
 \usage{
 TIME(...)
 }
 \arguments{
-\item{...}{}
+\item{...}{No parameters are needed}
 }
 \value{
-Time in specified format
+System time in %b %d %X
 }
 \description{
-Time function
+Small wrapper to extract the time from Sys.time()
 }
 \details{
-Time function
+Small wrapper to extract the time from Sys.time()
 }
 \author{
 Jochen Kruppa

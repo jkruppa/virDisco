@@ -2,23 +2,26 @@
 % Please edit documentation in R/utility.R
 \name{get_seq_chunks_by_threshold}
 \alias{get_seq_chunks_by_threshold}
-\title{test}
+\title{Divide sequences into chunks}
 \usage{
 get_seq_chunks_by_threshold(seqs, threshold)
 }
 \arguments{
-\item{seqs}{}
+\item{seqs}{DNAStringSet object with sequences}
 
-\item{threshold}{}
+\item{threshold}{maximal summed width of sequences in a chunk}
 }
 \value{
-null
+list() of chunks with the width less the threshold
 }
 \description{
-desc
+The function divides a DNAStringSet into a list of smaller objects given a threshold.
 }
 \details{
-detail
+Sometimes programs can not handle to long sequences. The functions
+allows to build up chunks without cutting sequences. If the
+threshold is exceeded by adding a sequence, the exceeding sequence
+will be put in the next chunk.
 }
 \author{
 Jochen Kruppa

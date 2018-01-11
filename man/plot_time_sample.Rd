@@ -2,21 +2,22 @@
 % Please edit documentation in R/utility.R
 \name{plot_time_sample}
 \alias{plot_time_sample}
-\title{Test}
+\title{Plot the processed files in a dir}
 \usage{
 plot_time_sample(batch_fastq_files)
 }
 \arguments{
-\item{batch_fastq_files}{}
+\item{batch_fastq_files}{A list of files to be parsed}
 }
 \value{
 ggplot object
 }
 \description{
-Test
+This an experimental function, which is very specific
 }
 \details{
-Test
+In the daily workflow, some descriptions must be generated. This
+is one of the functions.
 }
 \author{
 Jochen Kruppa

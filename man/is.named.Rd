@@ -2,21 +2,21 @@
 % Please edit documentation in R/utility.R
 \name{is.named}
 \alias{is.named}
-\title{Test}
+\title{Small tester if a object is named}
 \usage{
 is.named(file)
 }
 \arguments{
-\item{file}{}
+\item{file}{A file string}
 }
 \value{
 logical
 }
 \description{
-Test
+Small tester if a object or file is named
 }
 \details{
-Test
+Small tester if a object or file is named
 }
 \author{
 Jochen Kruppa

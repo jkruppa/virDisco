@@ -2,23 +2,23 @@
 % Please edit documentation in R/utility.R
 \name{collapse_df}
 \alias{collapse_df}
-\title{Test}
+\title{Collapse a matrix by row}
 \usage{
 collapse_df(mat, sep = "_")
 }
 \arguments{
-\item{mat}{}
+\item{mat}{A matrix}
 
-\item{sep}{}
+\item{sep}{A seperator for collapsing}
 }
 \value{
 matrix
 }
 \description{
-Test
+Helper function for collapsing a matrix
 }
 \details{
-Test
+Helper function for collapsing a matrix
 }
 \author{
 Jochen Kruppa

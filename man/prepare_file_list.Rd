@@ -2,21 +2,22 @@
 % Please edit documentation in R/utility.R
 \name{prepare_file_list}
 \alias{prepare_file_list}
-\title{Test}
+\title{Get all the files prepared in a directory}
 \usage{
 prepare_file_list(dir)
 }
 \arguments{
-\item{dir}{}
+\item{dir}{Directonary to be read}
 }
 \value{
 file.list
 }
 \description{
-Test
+A [expired] functionality to get the files from a directonary
 }
 \details{
-Test
+The function is _expired_. Use the function
+\code{\link{get_sub_files}} instead.
 }
 \author{
 Jochen Kruppa

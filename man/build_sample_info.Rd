@@ -2,27 +2,27 @@
 % Please edit documentation in R/utility.R
 \name{build_sample_info}
 \alias{build_sample_info}
-\title{Test}
+\title{Internal function to extract the sample information}
 \usage{
 build_sample_info(sample_in, out_file = NULL, par_list, proc_start_tm)
 }
 \arguments{
-\item{sample_in}{}
+\item{sample_in}{Infile of the sample, see \code{\link{get_sub_files}}.}
 
-\item{out_file}{}
+\item{out_file}{Outfile of the sample, see \code{\link{get_sub_files}}.}
 
-\item{par_list}{}
+\item{par_list}{Parameter list, see \code{\link{set_par_list}}.}
 
-\item{proc_start_tm}{}
+\item{proc_start_tm}{String of the start time of the pipeline [internal]}
 }
 \value{
 data.frame
 }
 \description{
-Test
+A function to collect the sample information from the pipeline run.
 }
 \details{
-Test
+This is a internal function, which collects all information on the sample after the pipeline has run.
 }
 \author{
 Jochen Kruppa
