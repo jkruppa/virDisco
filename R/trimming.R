@@ -1,17 +1,16 @@
-##' Test
+##' Internal trimmomatic call function
 ##'
-##' Test
-##' @title Test 
-##' @param inFile 
-##' @param outFile 
-##' @param leading 
-##' @param trailing 
-##' @param minlength 
-##' @param illuminaclip 
-##' @param log_file 
+##' Internal trimmomatic call function
+##' @title Internal trimmomatic call function
+##' @param inFile Infile of the sample, see \code{\link{get_sub_files}}.
+##' @param outFile Outfile of the sample, see \code{\link{get_sub_files}}.
+##' @param leading See trimmomatic manual
+##' @param trailing See trimmomatic manual 
+##' @param minlength See trimmomatic manual
+##' @param illuminaclip See trimmomatic manual
+##' @param log_file file path to log file
 ##' @return Test
 ##' @author Jochen Kruppa
-##' @export
 fastq_trimmer <- function (inFile, outFile, leading = 10, trailing = 10, minlength = 50, 
                            illuminaclip, log_file) 
     {
@@ -56,7 +55,7 @@ fastq_trimmer <- function (inFile, outFile, leading = 10, trailing = 10, minleng
 ##' Main fastq quality function
 ##'
 ##' Main fastq quality function. Calls the function
-##' fastq_quality_filter and fastq_trimmer. Stores files in a tempDir.
+##' fastq_trimmer [internal]. Stores files in a tempDir. The external function trimmomatic is needed and the file path has to be stored in the program_list, see \code{\link{set_program_list}}.
 ##' @title Main fastq quality function
 ##' @param inFile Fastq infile
 ##' @param illumninaclip Remove the adapter from illumina by TruSeq2

@@ -2,34 +2,34 @@
 % Please edit documentation in R/trimming.R
 \name{fastq_trimmer}
 \alias{fastq_trimmer}
-\title{Test}
+\title{Internal trimmomatic call function}
 \usage{
 fastq_trimmer(inFile, outFile, leading = 10, trailing = 10,
   minlength = 50, illuminaclip, log_file)
 }
 \arguments{
-\item{inFile}{}
+\item{inFile}{Infile of the sample, see \code{\link{get_sub_files}}.}
 
-\item{outFile}{}
+\item{outFile}{Outfile of the sample, see \code{\link{get_sub_files}}.}
 
-\item{leading}{}
+\item{leading}{See trimmomatic manual}
 
-\item{trailing}{}
+\item{trailing}{See trimmomatic manual}
 
-\item{minlength}{}
+\item{minlength}{See trimmomatic manual}
 
-\item{illuminaclip}{}
+\item{illuminaclip}{See trimmomatic manual}
 
-\item{log_file}{}
+\item{log_file}{file path to log file}
 }
 \value{
 Test
 }
 \description{
-Test
+Internal trimmomatic call function
 }
 \details{
-Test
+Internal trimmomatic call function
 }
 \author{
 Jochen Kruppa

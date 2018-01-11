@@ -30,7 +30,7 @@ Main fastq quality function
 }
 \details{
 Main fastq quality function. Calls the function
-fastq_quality_filter and fastq_trimmer. Stores files in a tempDir.
+fastq_trimmer [internal]. Stores files in a tempDir. The external function trimmomatic is needed and the file path has to be stored in the program_list, see \code{\link{set_program_list}}.
 }
 \author{
 Jochen Kruppa
