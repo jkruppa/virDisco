@@ -1,11 +1,15 @@
-##' Test
+##' Control function for the processing of many fastq samples of one folder
 ##'
-##' Test
-##' @title Test 
-##' @param batch_in_dir 
-##' @param batch_out_dir 
-##' @param par_list 
-##' @param run_samples 
+##' This is a main control function to get all the fastq files of one
+##' folder processed. The output is written in a other folder
+##' separated by the file names
+##' @title Function to run the pipeline on one folder
+##' @param batch_in_dir Path to the folder with the fastq files
+##' @param batch_out_dir Path to the ouput folder
+##' @param par_list See \code{link{set_par_list}} for the possible
+##'   parameters
+##' @param run_samples Character vector. Should special samples be run
+##'   and not all? [default = NULL]
 ##' @return NULL
 ##' @author Jochen Kruppa
 ##' @export

@@ -2,26 +2,27 @@
 % Please edit documentation in R/sqlite.R
 \name{setup_aa_info_sample_sqlite}
 \alias{setup_aa_info_sample_sqlite}
-\title{Test}
+\title{Function to build up the aa_info_sample_sqlite database}
 \usage{
 setup_aa_info_sample_sqlite(prot_id, genebank_id, prot_start, prot_end, db_file)
 }
 \arguments{
-\item{prot_id}{}
+\item{prot_id}{Protein ID of the amino acids}
 
-\item{genebank_id}{}
+\item{genebank_id}{Genebank ID connected to the protein IDs}
 
-\item{prot_start}{}
+\item{prot_start}{Protein start position on the sequence}
 
-\item{prot_end}{}
+\item{prot_end}{Protein end position on the sequence}
 
-\item{db_file}{}
+\item{db_file}{File path to save the sqlite3 database}
 }
 \description{
-Test
+The function generates the SQlite databse needed for the plotting.
 }
 \details{
-Test
+The function generates the SQlite databse needed for the plotting
+of the hit seqeunces.
 }
 \author{
 Jochen Kruppa

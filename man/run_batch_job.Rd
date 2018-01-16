@@ -2,24 +2,25 @@
 % Please edit documentation in R/run_batch_job.R
 \name{run_batch_job}
 \alias{run_batch_job}
-\title{Test}
+\title{Function to run the pipeline on one folder}
 \usage{
 run_batch_job(batch_in_dir, batch_out_dir, par_list, run_samples = NULL)
 }
 \arguments{
-\item{batch_in_dir}{}
+\item{batch_in_dir}{Path to the folder with the fastq files}
 
-\item{batch_out_dir}{}
+\item{batch_out_dir}{Path to the ouput folder}
 
-\item{par_list}{}
-
-\item{run_samples}{}
+\item{run_samples}{Character vector. Should special samples be run
+and not all? [default = NULL]}
 }
 \description{
-Test
+Control function for the processing of many fastq samples of one folder
 }
 \details{
-Test
+This is a main control function to get all the fastq files of one
+folder processed. The output is written in a other folder
+separated by the file names
 }
 \author{
 Jochen Kruppa

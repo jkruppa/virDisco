@@ -1,9 +1,10 @@
-##' desc
+##' The function generates the SQlite databse needed for the plotting.
 ##'
-##' detail
-##' @title title 
-##' @param ncbi_aa_seq 
-##' @param db_file 
+##' The function generates the SQlite databse needed for the plotting
+##' of the hit seqeunces.
+##' @title Function to build up the aa_info_sqlite database
+##' @param ncbi_aa_seq A AAStringSet containing amino acids
+##' @param db_file File path to the sqlite3 database
 ##' @return Null
 ##' @author Jochen Kruppa
 ##' @export
@@ -35,19 +36,20 @@ setup_aa_info_sqlite <- function(ncbi_aa_seq, db_file){
 
 
 
-##' Test
+##' The function generates the SQlite databse needed for the plotting.
 ##'
-##' Test
-##' @title Test 
-##' @param genebank_id 
-##' @param length 
-##' @param description 
-##' @param tax_id 
-##' @param mol_type 
-##' @param strain 
-##' @param accession 
-##' @param organism 
-##' @param db_file 
+##' The function generates the SQlite databse needed for the plotting
+##' of the hit seqeunces.
+##' @title Function to build up the species_info_sqlite database
+##' @param genebank_id Vector of genebank_ids
+##' @param length Length vector of the sequence
+##' @param description Description vector of the genebank_ids
+##' @param tax_id NCBI tax_id connected with the genebank_ids
+##' @param mol_type Molecular type
+##' @param strain Strain
+##' @param accession Accession number
+##' @param organism Organsim
+##' @param db_file File path to save the sqlite3 database
 ##' @return NULL
 ##' @author Jochen Kruppa
 ##' @export
@@ -75,15 +77,16 @@ setup_species_info_sqlite <- function(genebank_id,
   species_info <- copy_to(species_info_db, species_info_df, temporary = FALSE)
 }
 
-##' Test
+##' The function generates the SQlite databse needed for the plotting.
 ##'
-##' Test
-##' @title Test 
-##' @param prot_id 
-##' @param genebank_id 
-##' @param prot_start 
-##' @param prot_end 
-##' @param db_file 
+##' The function generates the SQlite databse needed for the plotting
+##' of the hit seqeunces.
+##' @title Function to build up the aa_info_sample_sqlite database
+##' @param prot_id Protein ID of the amino acids
+##' @param genebank_id Genebank ID connected to the protein IDs
+##' @param prot_start Protein start position on the sequence
+##' @param prot_end Protein end position on the sequence
+##' @param db_file File path to save the sqlite3 database
 ##' @return NULL
 ##' @author Jochen Kruppa
 ##' @export

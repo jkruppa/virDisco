@@ -2,23 +2,24 @@
 % Please edit documentation in R/sqlite.R
 \name{setup_aa_info_sqlite}
 \alias{setup_aa_info_sqlite}
-\title{title}
+\title{Function to build up the aa_info_sqlite database}
 \usage{
 setup_aa_info_sqlite(ncbi_aa_seq, db_file)
 }
 \arguments{
-\item{ncbi_aa_seq}{}
+\item{ncbi_aa_seq}{A AAStringSet containing amino acids}
 
-\item{db_file}{}
+\item{db_file}{File path to the sqlite3 database}
 }
 \value{
 Null
 }
 \description{
-desc
+The function generates the SQlite databse needed for the plotting.
 }
 \details{
-detail
+The function generates the SQlite databse needed for the plotting
+of the hit seqeunces.
 }
 \author{
 Jochen Kruppa

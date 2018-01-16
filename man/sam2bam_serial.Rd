@@ -2,22 +2,24 @@
 % Please edit documentation in R/sam2bam.R
 \name{sam2bam_serial}
 \alias{sam2bam_serial}
-\title{Test}
+\title{Wrapper function for samtools}
 \usage{
 sam2bam_serial(sam_files, keep = FALSE, index_sort = FALSE)
 }
 \arguments{
-\item{sam_files}{}
+\item{sam_files}{A vector of sam_files to be converted}
 
-\item{keep}{}
+\item{keep}{Should the sam files be keeped? [default = FALSE]}
 
-\item{index_sort}{}
+\item{index_sort}{Should the bam file sbe sorted? [default =
+FALSE]}
 }
 \description{
-Test
+A serial function to convert sam files from the mapping into bam files.
 }
 \details{
-Test
+This is not a standalone function. The samtools path is needed in
+the program_list().
 }
 \author{
 Jochen Kruppa

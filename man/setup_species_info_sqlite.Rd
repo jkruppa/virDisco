@@ -2,35 +2,36 @@
 % Please edit documentation in R/sqlite.R
 \name{setup_species_info_sqlite}
 \alias{setup_species_info_sqlite}
-\title{Test}
+\title{Function to build up the species_info_sqlite database}
 \usage{
 setup_species_info_sqlite(genebank_id, length, description, tax_id = NA,
   mol_type = NA, strain = NA, accession = NA, organism = NA, db_file)
 }
 \arguments{
-\item{genebank_id}{}
+\item{genebank_id}{Vector of genebank_ids}
 
-\item{length}{}
+\item{length}{Length vector of the sequence}
 
-\item{description}{}
+\item{description}{Description vector of the genebank_ids}
 
-\item{tax_id}{}
+\item{tax_id}{NCBI tax_id connected with the genebank_ids}
 
-\item{mol_type}{}
+\item{mol_type}{Molecular type}
 
-\item{strain}{}
+\item{strain}{Strain}
 
-\item{accession}{}
+\item{accession}{Accession number}
 
-\item{organism}{}
+\item{organism}{Organsim}
 
-\item{db_file}{}
+\item{db_file}{File path to save the sqlite3 database}
 }
 \description{
-Test
+The function generates the SQlite databse needed for the plotting.
 }
 \details{
-Test
+The function generates the SQlite databse needed for the plotting
+of the hit seqeunces.
 }
 \author{
 Jochen Kruppa
