@@ -1,15 +1,21 @@
-##' descr
+##' The function shuffles a given sequence and keeps a given k
+##' distribution
 ##'
-##' details
-##' @title title
-##' @param inFile 
-##' @param outFile 
-##' @param k 
-##' @param n 
-##' @param clean 
-##' @param tmpDir 
-##' @param fasta_formatter 
-##' @param fasta_uShuffle 
+##' The function calls uShuffle, which can only handle fasta files
+##' without a linebreak. Therefore, the program formatter removes all
+##' linebreaks from the fasta file beforehand. Than uShuffle shuffles
+##' the sequence by keeping a distrubtion of kmer's given k.
+##' @title Shuffle a sequence with a kept kmer distribution
+##' @param inFile File path to the fasta file to be shuffled
+##' @param outFile File path to the out dir
+##' @param k Kept k for the shuffling (k < 25)
+##' @param n Number of produced shuffle sequences per sequence
+##'   [default = 1]
+##' @param clean Should everthing removed [default = TRUE]
+##' @param tmpDir Where to save temp files
+##' @param fasta_formatter File path to the fasta formatter
+##'   executables
+##' @param fasta_uShuffle File path to the fasta uShuffle executables
 ##' @return Null
 ##' @author Jochen Kruppa
 ##' @export

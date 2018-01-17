@@ -21,6 +21,13 @@
 ##' @return
 ##' A S4 class with the following slots [default values]
 ##' \describe{
+##' \item{num_decoy_reads = "numeric"}{number of generated decoy reads, if decoy is true [500]}
+##' \item{min_num_reads = "numeric"}{mimimum number of reads per reference [50]} 
+##' \item{min_coverage = "numeric"}{mimimum coverage of the reference by reads to keep the hit [0.05]} 
+##' \item{map_dna_in = "list"}{internal file storage for dna mapping} 
+##' \item{map_dna_stats = "list"}{internal list for DNA mapping statistics}  
+##' \item{map_pep_in = "list"}{internal file storage for amino mapping}  
+##' \item{decoy = "logical"}{should the decoy approach be run [false]}
 ##' \item{tax = "logical"}{should the tax trees are generated [true]}
 ##' \item{qc = "logical"}{should the quality control by trimmomatic be run [true]}
 ##' \item{clean = "logical"}{should intermediate files be deleted [true]} 
@@ -74,22 +81,24 @@ set_par_list <- function(index_genome_dir,
   }
 }
 
-##' Test
+##' Many programs are needed for the run of virDisco. Here the program
+##' executables are defined.
 ##'
-##' Test
-##' @title Test 
-##' @param bowtie_dir 
-##' @param pauda_dir 
-##' @param star_dir 
-##' @param bowtie_build_dir 
-##' @param pauda_build_dir 
-##' @param star_build_dir 
-##' @param samtools_dir 
-##' @param trimmomatic_dir 
-##' @param pandaseq_dir 
-##' @param seqtk_dir 
-##' @param blastn_dir 
-##' @param ete3_dir 
+##' See \url{https://github.com/jkruppa/virDisco} for a list of
+##' program sources.
+##' @title Path to the external program executables
+##' @param bowtie_dir Path to Bowtie2 DNA mapper
+##' @param pauda_dir Path to PAUDA - a poor man's BLASTX
+##' @param star_dir Path to Star mapper [optional]
+##' @param bowtie_build_dir Path to the Bowtie2 build dir
+##' @param pauda_build_dir Path to the Bowtie2 build dir for PAUDA
+##' @param star_build_dir Path to the Star build dir
+##' @param samtools_dir Path to Samtools
+##' @param trimmomatic_dir Path to Trimmomatic
+##' @param pandaseq_dir Path to PANDAseq
+##' @param seqtk_dir Path to Seqtk
+##' @param blastn_dir Path to the BLAST executables
+##' @param ete3_dir Path to the ETE Toolkit
 ##' @return program_list
 ##' @author Jochen Kruppa
 ##' @export

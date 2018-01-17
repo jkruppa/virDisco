@@ -11,6 +11,9 @@ run_batch_job(batch_in_dir, batch_out_dir, par_list, run_samples = NULL)
 
 \item{batch_out_dir}{Path to the ouput folder}
 
+\item{par_list}{See \code{link{set_par_list}} for the possible
+parameters}
+
 \item{run_samples}{Character vector. Should special samples be run
 and not all? [default = NULL]}
 }

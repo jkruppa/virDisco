@@ -2,45 +2,47 @@
 % Please edit documentation in R/oop_functions.R
 \name{set_program_list}
 \alias{set_program_list}
-\title{Test}
+\title{Path to the external program executables}
 \usage{
 set_program_list(bowtie_dir, pauda_dir, star_dir, bowtie_build_dir,
   pauda_build_dir, samtools_dir, trimmomatic_dir, pandaseq_dir, seqtk_dir,
   blastn_dir, ete3_dir)
 }
 \arguments{
-\item{bowtie_dir}{}
+\item{bowtie_dir}{Path to Bowtie2 DNA mapper}
 
-\item{pauda_dir}{}
+\item{pauda_dir}{Path to PAUDA - a poor man's BLASTX}
 
-\item{star_dir}{}
+\item{star_dir}{Path to Star mapper [optional]}
 
-\item{bowtie_build_dir}{}
+\item{bowtie_build_dir}{Path to the Bowtie2 build dir}
 
-\item{pauda_build_dir}{}
+\item{pauda_build_dir}{Path to the Bowtie2 build dir for PAUDA}
 
-\item{samtools_dir}{}
+\item{samtools_dir}{Path to Samtools}
 
-\item{trimmomatic_dir}{}
+\item{trimmomatic_dir}{Path to Trimmomatic}
 
-\item{pandaseq_dir}{}
+\item{pandaseq_dir}{Path to PANDAseq}
 
-\item{seqtk_dir}{}
+\item{seqtk_dir}{Path to Seqtk}
 
-\item{blastn_dir}{}
+\item{blastn_dir}{Path to the BLAST executables}
 
-\item{ete3_dir}{}
+\item{ete3_dir}{Path to the ETE Toolkit}
 
-\item{star_build_dir}{}
+\item{star_build_dir}{Path to the Star build dir}
 }
 \value{
 program_list
 }
 \description{
-Test
+Many programs are needed for the run of virDisco. Here the program
+executables are defined.
 }
 \details{
-Test
+See \url{https://github.com/jkruppa/virDisco} for a list of
+program sources.
 }
 \author{
 Jochen Kruppa

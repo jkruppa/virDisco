@@ -2,36 +2,42 @@
 % Please edit documentation in R/random_dna_seq.R
 \name{random_dna_seq}
 \alias{random_dna_seq}
-\title{title}
+\title{Shuffle a sequence with a kept kmer distribution}
 \usage{
 random_dna_seq(inFile, outFile, k, n = 1, clean = TRUE, tmpDir,
   fasta_formatter = NULL, fasta_uShuffle = NULL)
 }
 \arguments{
-\item{inFile}{}
+\item{inFile}{File path to the fasta file to be shuffled}
 
-\item{outFile}{}
+\item{outFile}{File path to the out dir}
 
-\item{k}{}
+\item{k}{Kept k for the shuffling (k < 25)}
 
-\item{n}{}
+\item{n}{Number of produced shuffle sequences per sequence
+[default = 1]}
 
-\item{clean}{}
+\item{clean}{Should everthing removed [default = TRUE]}
 
-\item{tmpDir}{}
+\item{tmpDir}{Where to save temp files}
 
-\item{fasta_formatter}{}
+\item{fasta_formatter}{File path to the fasta formatter
+executables}
 
-\item{fasta_uShuffle}{}
+\item{fasta_uShuffle}{File path to the fasta uShuffle executables}
 }
 \value{
 Null
 }
 \description{
-descr
+The function shuffles a given sequence and keeps a given k
+distribution
 }
 \details{
-details
+The function calls uShuffle, which can only handle fasta files
+without a linebreak. Therefore, the program formatter removes all
+linebreaks from the fasta file beforehand. Than uShuffle shuffles
+the sequence by keeping a distrubtion of kmer's given k.
 }
 \author{
 Jochen Kruppa

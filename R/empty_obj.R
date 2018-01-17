@@ -1,8 +1,8 @@
-##' Test
+##' Internal empty object for pepe mapping
 ##'
-##' Test
-##' @title Test
-##' @param ... 
+##' Internal empty object for pepe mapping
+##' @title Internal empty object for pepe mapping
+##' @param ... No parameters needed
 ##' @return data.frame
 ##' @author Jochen Kruppa
 ##' @export

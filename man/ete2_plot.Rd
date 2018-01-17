@@ -2,24 +2,26 @@
 % Please edit documentation in R/ete3.R
 \name{ete2_plot}
 \alias{ete2_plot}
-\title{Test}
+\title{Control function for the ete3 phylogenetic trees}
 \usage{
 ete2_plot(tax_ids, out_file, pdf_file, clean = FALSE)
 }
 \arguments{
-\item{tax_ids}{}
+\item{tax_ids}{Tax ids of the hits}
 
-\item{out_file}{}
+\item{out_file}{File path for saving the results}
 
-\item{pdf_file}{}
+\item{pdf_file}{Final pdf file path}
 
-\item{clean}{}
+\item{clean}{Should everthing be cleaned [default = FALSE]}
 }
 \description{
-Test
+Control function for the ete3 phylogenetic trees. Depends on many
+other external functions.
 }
 \details{
-Test
+This function might not run by its own. Beside the ete3-toolkit
+some xvfb-run issues have to be considered on a linux cluster.
 }
 \author{
 Jochen Kruppa

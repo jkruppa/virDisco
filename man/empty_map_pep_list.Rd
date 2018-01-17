@@ -2,21 +2,21 @@
 % Please edit documentation in R/empty_obj.R
 \name{empty_map_pep_list}
 \alias{empty_map_pep_list}
-\title{Test}
+\title{Internal empty object for pepe mapping}
 \usage{
 empty_map_pep_list(...)
 }
 \arguments{
-\item{...}{}
+\item{...}{No parameters needed}
 }
 \value{
 data.frame
 }
 \description{
-Test
+Internal empty object for pepe mapping
 }
 \details{
-Test
+Internal empty object for pepe mapping
 }
 \author{
 Jochen Kruppa

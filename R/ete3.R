@@ -1,11 +1,13 @@
-##' Test
+##' Control function for the ete3 phylogenetic trees. Depends on many
+##' other external functions.
 ##'
-##' Test
-##' @title Test 
-##' @param tax_ids 
-##' @param out_file 
-##' @param pdf_file 
-##' @param clean 
+##' This function might not run by its own. Beside the ete3-toolkit
+##' some xvfb-run issues have to be considered on a linux cluster.
+##' @title Control function for the ete3 phylogenetic trees
+##' @param tax_ids Tax ids of the hits
+##' @param out_file File path for saving the results
+##' @param pdf_file Final pdf file path
+##' @param clean Should everthing be cleaned [default = FALSE]
 ##' @return NULL
 ##' @author Jochen Kruppa
 ##' @export
@@ -36,4 +38,3 @@ ete2_plot <- function(tax_ids, out_file, pdf_file, clean = FALSE){
   ## clean everything
   if(clean) unlink(list.files(dirname(out_file), ".tax$", full.names = TRUE))
 }
-## ------------------------------------------------------------

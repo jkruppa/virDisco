@@ -32,6 +32,13 @@ setup}
 \value{
 A S4 class with the following slots [default values]
 \describe{
+\item{num_decoy_reads = "numeric"}{number of generated decoy reads, if decoy is true [500]}
+\item{min_num_reads = "numeric"}{mimimum number of reads per reference [50]} 
+\item{min_coverage = "numeric"}{mimimum coverage of the reference by reads to keep the hit [0.05]} 
+\item{map_dna_in = "list"}{internal file storage for dna mapping} 
+\item{map_dna_stats = "list"}{internal list for DNA mapping statistics}  
+\item{map_pep_in = "list"}{internal file storage for amino mapping}  
+\item{decoy = "logical"}{should the decoy approach be run [false]}
 \item{tax = "logical"}{should the tax trees are generated [true]}
 \item{qc = "logical"}{should the quality control by trimmomatic be run [true]}
 \item{clean = "logical"}{should intermediate files be deleted [true]} 
