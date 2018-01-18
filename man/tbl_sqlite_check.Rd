@@ -2,21 +2,21 @@
 % Please edit documentation in R/methods.R
 \name{tbl_sqlite_check}
 \alias{tbl_sqlite_check}
-\title{Test}
+\title{Test function to check the sqlite2 databases for consistency}
 \usage{
 tbl_sqlite_check(object)
 }
 \arguments{
-\item{object}{}
+\item{object}{par_list object}
 }
 \value{
 boolean
 }
 \description{
-Desc
+A generic function to check the par_list entries
 }
 \details{
-Detail
+A generic function to check the par_list entries
 }
 \author{
 Jochen Kruppa

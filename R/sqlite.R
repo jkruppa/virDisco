@@ -1,7 +1,7 @@
 ##' The function generates the SQlite databse needed for the plotting.
 ##'
 ##' The function generates the SQlite databse needed for the plotting
-##' of the hit seqeunces.
+##' of the hit sequences.
 ##' @title Function to build up the aa_info_sqlite database
 ##' @param ncbi_aa_seq A AAStringSet containing amino acids
 ##' @param db_file File path to the sqlite3 database

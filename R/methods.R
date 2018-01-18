@@ -159,11 +159,11 @@ setMethod(
     }
   }
 )
-##' Desc
+##' A generic function to check the par_list entries
 ##'
-##' Detail
-##' @title Test 
-##' @param object 
+##' A generic function to check the par_list entries
+##' @title Test function to check the sqlite2 databases for consistency
+##' @param object par_list object
 ##' @return boolean
 ##' @author Jochen Kruppa
 ##' @export

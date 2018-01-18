@@ -19,7 +19,7 @@ The function generates the SQlite databse needed for the plotting.
 }
 \details{
 The function generates the SQlite databse needed for the plotting
-of the hit seqeunces.
+of the hit sequences.
 }
 \author{
 Jochen Kruppa
