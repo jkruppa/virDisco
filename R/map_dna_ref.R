@@ -1,13 +1,21 @@
-##' Test
-##'
-##' Test
-##' @title Test
-##' @param infile 
-##' @param outfile 
-##' @param par_list 
-##' @param min_hit 
-##' @param all 
-##' @return data.frame
+##' Runs the DNA mapping by Bowtie or Star
+##' 
+##' The function calls the external mapper Bowtie2 or Star for the
+##' mapping. The resulting sam file is afterwards transformed to a bam
+##' file by samtools. The results are returned as an alignment data
+##' frame used later in the plot functionality.
+##' @title DNA mapping function
+##' @param infile File path to the fastq file, better controlled by
+##'   parameter given by the par_list(), see
+##'   \code{\link{set_par_list}}
+##' @param outfile File path to the results dir
+##' @param par_list Parameter given by the par_list(), see
+##'   \code{\link{set_par_list}}
+##' @param min_hit Minimum number of reads hitting the reference
+##'   [default = 5]
+##' @param all Should the reads mapped to all possible positions
+##'   [default = FALSE, option of Bowtie2]
+##' @return dna_alignment_df data.frame
 ##' @author Jochen Kruppa
 ##' @export
 map_dna_ref <- function(infile, outfile, par_list, min_hit = 5, all = FALSE){

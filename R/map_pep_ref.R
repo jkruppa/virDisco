@@ -1,11 +1,18 @@
-##' Test
+##' This function calls PANDAseq and PAUDA for mapping the translated DNA reads
 ##'
-##' Test
-##' @title Test 
-##' @param infile 
-##' @param outfile 
-##' @param par_list 
-##' @return data.frame
+##' The function is the mapping control function for the AA
+##' mapping. Most importantly, paired reads are merged by PAUDAseq
+##' first. The mapping and translation of the sequence reads to amino
+##' reads is done by PAUDA. Finally, the blastx output is parsed by
+##' \code{\link{get_pauda_hits}}.
+##' @title Amino mapping function
+##' @param infile File path to the fastq file, better controlled by
+##'   parameter given by the par_list(), see
+##'   \code{\link{set_par_list}}
+##' @param outfile File path to the results dir
+##' @param par_list Parameter given by the par_list(), see
+##'   \code{\link{set_par_list}}
+##' @return pep_alignment_df data.frame
 ##' @author Jochen Kruppa
 ##' @export
 map_pep_ref <- function(infile, outfile, par_list){

@@ -2,29 +2,37 @@
 % Please edit documentation in R/map_dna_ref.R
 \name{map_dna_ref}
 \alias{map_dna_ref}
-\title{Test}
+\title{DNA mapping function}
 \usage{
 map_dna_ref(infile, outfile, par_list, min_hit = 5, all = FALSE)
 }
 \arguments{
-\item{infile}{}
+\item{infile}{File path to the fastq file, better controlled by
+parameter given by the par_list(), see
+\code{\link{set_par_list}}}
 
-\item{outfile}{}
+\item{outfile}{File path to the results dir}
 
-\item{par_list}{}
+\item{par_list}{Parameter given by the par_list(), see
+\code{\link{set_par_list}}}
 
-\item{min_hit}{}
+\item{min_hit}{Minimum number of reads hitting the reference
+[default = 5]}
 
-\item{all}{}
+\item{all}{Should the reads mapped to all possible positions
+[default = FALSE, option of Bowtie2]}
 }
 \value{
-data.frame
+dna_alignment_df data.frame
 }
 \description{
-Test
+Runs the DNA mapping by Bowtie or Star
 }
 \details{
-Test
+The function calls the external mapper Bowtie2 or Star for the
+mapping. The resulting sam file is afterwards transformed to a bam
+file by samtools. The results are returned as an alignment data
+frame used later in the plot functionality.
 }
 \author{
 Jochen Kruppa

@@ -1,13 +1,13 @@
-##' Test
+##' Wrapper function to build up the Bowtie2 command for the the system() call
 ##'
-##' Test
-##' @title Test 
-##' @param inFile 
-##' @param samOutFile 
-##' @param referenceDir 
-##' @param method 
-##' @param p 
-##' @param all 
+##' This function is running internally in the \code{\link{map_dna_ref}}.
+##' @title Wrapper to build up the Bowtie2 command
+##' @param inFile File path to the in file(s)
+##' @param samOutFile Path to the sam output file
+##' @param referenceDir Path to the reference dir
+##' @param method Should ene-to-end or lcal mapping be used?
+##' @param p Number of used cores
+##' @param all Shoul the reads mapped to all possible positions on the reference [default = FALSE]
 ##' @return character
 ##' @author Jochen Kruppa
 ##' @export

@@ -1,9 +1,12 @@
-##' Test
+##' The function extracts the mapping information of PAUDA
 ##'
-##' Test
-##' @title Test
-##' @param file 
-##' @param par_list 
+##' Internal function of \code{\link{map_pep_ref}} to extract the
+##' information of the blastx output of the amino acid mapping by
+##' PAUDA.
+##' @title Internal parse function for PAUDA
+##' @param file blastx input file from PAUDA output
+##' @param par_list Parameter given by the par_list(), see
+##'   \code{\link{set_par_list}}
 ##' @return data.frame
 ##' @author Jochen Kruppa
 ##' @export

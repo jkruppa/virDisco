@@ -2,23 +2,26 @@
 % Please edit documentation in R/get_pauda_hits.R
 \name{get_pauda_hits}
 \alias{get_pauda_hits}
-\title{Test}
+\title{Internal parse function for PAUDA}
 \usage{
 get_pauda_hits(file, par_list)
 }
 \arguments{
-\item{file}{}
+\item{file}{blastx input file from PAUDA output}
 
-\item{par_list}{}
+\item{par_list}{Parameter given by the par_list(), see
+\code{\link{set_par_list}}}
 }
 \value{
 data.frame
 }
 \description{
-Test
+The function extracts the mapping information of PAUDA
 }
 \details{
-Test
+Internal function of \code{\link{map_pep_ref}} to extract the
+information of the blastx output of the amino acid mapping by
+PAUDA.
 }
 \author{
 Jochen Kruppa

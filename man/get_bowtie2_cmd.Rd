@@ -2,32 +2,32 @@
 % Please edit documentation in R/get_bowtie2_cmd.R
 \name{get_bowtie2_cmd}
 \alias{get_bowtie2_cmd}
-\title{Test}
+\title{Wrapper to build up the Bowtie2 command}
 \usage{
 get_bowtie2_cmd(inFile, samOutFile, referenceDir, method, p = 32,
   all = FALSE)
 }
 \arguments{
-\item{inFile}{}
+\item{inFile}{File path to the in file(s)}
 
-\item{samOutFile}{}
+\item{samOutFile}{Path to the sam output file}
 
-\item{referenceDir}{}
+\item{referenceDir}{Path to the reference dir}
 
-\item{method}{}
+\item{method}{Should ene-to-end or lcal mapping be used?}
 
-\item{p}{}
+\item{p}{Number of used cores}
 
-\item{all}{}
+\item{all}{Shoul the reads mapped to all possible positions on the reference [default = FALSE]}
 }
 \value{
 character
 }
 \description{
-Test
+Wrapper function to build up the Bowtie2 command for the the system() call
 }
 \details{
-Test
+This function is running internally in the \code{\link{map_dna_ref}}.
 }
 \author{
 Jochen Kruppa
