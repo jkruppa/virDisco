@@ -1,17 +1,19 @@
-##' Test
+##' The function builds a index of a small subset of sequences
 ##'
-##' Test
-##' @title Test 
-##' @param dna_set 
-##' @param aa_set 
-##' @param index_dir 
-##' @param index_name 
-##' @param bowtie 
-##' @param pauda 
-##' @param star 
-##' @param force 
-##' @param tmp_dir 
-##' @return file.list 
+##' This functions calls Bowtie2, PAUDA and Star to build the DNA
+##' index. The file system is set by the function. As return the path
+##' to index files will be given.
+##' @title Build a index for DNA and AA mapper
+##' @param dna_set A DNAStringSet to be processed
+##' @param aa_set A AAStringSet to be porcessed
+##' @param index_dir The dir of the index (empty)
+##' @param index_name The name of the index
+##' @param bowtie Should the Bowtie2 index be build [default = TRUE]
+##' @param pauda Should the Pauda index be build [default = TRUE]
+##' @param star Should the Star index be build [default = FALSE]
+##' @param force Should everything be overwritten [default = FALSE]
+##' @param tmp_dir File path to the tmp dir
+##' @return file.list
 ##' @author Jochen Kruppa
 ##' @export
 build_index <- function(dna_set, aa_set,

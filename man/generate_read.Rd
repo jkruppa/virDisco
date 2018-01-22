@@ -2,26 +2,28 @@
 % Please edit documentation in R/generate_decoy_reads.R
 \name{generate_read}
 \alias{generate_read}
-\title{gb}
+\title{Generates a _single_ read from a sequence}
 \usage{
-generate_read(decoy_seq, files, paired, read_length, read_gap)
+generate_read(decoy_seq, files, paired = TRUE, read_length, read_gap = 50)
 }
 \arguments{
-\item{decoy_seq}{}
+\item{decoy_seq}{Sequence as DNAStringSet}
 
-\item{files}{}
+\item{files}{File path to the output file(s)}
 
-\item{paired}{}
+\item{paired}{Logical, should the reads be paired? [default =
+TRUE]}
 
-\item{read_length}{}
+\item{read_length}{Numeric, read length}
 
-\item{read_gap}{}
+\item{read_gap}{If paired, how large should be the gap?}
 }
 \description{
-Test desc
+A internal function of \code{\link{generate_decoy_reads}}. Linux only.
 }
 \details{
-Test detail
+This function call generates a set or one sequence read of a given
+length from a inital sequence.
 }
 \author{
 Jochen Kruppa

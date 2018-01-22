@@ -2,29 +2,38 @@
 % Please edit documentation in R/generate_decoy_reads.R
 \name{generate_decoy_reads}
 \alias{generate_decoy_reads}
-\title{test}
+\title{Generates (decoy) reads from a sequence}
 \usage{
 generate_decoy_reads(decoy_seq, paired = TRUE, read_num = 10000,
-  read_length = 50, read_gap = 50, split = 10)
+  read_length = 50, read_gap = 50, split = 10, par_list)
 }
 \arguments{
-\item{decoy_seq}{}
+\item{decoy_seq}{Sequence to draw the reads from as DNAStringSet}
 
-\item{paired}{}
+\item{paired}{Should the reads be paired? [default = TRUE]}
 
-\item{read_num}{}
+\item{read_num}{How many reads should be generated? [default =
+10000]}
 
-\item{read_length}{}
+\item{read_length}{How long should the reads be? [default = 50]}
 
-\item{read_gap}{}
+\item{read_gap}{How large should be the gap between paired reads?
+[default = 50]}
 
-\item{split}{}
+\item{split}{How many processes should be run in parallel?
+[default = 10]}
+
+\item{par_list}{Parameter given by the par_list(), see
+\code{\link{set_par_list}}}
 }
 \description{
-est desc
+The function draws randomly reads from a sequence. Linux only due
+to cat commands.
 }
 \details{
-test detail
+The function draws in parallel from a inital seqeunce a given
+nuber of paired reads. The reads are saved temporal in the tmp
+folder definied by \code{\link{set_par_list}}.
 }
 \author{
 Jochen Kruppa

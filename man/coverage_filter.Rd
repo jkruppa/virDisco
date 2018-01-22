@@ -2,27 +2,28 @@
 % Please edit documentation in R/coverage_filter.R
 \name{coverage_filter}
 \alias{coverage_filter}
-\title{Test}
+\title{Filter the hits by the coverage}
 \usage{
 coverage_filter(hit_id, map_dna_list, par_list, out_file)
 }
 \arguments{
-\item{hit_id}{}
+\item{hit_id}{Genebank IDs of the hits}
 
-\item{map_dna_list}{}
+\item{par_list}{Parameter given by the par_list(), see
+\code{\link{set_par_list}}}
 
-\item{par_list}{}
-
-\item{out_file}{}
+\item{out_file}{File path to the results dir}
 }
 \value{
 tibble
 }
 \description{
-Desc
+Some of the hits might have a to low coverage, the function
+filters the reads given the parameters by the par_list.
 }
 \details{
-Detail
+To reduce the overall false positive hits, the function filters to
+low coverage references and references with a low mapping rate.
 }
 \author{
 Jochen Kruppa

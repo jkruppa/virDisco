@@ -26,7 +26,7 @@ additonal parameters set in the par_list by the function
 }
 \examples{
 
-## This function needs dpendencies and file handling, see \\url{https://github.com/jkruppa/viralDetectTools} for a comprehensive tutorial.
+## This function needs dendencies and file handling, see \\url{https://github.com/jkruppa/virDisco} for a comprehensive tutorial.
 }
 \author{
 Jochen Kruppa

@@ -1,11 +1,14 @@
-##' Desc
+##' Some of the hits might have a to low coverage, the function
+##' filters the reads given the parameters by the par_list.
 ##'
-##' Detail
-##' @title Test 
-##' @param hit_id 
-##' @param map_dna_list 
-##' @param par_list 
-##' @param out_file 
+##' To reduce the overall false positive hits, the function filters to
+##' low coverage references and references with a low mapping rate.
+##' @title Filter the hits by the coverage
+##' @param hit_id Genebank IDs of the hits
+##' @param map_dna_list Output of \code{\link{map_dna_ref}
+##' @param par_list Parameter given by the par_list(), see
+##'   \code{\link{set_par_list}}
+##' @param out_file File path to the results dir
 ##' @return tibble
 ##' @author Jochen Kruppa
 ##' @export

@@ -1,13 +1,21 @@
-##' est desc
+##' The function draws randomly reads from a sequence. Linux only due
+##' to cat commands.
 ##'
-##' test detail
-##' @title test
-##' @param decoy_seq 
-##' @param paired 
-##' @param read_num 
-##' @param read_length 
-##' @param read_gap 
-##' @param split 
+##' The function draws in parallel from a inital seqeunce a given
+##' nuber of paired reads. The reads are saved temporal in the tmp
+##' folder definied by \code{\link{set_par_list}}.
+##' @title Generates (decoy) reads from a sequence
+##' @param decoy_seq Sequence to draw the reads from as DNAStringSet
+##' @param paired Should the reads be paired? [default = TRUE]
+##' @param read_num How many reads should be generated? [default =
+##'   10000]
+##' @param read_length How long should the reads be? [default = 50]
+##' @param read_gap How large should be the gap between paired reads?
+##'   [default = 50]
+##' @param split How many processes should be run in parallel?
+##'   [default = 10]
+##' @param par_list Parameter given by the par_list(), see
+##'   \code{\link{set_par_list}}
 ##' @return NULL
 ##' @author Jochen Kruppa
 ##' @export
@@ -16,7 +24,8 @@ generate_decoy_reads <- function(decoy_seq,
                                  read_num = 10000,
                                  read_length = 50,
                                  read_gap = 50,
-                                 split = 10) {
+                                 split = 10,
+                                 par_list) {
   ## build the files
   if(paired){
     tmp_files <- list("R1" = tempfile(pattern = str_c(names(decoy_seq), "_R1_"),
@@ -64,23 +73,25 @@ generate_decoy_reads <- function(decoy_seq,
   unlink(unlist(read_chunks_files))
 }
 
-##' Test desc
+##' A internal function of \code{\link{generate_decoy_reads}}. Linux only.
 ##'
-##' Test detail
-##' @title gb
-##' @param decoy_seq 
-##' @param files 
-##' @param paired 
-##' @param read_length 
-##' @param read_gap 
+##' This function call generates a set or one sequence read of a given
+##' length from a inital sequence.
+##' @title Generates a _single_ read from a sequence
+##' @param decoy_seq Sequence as DNAStringSet
+##' @param files File path to the output file(s)
+##' @param paired Logical, should the reads be paired? [default =
+##'   TRUE]
+##' @param read_length Numeric, read length
+##' @param read_gap If paired, how large should be the gap?
 ##' @return NULL
 ##' @author Jochen Kruppa
 ##' @export
 generate_read <- function(decoy_seq,
                           files,
-                          paired,
+                          paired = TRUE,
                           read_length,
-                          read_gap
+                          read_gap = 50
                           ) {
   ## check is paired reads are needed...
   ## distance of the paired reads

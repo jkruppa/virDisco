@@ -15,7 +15,7 @@
 ##' @export
 ##' @examples
 ##'
-##' ## This function needs dpendencies and file handling, see \url{https://github.com/jkruppa/viralDetectTools} for a comprehensive tutorial.
+##' ## This function needs dendencies and file handling, see \url{https://github.com/jkruppa/virDisco} for a comprehensive tutorial.
 artificial_genome_mapping <- function(in_file,
                                       out_file,
                                       par_list
