@@ -17,7 +17,7 @@ parameter given by the par_list(), see
 \code{\link{set_par_list}}}
 }
 \value{
-pep_alignment_df data.frame
+pep_alignment_df list
 }
 \description{
 This function calls PANDAseq and PAUDA for mapping the translated DNA reads
@@ -28,6 +28,9 @@ mapping. Most importantly, paired reads are merged by PAUDAseq
 first. The mapping and translation of the sequence reads to amino
 reads is done by PAUDA. Finally, the blastx output is parsed by
 \code{\link{get_pauda_hits}}.
+}
+\examples{
+data(NHS_10001_map_aa_list)
 }
 \author{
 Jochen Kruppa

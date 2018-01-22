@@ -15,9 +15,11 @@
 ##'   [default = 5]
 ##' @param all Should the reads mapped to all possible positions
 ##'   [default = FALSE, option of Bowtie2]
-##' @return dna_alignment_df data.frame
+##' @return dna_alignment_df list
 ##' @author Jochen Kruppa
 ##' @export
+##' @examples
+##' data(NHS_10001_map_dna_list)
 map_dna_ref <- function(infile, outfile, par_list, min_hit = 5, all = FALSE){
   ## mapping to dna reference
   bam_file <- gsub(".sam", "_dna.bam", outfile)

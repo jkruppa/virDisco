@@ -16,6 +16,6 @@
 infected_fastq
 }
 \description{
-Test
+A list with two fastq objects including R1 and R2 reads
 }
 \keyword{datasets}

@@ -12,9 +12,11 @@
 ##' @param outfile File path to the results dir
 ##' @param par_list Parameter given by the par_list(), see
 ##'   \code{\link{set_par_list}}
-##' @return pep_alignment_df data.frame
+##' @return pep_alignment_df list
 ##' @author Jochen Kruppa
 ##' @export
+##' @examples
+##' data(NHS_10001_map_aa_list)
 map_pep_ref <- function(infile, outfile, par_list){
   ## mapping to pep reference
   if(par_list["paired"]) {

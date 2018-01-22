@@ -4,12 +4,12 @@
 \name{aa_seqs}
 \alias{aa_seqs}
 \title{AAStringSet of amino acid sequences}
-\format{A AAStringSet with 1268 viral gene entries. The names are split by '_' meaning:
+\format{A AAStringSet with 521 viral gene entries. The names are split by '_' meaning:
 \describe{
   \item{1st}{Protein ID}
   \item{2nd}{Genbank ID}
   \item{3rd}{Starting base on DNA sequence}
-  \item{4th}{Endinf base on DNA sequence}
+  \item{4th}{Ending base on DNA sequence}
 }}
 \source{
 \url{ftp://ftp.ncbi.nlm.nih.gov/genbank}
@@ -18,7 +18,7 @@
 aa_seqs
 }
 \description{
-A dataset containing 1268 amino acid sequences from the
+A dataset containing 521 amino acid sequences from the
 corresponding DNA sequencing fasta file
 }
 \keyword{datasets}

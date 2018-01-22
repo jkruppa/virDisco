@@ -4,11 +4,13 @@
 \name{aa_info_db}
 \alias{aa_info_db}
 \title{Dataset}
-\format{A fasta file with 1000 entries. The names are split by ' ' meaning:
+\format{A data.frame with 519 protein IDs and the connected genbank IDs. 
 \describe{
-  \item{1st}{Genbank ID}
+  \item{1st}{Protein ID}
   \item{2nd}{Genbank ID}
-  \item{3rd - End}{Description}
+  \item{3rd}{Protein start position}
+  \item{4th}{Protein end position}
+  \item{5th}{Identifier}
 }}
 \source{
 \url{ftp://ftp.ncbi.nlm.nih.gov/genbank}
@@ -17,6 +19,7 @@
 aa_info_db
 }
 \description{
-A dataset containing 1000 DNA sequences from the NCBI GenBank.
+A dataset containing 519 protein IDs, the start and the end position
+on the DNA sequence
 }
 \keyword{datasets}

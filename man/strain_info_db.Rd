@@ -4,11 +4,16 @@
 \name{strain_info_db}
 \alias{strain_info_db}
 \title{Dataset}
-\format{A fasta file with 1000 entries. The names are split by ' ' meaning:
+\format{A dataset containing 287 viral strains and information:
 \describe{
   \item{1st}{Genbank ID}
-  \item{2nd}{Genbank ID}
-  \item{3rd - End}{Description}
+  \item{2nd}{Molecular type} 
+  \item{3rd}{Strain: RNA, DNA or other}
+  \item{4th}{Taxonomic ID}
+  \item{5th}{Additional accession number}
+  \item{6th}{Length}
+  \item{7th}{Organism}
+  \item{8th}{Description}
 }}
 \source{
 \url{ftp://ftp.ncbi.nlm.nih.gov/genbank}
@@ -17,6 +22,6 @@
 strain_info_db
 }
 \description{
-A dataset containing 1000 DNA sequences from the NCBI GenBank.
+A dataset containing 287 viral strains and information
 }
 \keyword{datasets}

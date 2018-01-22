@@ -4,10 +4,22 @@
 \name{NHS_10001_map_dna_list}
 \alias{NHS_10001_map_dna_list}
 \title{Dataset}
-\format{A list with two entries:
+\format{A list with two data.frame:
+$count_df
 \describe{
-  \item{R1}{Fastq reads object with 10000 paired reads of R1}
-  \item{R2}{Fastq reads object with 10000 paired reads of R2}
+  \item{genebank_id}{Genbank reference ID}
+  \item{count_read}{Number of reads mapped to the genebank ID reference}
+}
+$alignment_df
+\describe{
+  \item{genebank_id}{Genbank reference ID}
+  \item{qname}{Read name i.e. query name}
+  \item{strand}{Strand}
+  \item{read_length}{Read length}
+  \item{pos_start}{Poistion start on the reference DNA sequence}
+  \item{pos_end}{Poistion end on the reference DNA sequence}
+  \item{mapq}{Mapping quality}
+  \item{seq_id}{Additional identifier}
 }}
 \source{
 \url{ftp://ftp.ncbi.nlm.nih.gov/genbank}
@@ -16,6 +28,6 @@
 NHS_10001_map_dna_list
 }
 \description{
-Test
+A example output of \code{\link{map_dna_ref}}.
 }
 \keyword{datasets}

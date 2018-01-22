@@ -4,7 +4,7 @@
 \name{dna_seqs}
 \alias{dna_seqs}
 \title{DNAStringSet of DNA sequences}
-\format{A named DNAStringSet with 1000 viral entries. The names are split by ' ' meaning:
+\format{A named DNAStringSet with 287 viral entries. The names are split by ' ' meaning:
 \describe{
   \item{1st}{Genbank ID}
   \item{2nd}{Genbank ID}
@@ -17,6 +17,6 @@
 dna_seqs
 }
 \description{
-A dataset containing 1000 DNA sequences from the NCBI GenBank.
+A DNAStringSet containing 287 DNA sequences from the NCBI GenBank.
 }
 \keyword{datasets}

@@ -4,10 +4,22 @@
 \name{NHS_10001_map_aa_list}
 \alias{NHS_10001_map_aa_list}
 \title{Dataset}
-\format{A list with two entries:
+\format{A list with two data.frame:
+$count_df
 \describe{
-  \item{R1}{Fastq reads object with 10000 paired reads of R1}
-  \item{R2}{Fastq reads object with 10000 paired reads of R2}
+  \item{genebank_id}{Genbank reference ID}
+  \item{count_prot}{Number of translated reads mapped to the genebank ID reference} 
+}
+$alignment_df
+\describe{
+  \item{qname}{Read name i.e. query name}
+  \item{prot_id}{Protein reference ID}
+  \item{pos_start}{Poistion start on the reference DNA sequence}
+  \item{pos_end}{Poistion end on the reference DNA sequence}
+  \item{score_bit}{Mapping quality}
+  \item{score_expected}{e-value of Blast}
+  \item{ident}{How equal is the reference to the read?}
+  \item{genebank_id}{Genebank ID of the reference sequence}
 }}
 \source{
 \url{ftp://ftp.ncbi.nlm.nih.gov/genbank}
@@ -16,6 +28,6 @@
 NHS_10001_map_aa_list
 }
 \description{
-Test
+A example output of \code{\link{map_pep_ref}}.
 }
 \keyword{datasets}

@@ -23,7 +23,7 @@ parameter given by the par_list(), see
 [default = FALSE, option of Bowtie2]}
 }
 \value{
-dna_alignment_df data.frame
+dna_alignment_df list
 }
 \description{
 Runs the DNA mapping by Bowtie or Star
@@ -33,6 +33,9 @@ The function calls the external mapper Bowtie2 or Star for the
 mapping. The resulting sam file is afterwards transformed to a bam
 file by samtools. The results are returned as an alignment data
 frame used later in the plot functionality.
+}
+\examples{
+data(NHS_10001_map_dna_list)
 }
 \author{
 Jochen Kruppa

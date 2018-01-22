@@ -4,10 +4,13 @@
 \name{NHS_10001_count_tbl}
 \alias{NHS_10001_count_tbl}
 \title{Dataset}
-\format{A list with two entries:
+\format{A data.frame with five entries:
 \describe{
-  \item{R1}{Fastq reads object with 10000 paired reads of R1}
-  \item{R2}{Fastq reads object with 10000 paired reads of R2}
+  \item{genebank_id}{Genbank ID}
+  \item{dna_reads}{Count of DNA reads mapped to the reference Genbank ID}
+  \item{dna_rank}{Rank of the DNA read count}
+  \item{amino_reads}{Count of AA reads mapped to the reference Genbank ID}
+  \item{amino_rank}{Rank of the AA read count}
 }}
 \source{
 \url{ftp://ftp.ncbi.nlm.nih.gov/genbank}
@@ -16,6 +19,6 @@
 NHS_10001_count_tbl
 }
 \description{
-Test
+A example output of \code{\link{ord_findings}}.
 }
 \keyword{datasets}
