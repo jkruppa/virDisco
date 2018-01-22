@@ -3,7 +3,7 @@
 \docType{data}
 \name{infected_fastq}
 \alias{infected_fastq}
-\title{Dataset}
+\title{Example fastq files}
 \format{A list with two entries:
 \describe{
   \item{R1}{Fastq reads object with 10000 paired reads of R1}

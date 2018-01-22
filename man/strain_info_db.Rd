@@ -3,7 +3,7 @@
 \docType{data}
 \name{strain_info_db}
 \alias{strain_info_db}
-\title{Dataset}
+\title{Example species infro db}
 \format{A dataset containing 287 viral strains and information:
 \describe{
   \item{1st}{Genbank ID}

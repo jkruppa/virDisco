@@ -3,7 +3,7 @@
 \docType{data}
 \name{aa_info_db}
 \alias{aa_info_db}
-\title{Dataset}
+\title{Example amino acid information db}
 \format{A data.frame with 519 protein IDs and the connected genbank IDs. 
 \describe{
   \item{1st}{Protein ID}

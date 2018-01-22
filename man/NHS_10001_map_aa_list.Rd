@@ -3,7 +3,7 @@
 \docType{data}
 \name{NHS_10001_map_aa_list}
 \alias{NHS_10001_map_aa_list}
-\title{Dataset}
+\title{Output of map_pep_ref}
 \format{A list with two data.frame:
 $count_df
 \describe{

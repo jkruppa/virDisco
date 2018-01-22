@@ -3,13 +3,15 @@
 \docType{data}
 \name{NHS_10001_map_dna_list}
 \alias{NHS_10001_map_dna_list}
-\title{Dataset}
+\title{Output of map_dna_ref}
 \format{A list with two data.frame:
+
 $count_df
 \describe{
   \item{genebank_id}{Genbank reference ID}
   \item{count_read}{Number of reads mapped to the genebank ID reference}
 }
+
 $alignment_df
 \describe{
   \item{genebank_id}{Genbank reference ID}

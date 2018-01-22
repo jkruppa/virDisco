@@ -3,7 +3,7 @@
 \docType{data}
 \name{NHS_10001_count_tbl}
 \alias{NHS_10001_count_tbl}
-\title{Dataset}
+\title{Output of ord_findings}
 \format{A data.frame with five entries:
 \describe{
   \item{genebank_id}{Genbank ID}
